@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Max Pain Report - {{ report_date }}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            color: #34495e;
+            text-align: center;
+            font-weight: normal;
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 1.5em;
+        }
+
+        .disclaimer {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 4px;
+            line-height: 1.6;
+        }
+
+        .disclaimer strong {
+            display: block;
+            margin-bottom: 10px;
+            color: #856404;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .bearish {
+            color: #c0392b;
+        }
+
+        .bullish {
+            color: #27ae60;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        tr {
+            transition: background-color 0.2s ease;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .highlight {
+            background-color: #e8f4f8 !important;
+        }
+
+        .highlight:hover {
+            background-color: #d4ebf2 !important;
+        }
+
+        .ticker {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .negative {
+            color: #c0392b;
+            font-weight: 600;
+        }
+
+        .positive {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        .price {
+            font-family: 'Courier New', monospace;
+            color: #34495e;
+        }
+
+        .premium {
+            font-family: 'Courier New', monospace;
+            text-align: right;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ecf0f1;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            line-height: 1.8;
+        }
+
+        .asterisk-note {
+            margin-top: 20px;
+            font-style: italic;
+            color: #95a5a6;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MAX PAIN REPORT</h1>
+        <h2>{{ report_date }}</h2>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Total Tickers</div>
+                <div class="stat-value">{{ ticker_count }}</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Bearish Bias</div>
+                <div class="stat-value bearish">{{ summary.bearish_count }}</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Bullish Bias</div>
+                <div class="stat-value bullish">{{ summary.bullish_count }}</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Avg % Change</div>
+                <div class="stat-value">{{ "%.2f"|format(summary.avg_pct_change) }}%</div>
+            </div>
+        </div>
+
+        <div class="disclaimer">
+            <strong>Disclaimer</strong>
+            Max pain is not a guarantee and is intended to be used solely for directional clues.
+            All values below are computed using the data provided by {{ data_source }}.com.
+            We cannot attest to the accuracy of the data. Trade at your own risk.
+        </div>
+
+        <h3>Sorted by Net Premium</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ticker</th>
+                    <th>Friday Close</th>
+                    <th>Max Pain</th>
+                    <th>% Change</th>
+                    <th style="text-align: right;">Net Call/(Put) Premium</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr {% if result.is_top_n %}class="highlight"{% endif %}>
+                    <td class="ticker">{{ result.ticker }}{% if result.is_top_n %}*{% endif %}</td>
+                    <td class="price">${{ "%.2f"|format(result.current_price) }}</td>
+                    <td class="price">${{ "%.2f"|format(result.max_pain_price) }}</td>
+                    <td class="{% if result.pct_change < 0 %}negative{% else %}positive{% endif %}">
+                        {{ "%+.2f"|format(result.pct_change) }}%
+                    </td>
+                    <td class="premium">${{ "{:,.2f}".format(result.net_call_put_premium) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="footer">
+            <p><strong>Generated with Max Pain Calculator v1.0</strong></p>
+            <p>Data Source: {{ data_source }}</p>
+            <p>Generated: {{ generation_time }}</p>
+            <p class="asterisk-note">
+                *An asterisk indicates a stock ranking in the top 20 in terms of net premium (absolute value).
+            </p>
+        </div>
+    </div>
+</body>
+</html>

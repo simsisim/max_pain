@@ -1,0 +1,25 @@
+# Max Pain Calculator - Requirements
+# ====================================
+
+# Core dependencies
+pandas>=2.0.0
+numpy>=1.24.0
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# Configuration
+configparser>=5.3.0
+
+# Reporting
+jinja2>=3.1.2
+
+# Optional: Yahoo Finance
+yfinance>=0.2.0
+
+# Optional: Progress bars
+tqdm>=4.66.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0

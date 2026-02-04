@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="author" content="OptionCharts"/>
+  <title>CBOE: Cboe Global Markets Inc. Max Pain | OptionCharts</title>
+<meta name="description" content="View CBOE: Cboe Global Markets Inc. Options Max Pain chart.">
+<link rel="canonical" href="https://optioncharts.io/options/CBOE/max-pain">
+<meta name="robots" content="index">
+<meta property="og:site_name" content="OptionCharts">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://optioncharts.io/images/brand_logo/logo_white_lettering_on_blue.png">
+<meta property="og:title" content="CBOE: Cboe Global Markets Inc. Max Pain | OptionCharts">
+<meta property="og:description" content="View CBOE: Cboe Global Markets Inc. Options Max Pain chart.">
+<meta property="og:url" content="https://optioncharts.io/options/CBOE/max-pain">
+
+  <!--favicons-->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="XVh9EIGT2ROlsc1YreA1eNKL2gE07u2knep1MRaE9Yl7qsNdpC3Di4ipY8ApVQj1imPIf_3nsoIVEPRFncIySw" />
+  
+
+  <!--jQuery-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!--  jQuery UI-->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
+
+  <script src="/assets/freeze-table-4befa1b7ffee2cd449d54c1c7f0a533fcfb2ba509313143f5158cb0d4cce367b.js" data-turbo-track="reload" defer="defer"></script>
+  <script src="/assets/tableSortable.min-38ddf8b924d0fab22980e383cef070e190315cd69b11bf8361f015a76af9103c.js" data-turbo-track="reload" defer="defer"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+
+    <script src="https://code.highcharts.com/12.4.0/highcharts.js"></script>
+    <script src="https://code.highcharts.com/12.4.0/modules/stock.js"></script>
+    <script src="https://code.highcharts.com/12.4.0/modules/full-screen.js"></script>
+    <script src="https://code.highcharts.com/12.4.0/modules/data.js"></script>
+    <script src="https://code.highcharts.com/12.4.0/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/12.4.0/modules/heatmap.js"></script>
+    <script src="https://code.highcharts.com/12.4.0/modules/treemap.js"></script>
+    <script src="https://code.highcharts.com/12.4.0/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/12.4.0/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/12.4.0/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/12.4.0/stock/modules/heikinashi.js"></script>
+    <script src="https://code.highcharts.com/12.4.0/stock/modules/hollowcandlestick.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            window.Highcharts = Highcharts;
+            set_highcharts_global_options()
+        })
+    </script>
+
+  <!--htmx-->
+  <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js" integrity="sha384-Akqfrbj/HpNVo8k11SXBb6TlBWmXXlYQrCSqEWmyKJe+hDm3Z/B2WVG4smwBkRVm" crossorigin="anonymous"></script>
+
+  <!-- ========================= CSS here ========================= -->
+  <!-- bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/assets/tailwind-ce35f5d5980a84a24cebeac897aa981270215f8e4509e9bd2364018927856c9b.css" data-turbo-track="reload" />
+  <!--optioncharts css-->
+  <link rel="stylesheet" href="/assets/all-e441bd897674bfef0b0bac9dca4f3c2ddc6a00f4b4574229109b4398cd83758e.css" data-turbo-track="reload" />
+  <link rel="stylesheet" href="/assets/tailwind_preflight-0c31578e556961366e65e67e45af72071bc1d498ca9a78550b7bbd3a6c77aabd.css" data-turbo-track="reload" />
+  <!-- Google fonts-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" type="text/css"/>
+
+  <!-- gon gem sending data to your js files-->
+  <script>
+//<![CDATA[
+window.gon={};gon.is_production=true;gon.is_user_premium=false;gon.is_user_essential=false;gon.chart_theme="optioncharts-main";gon.oc_meta_tags={"/":{"urls":["/"],"title":"Elevate your option trading with striking charts and visuals","description":"View the latest option charts and visuals to help you make informed options trades. Analyze key data such as option volume, open interest, max pain, implied volatility, and probabilities.","canonical":null},"/pricing":{"urls":["/pricing"],"title":"Pricing \u0026 Plans | OptionCharts","description":"View plans and pricing for OptionCharts.io","canonical":null},"/faq":{"urls":["/faq"],"title":"FAQ | OptionCharts.io","description":"Frequently asked questions about OptionCharts.io","canonical":null},"/contact":{"urls":["/contact"],"title":"Contact Us | OptionCharts.io","description":"Contact us for any questions or inquiries about OptionCharts","canonical":null},"/options/*":{"urls":["/options/*"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Overview | OptionCharts","description":"View comprehensive \u003cticker\u003e options with our latest charts on volume, open interest, max pain, and implied volatility.","canonical":"https://optioncharts.io/options/\u003cticker\u003e"},"/options/*/overview":{"urls":["/options/*/overview"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Overview | OptionCharts","description":"View option trading statistics for \u003cticker\u003e including including volume, open interest, implied volatility, and max pain for all expirations.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/overview"},"/options/*/chain/chart/open-interest":{"urls":["/options/*/chain/chart/open-interest","/options/*/chain/*/chart/open-interest","/options/*/open-interest"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Open Interest | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Open Interest chart.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/open-interest"},"/options/*/chain/*/chart/open-interest":{"urls":["/options/*/chain/chart/open-interest","/options/*/chain/*/chart/open-interest","/options/*/open-interest"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Open Interest | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Open Interest chart.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/open-interest"},"/options/*/open-interest":{"urls":["/options/*/chain/chart/open-interest","/options/*/chain/*/chart/open-interest","/options/*/open-interest"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Open Interest | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Open Interest chart.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/open-interest"},"/options/*/chain/chart/volume":{"urls":["/options/*/chain/chart/volume","/options/*/chain/*/chart/volume","/options/*/volume"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Volume | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Options Volume.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/volume"},"/options/*/chain/*/chart/volume":{"urls":["/options/*/chain/chart/volume","/options/*/chain/*/chart/volume","/options/*/volume"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Volume | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Options Volume.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/volume"},"/options/*/volume":{"urls":["/options/*/chain/chart/volume","/options/*/chain/*/chart/volume","/options/*/volume"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Volume | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Options Volume.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/volume"},"/options/*/chain":{"urls":["/options/*/chain"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Charts by Expiry | OptionCharts","description":"View comprehensive \u003cticker\u003e: \u003ccompany_name\u003e options charts for volume, open interest, implied volatility, and max pain by expiration date.","canonical":"https://optioncharts.io/options/\u003cticker\u003e"},"/options/*/probability-distribution":{"urls":["/options/*/probability-distribution"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Probability Distribution | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Options Probability Distribution Chart.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/probability-distribution"},"/options/*/chain/chart/probability-distribution":{"urls":["/options/*/chain/chart/probability-distribution","/options/*/chain/*/chart/probability-distribution"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Probability | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Options Probability Chart.","canonical":null},"/options/*/chain/*/chart/probability-distribution":{"urls":["/options/*/chain/chart/probability-distribution","/options/*/chain/*/chart/probability-distribution"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Probability | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Options Probability Chart.","canonical":null},"/options/*/chain/chart/volatility-skew":{"urls":["/options/*/chain/chart/volatility-skew","/options/*/chain/*/chart/volatility-skew","/options/*/volatility-skew"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Implied Volatility (IV) | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Implied Volatility (IV) Chart.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/volatility-skew"},"/options/*/chain/*/chart/volatility-skew":{"urls":["/options/*/chain/chart/volatility-skew","/options/*/chain/*/chart/volatility-skew","/options/*/volatility-skew"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Implied Volatility (IV) | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Implied Volatility (IV) Chart.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/volatility-skew"},"/options/*/volatility-skew":{"urls":["/options/*/chain/chart/volatility-skew","/options/*/chain/*/chart/volatility-skew","/options/*/volatility-skew"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Implied Volatility (IV) | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Implied Volatility (IV) Chart.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/volatility-skew"},"/options/*/chain/chart/greeks":{"urls":["/options/*/chain/chart/greeks","/options/*/chain/*/chart/greeks","/options/*/greeks"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Greeks Charts | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e option greeks chart - delta, gamma, theta, and vega.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/greeks"},"/options/*/chain/*/chart/greeks":{"urls":["/options/*/chain/chart/greeks","/options/*/chain/*/chart/greeks","/options/*/greeks"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Greeks Charts | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e option greeks chart - delta, gamma, theta, and vega.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/greeks"},"/options/*/greeks":{"urls":["/options/*/chain/chart/greeks","/options/*/chain/*/chart/greeks","/options/*/greeks"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Greeks Charts | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e option greeks chart - delta, gamma, theta, and vega.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/greeks"},"/options/*/chain/chart/max-pain":{"urls":["/options/*/chain/chart/max-pain","/options/*/chain/*/chart/max-pain","/options/*/max-pain"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Max Pain | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Options Max Pain chart.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/max-pain"},"/options/*/chain/*/chart/max-pain":{"urls":["/options/*/chain/chart/max-pain","/options/*/chain/*/chart/max-pain","/options/*/max-pain"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Max Pain | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Options Max Pain chart.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/max-pain"},"/options/*/max-pain":{"urls":["/options/*/chain/chart/max-pain","/options/*/chain/*/chart/max-pain","/options/*/max-pain"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Max Pain | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Options Max Pain chart.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/max-pain"},"/options/*/expected-move":{"urls":["/options/*/expected-move"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Expected Move | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Options Expected Move chart showing anticipated price movement.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/expected-move"},"/options/*/chain/chart/unusual-options":{"urls":["/options/*/chain/chart/unusual-options","/options/*/chain/*/chart/unusual-options","/options/*/unusual-options"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Unusual Options | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Unusual Options Activity.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/unusual-options"},"/options/*/chain/*/chart/unusual-options":{"urls":["/options/*/chain/chart/unusual-options","/options/*/chain/*/chart/unusual-options","/options/*/unusual-options"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Unusual Options | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Unusual Options Activity.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/unusual-options"},"/options/*/unusual-options":{"urls":["/options/*/chain/chart/unusual-options","/options/*/chain/*/chart/unusual-options","/options/*/unusual-options"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Unusual Options | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Unusual Options Activity.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/unusual-options"},"/options/*/chain/chart/highest-volume":{"urls":["/options/*/chain/chart/highest-volume","/options/*/chain/*/chart/highest-volume"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Highest Volume Options | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Highest Volume Options.","canonical":null},"/options/*/chain/*/chart/highest-volume":{"urls":["/options/*/chain/chart/highest-volume","/options/*/chain/*/chart/highest-volume"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Highest Volume Options | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Highest Volume Options.","canonical":null},"/options/*/chain/chart/highest-open-interest":{"urls":["/options/*/chain/chart/highest-open-interest","/options/*/chain/*/chart/highest-open-interest"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Highest Open Interest Options| OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Highest Open Interest Options.","canonical":null},"/options/*/chain/*/chart/highest-open-interest":{"urls":["/options/*/chain/chart/highest-open-interest","/options/*/chain/*/chart/highest-open-interest"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Highest Open Interest Options| OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Highest Open Interest Options.","canonical":null},"/options/*/chain/chart/option-chain":{"urls":["/options/*/chain/chart/option-chain","/options/*/chain/*/chart/option-chain","/options/*/option-chain"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Chain | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Options Chain.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/option-chain"},"/options/*/chain/*/chart/option-chain":{"urls":["/options/*/chain/chart/option-chain","/options/*/chain/*/chart/option-chain","/options/*/option-chain"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Chain | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Options Chain.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/option-chain"},"/options/*/option-chain":{"urls":["/options/*/chain/chart/option-chain","/options/*/chain/*/chart/option-chain","/options/*/option-chain"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Chain | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Options Chain.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/option-chain"},"/options/*/option-history":{"urls":["/options/*/option-history"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option History | OptionCharts","description":"View historical option data for \u003cticker\u003e: \u003ccompany_name\u003e including volume, open interest, implied volatility, and max pain over time.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/option-history"},"/options/*/option-history-volume":{"urls":["/options/*/option-history-volume"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Volume History | OptionCharts","description":"View historical option volume data for \u003cticker\u003e: \u003ccompany_name\u003e including volume put-call ratio, call volume, put volume, and volume trends over time.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/option-history-volume"},"/options/*/option-history-open-interest":{"urls":["/options/*/option-history-open-interest"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Open Interest History | OptionCharts","description":"View historical option open interest for \u003cticker\u003e: \u003ccompany_name\u003e including open interest put-call ratio, call open interest, put open interest, and trends over time.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/option-history-open-interest"},"/options/*/option-history-iv":{"urls":["/options/*/option-history-iv"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option IV History | OptionCharts","description":"View historical implied volatility (IV) data for \u003cticker\u003e: \u003ccompany_name\u003e including IV 30d, IV rank, and volatility trends over time.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/option-history-iv"},"/options/*/option-history-max-pain":{"urls":["/options/*/option-history-max-pain"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Max Pain History | OptionCharts","description":"View historical max pain data for \u003cticker\u003e: \u003ccompany_name\u003e options.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/option-history-max-pain"},"/options/*/option-history-gex":{"urls":["/options/*/option-history-gex"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Gamma Exposure History | OptionCharts","description":"View historical gamma exposure (GEX) chart for \u003cticker\u003e: \u003ccompany_name\u003e options.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/option-history-gex"},"/options/*/option-history-dex":{"urls":["/options/*/option-history-dex"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Delta Exposure History | OptionCharts","description":"View historical delta exposure (DEX) chart for \u003cticker\u003e: \u003ccompany_name\u003e options.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/option-history-dex"},"/options/*/option-history-chart-custom":{"urls":["/options/*/option-history-chart-custom"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option History Chart Builder | OptionCharts","description":"View customizable Option history charts for \u003cticker\u003e: \u003ccompany_name\u003e, featuring put-call ratios, option volume, open interest, and implied volatility.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/option-history-chart-custom"},"/options/*/overview/multi-expiry-summary-table":{"urls":["/options/*/overview/multi-expiry-summary-table"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Multi-Expiry Option Summary Table  | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Option Overview table.  This table provides a comprehensive overview of all options grouped by their expiration dates.","canonical":null},"/options/*/overview/multi-expiry-volume":{"urls":["/options/*/overview/multi-expiry-volume"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Total Option Volume  | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Total Options Volume for all expirations.","canonical":null},"/options/*/overview/multi-expiry-open-interest":{"urls":["/options/*/overview/multi-expiry-open-interest"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Total Open Interest | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Total Open Interest for all expirations.","canonical":null},"/options/*/overview/multi-expiry-volatility-skew":{"urls":["/options/*/overview/multi-expiry-volatility-skew"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Multi-Expiry Implied Volatility | OptionCharts","description":"The Options Implied Volatility (IV) Skew Chart for \u003cticker\u003e: \u003ccompany_name\u003e for all expirations.","canonical":null},"/options/*/overview/multi-expiry-unusual-options":{"urls":["/options/*/overview/multi-expiry-unusual-options"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Multi-Expiry Unusual Options | OptionCharts","description":"Unusual Option Activity for \u003cticker\u003e: \u003ccompany_name\u003e for all expirations.","canonical":null},"/options/*/overview/multi-expiry-max-pain":{"urls":["/options/*/overview/multi-expiry-max-pain"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Multi-Expiry Max Pain | OptionCharts","description":"The Options Max Pain chart for \u003cticker\u003e: \u003ccompany_name\u003e for all expirations.","canonical":null},"/options/*/overview/multi-expiry-probability-distribution":{"urls":["/options/*/overview/multi-expiry-probability-distribution"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Multi-Expiry Option Probabilities | OptionCharts","description":"The Options Probability Distribution chart for \u003cticker\u003e: \u003ccompany_name\u003e for all expirations.","canonical":null},"/options/*/overview/ticker-highest-volume-options":{"urls":["/options/*/overview/ticker-highest-volume-options"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Highest Volume Options | OptionCharts","description":"The Highest Volume Options for \u003cticker\u003e: \u003ccompany_name\u003e for all expirations.  Charts for \u003cticker\u003e option volume.","canonical":null},"/options/*/overview/ticker-highest-open-interest-options":{"urls":["/options/*/overview/ticker-highest-open-interest-options"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Highest Open Interest Options | OptionCharts","description":"The Highest Open Interest Options for \u003cticker\u003e: \u003ccompany_name\u003e for all expirations.  Charts for \u003cticker\u003e option open interest.","canonical":null},"/options/*/overview/option-statistics":{"urls":["/options/*/overview/option-statistics"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Statistics | OptionCharts","description":"Options Statistics for \u003cticker\u003e: \u003ccompany_name\u003e.","canonical":null},"/trending/most-active-stock-options":{"urls":["/trending/most-active-stock-options"],"title":"Most Active Stock Options | OptionCharts","description":"View the Most Active Stock Options by Volume for the day.","canonical":null},"/trending/most-active-etf-options":{"urls":["/trending/most-active-etf-options"],"title":"Most Active ETF Options | OptionCharts","description":"View the Most Active ETF Options for the day.","canonical":null},"/trending/most-active-index-options":{"urls":["/trending/most-active-index-options"],"title":"Most Active Index Options | OptionCharts","description":"View the Most Active Index Options for the day.","canonical":null},"/trending/most-active-all-options":{"urls":["/trending/most-active-all-options"],"title":"Most Active Options | OptionCharts","description":"View the Most Active Options for all securities including stocks, ETFs, and indexes.","canonical":null},"/trending/most-active-stock-options-contracts":{"urls":["/trending/most-active-stock-options-contracts"],"title":"Most Active Stock Options Contracts | OptionCharts","description":"View the Most Active Stock Options Contracts by Volume for the day.","canonical":null},"/trending/most-active-etf-options-contracts":{"urls":["/trending/most-active-etf-options-contracts"],"title":"Most Active ETF Options Contracts | OptionCharts","description":"View the Most Active ETF Options Contracts by Volume for the day.","canonical":null},"/trending/most-active-index-options-contracts":{"urls":["/trending/most-active-index-options-contracts"],"title":"Most Active Index Options Contracts | OptionCharts","description":"View the Most Active Index Options Contracts by Volume for the day.","canonical":null},"/trending/most-active-all-options-contracts":{"urls":["/trending/most-active-all-options-contracts"],"title":"Most Active Options Contracts | OptionCharts","description":"View the Most Active Options Contracts for all securities including stocks, ETFs, and indexes.","canonical":null},"/trending/unusual-option-activity":{"urls":["/trending/unusual-option-activity"],"title":"Unusual Option Activity | OptionCharts","description":"The top unusual option activity measured by the ratio of volume to open interest during the current trading session.","canonical":null},"/trending/unusual-options-activity-stock-contracts":{"urls":["/trending/unusual-options-activity-stock-contracts"],"title":"Unusual Options Activity Stock Contracts | OptionCharts","description":"The top unusual option activity for stock contracts measured by the ratio of volume to open interest during the current trading session.","canonical":null},"/trending/unusual-options-activity-etf-contracts":{"urls":["/trending/unusual-options-activity-etf-contracts"],"title":"Unusual Options Activity ETF Contracts | OptionCharts","description":"The top unusual option activity for ETF contracts measured by the ratio of volume to open interest during the current trading session.","canonical":null},"/trending/unusual-options-activity-index-contracts":{"urls":["/trending/unusual-options-activity-index-contracts"],"title":"Unusual Options Activity Index Contracts | OptionCharts","description":"The top unusual option activity for index contracts measured by the ratio of volume to open interest during the current trading session.","canonical":null},"/trending/unusual-options-activity-all-contracts":{"urls":["/trending/unusual-options-activity-all-contracts"],"title":"Unusual Options Activity Contracts | OptionCharts","description":"The top unusual option activity for stocks, ETFs, and indexes.","canonical":null},"/trending/highest-open-interest-stock-options":{"urls":["/trending/highest-open-interest-stock-options"],"title":"Highest Open Interest Stock Options | OptionCharts","description":"View the Highest Open Interest Stock Options for the day.","canonical":null},"/trending/highest-open-interest-etf-options":{"urls":["/trending/highest-open-interest-etf-options"],"title":"Highest Open Interest ETF Options | OptionCharts","description":"View the Highest Open Interest ETF Options for the day.","canonical":null},"/trending/highest-open-interest-index-options":{"urls":["/trending/highest-open-interest-index-options"],"title":"Highest Open Interest Index Options | OptionCharts","description":"View the Highest Open Interest Index Options for the day.","canonical":null},"/trending/highest-open-interest-all-options":{"urls":["/trending/highest-open-interest-all-options"],"title":"Highest Open Interest Options | OptionCharts","description":"View the Highest Open Interest Options for the day.","canonical":null},"/trending/highest-open-interest":{"urls":["/trending/highest-open-interest"],"title":"Highest Open Interest Options | OptionCharts","description":"View the Highest Open Interest Options for the day.","canonical":null},"/trending/highest-open-interest-stock-options-contracts":{"urls":["/trending/highest-open-interest-stock-options-contracts"],"title":"Highest Open Interest Stock Options Contracts | OptionCharts","description":"View the Highest Open Interest Stock Options Contracts for the day.","canonical":null},"/trending/highest-open-interest-etf-options-contracts":{"urls":["/trending/highest-open-interest-etf-options-contracts"],"title":"Highest Open Interest ETF Options Contracts | OptionCharts","description":"View the Highest Open Interest ETF Options Contracts for the day.","canonical":null},"/trending/highest-open-interest-index-options-contracts":{"urls":["/trending/highest-open-interest-index-options-contracts"],"title":"Highest Open Interest Index Options Contracts | OptionCharts","description":"View the Highest Open Interest Index Options Contracts for the day.","canonical":null},"/trending/highest-open-interest-all-options-contracts":{"urls":["/trending/highest-open-interest-all-options-contracts"],"title":"Highest Open Interest Options Contracts | OptionCharts","description":"View the Highest Open Interest Options Contracts for the day.","canonical":null},"/trending/highest-implied-volatility-stock-contracts":{"urls":["/trending/highest-implied-volatility-stock-contracts"],"title":"Highest Implied Volatility Stock Option Contracts | OptionCharts","description":"View the Highest Implied Volatility Stock Options for the day.","canonical":null},"/trending/highest-implied-volatility-etf-contracts":{"urls":["/trending/highest-implied-volatility-etf-contracts"],"title":"Highest Implied Volatility ETF Option Contracts | OptionCharts","description":"View the Highest Implied Volatility ETF Options for the day.","canonical":null},"/trending/highest-implied-volatility-index-contracts":{"urls":["/trending/highest-implied-volatility-index-contracts"],"title":"Highest Implied Volatility Index Option Contracts | OptionCharts","description":"View the Highest Implied Volatility Index Options for the day.","canonical":null},"/trending/highest-implied-volatility-all-contracts":{"urls":["/trending/highest-implied-volatility-all-contracts"],"title":"Highest Implied Volatility Option Contracts | OptionCharts","description":"View the Highest Implied Volatility Options for the day.","canonical":null},"/trending/highest-implied-volatility-stock-tickers":{"urls":["/trending/highest-implied-volatility-stock-tickers"],"title":"Highest Implied Volatility Stock Options | OptionCharts","description":"View the Highest Implied Volatility Stock Options by ticker symbol.","canonical":null},"/trending/highest-implied-volatility-etf-tickers":{"urls":["/trending/highest-implied-volatility-etf-tickers"],"title":"Highest Implied Volatility ETF Options | OptionCharts","description":"View the Highest Implied Volatility ETF by ticker symbol.","canonical":null},"/trending/highest-implied-volatility-index-tickers":{"urls":["/trending/highest-implied-volatility-index-tickers"],"title":"Highest Implied Volatility Index Options | OptionCharts","description":"View the Highest Implied Volatility Index Options by ticker symbol.","canonical":null},"/trending/highest-implied-volatility-all-tickers":{"urls":["/trending/highest-implied-volatility-all-tickers"],"title":"Highest Implied Volatility Options | OptionCharts","description":"View the Highest Implied Volatility Options by ticker symbol.","canonical":null},"/trending/options-flow-stock":{"urls":["/trending/options-flow-stock"],"title":"Stock Options Flow | OptionCharts","description":"View the latest stock options flow.","canonical":null},"/trending/options-flow-etf":{"urls":["/trending/options-flow-etf"],"title":"ETF Options Flow | OptionCharts","description":"View the latest ETF options flow.","canonical":null},"/trending/options-flow-index":{"urls":["/trending/options-flow-index"],"title":"Index Options Flow | OptionCharts","description":"View the latest index options flow.","canonical":null},"/trending/options-flow":{"urls":["/trending/options-flow"],"title":"Options Flow | OptionCharts","description":"View the latest options flow.","canonical":null},"/trending":{"urls":["/trending"],"title":"Option Market Trends | OptionCharts","description":"View the latest option market trends and most active options.","canonical":null},"/trending/high-iv-rank-stocks":{"urls":["/trending/high-iv-rank-stocks"],"title":"High IV Rank Stocks | OptionCharts","description":"View the stocks with the highest IV Rank.","canonical":null},"/trending/high-iv-rank-etfs":{"urls":["/trending/high-iv-rank-etfs"],"title":"High IV Rank ETFs | OptionCharts","description":"View the ETFs with the highest IV Rank.","canonical":null},"/trending/high-iv-rank-indexes":{"urls":["/trending/high-iv-rank-indexes"],"title":"High IV Rank Indexes | OptionCharts","description":"View the indexes with the highest IV Rank.","canonical":null},"/trending/high-iv-rank-all":{"urls":["/trending/high-iv-rank-all"],"title":"High IV Rank All | OptionCharts","description":"View the securities with the highest IV Rank.","canonical":null},"/trending/low-iv-rank-stocks":{"urls":["/trending/low-iv-rank-stocks"],"title":"Low IV Rank Stocks | OptionCharts","description":"View the stocks with the lowest IV Rank.","canonical":null},"/trending/low-iv-rank-etfs":{"urls":["/trending/low-iv-rank-etfs"],"title":"Low IV Rank ETFs | OptionCharts","description":"View the ETFs with the lowest IV Rank.","canonical":null},"/trending/low-iv-rank-indexes":{"urls":["/trending/low-iv-rank-indexes"],"title":"Low IV Rank Indexes | OptionCharts","description":"View the indexes with the lowest IV Rank.","canonical":null},"/trending/low-iv-rank-all":{"urls":["/trending/low-iv-rank-all"],"title":"Low IV Rank All | OptionCharts","description":"View the securities with the lowest IV Rank.","canonical":null},"/options/*/option-profit-loss-chart":{"urls":["/options/*/option-profit-loss-chart","/options/*/option-profit-loss-chart/strategy/custom"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart","description":"View the option profit and loss chart for \u003cticker\u003e.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/option-profit-loss-chart"},"/options/*/option-profit-loss-chart/strategy/custom":{"urls":["/options/*/option-profit-loss-chart","/options/*/option-profit-loss-chart/strategy/custom"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart","description":"View the option profit and loss chart for \u003cticker\u003e.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/option-profit-loss-chart"},"/options/*/option-profit-loss-chart/strategy/long-call":{"urls":["/options/*/option-profit-loss-chart/strategy/long-call"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Long Call","description":"View the option profit and loss chart for a \u003cticker\u003e long call option strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/long-put":{"urls":["/options/*/option-profit-loss-chart/strategy/long-put"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Long Put","description":"View the option profit and loss chart for a \u003cticker\u003e long put option strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/short-call":{"urls":["/options/*/option-profit-loss-chart/strategy/short-call"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Short Call","description":"View the option profit and loss chart for a \u003cticker\u003e short call option strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/short-put":{"urls":["/options/*/option-profit-loss-chart/strategy/short-put"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Short Put","description":"View the option profit and loss chart for a \u003cticker\u003e short put option strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/covered-call":{"urls":["/options/*/option-profit-loss-chart/strategy/covered-call"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Covered Call","description":"View the option profit and loss chart for a \u003cticker\u003e covered call option strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/protective-put":{"urls":["/options/*/option-profit-loss-chart/strategy/protective-put"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Procective Put","description":"View the option profit and loss chart for a \u003cticker\u003e protective put strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/bull-call-spread":{"urls":["/options/*/option-profit-loss-chart/strategy/bull-call-spread"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Bull Call Spread","description":"View the option profit and loss chart for a \u003cticker\u003e bull call spread strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/bull-put-spread":{"urls":["/options/*/option-profit-loss-chart/strategy/bull-put-spread"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Bull Put Spread","description":"View the option profit and loss chart for a \u003cticker\u003e bull put spread strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/cash-secured-put":{"urls":["/options/*/option-profit-loss-chart/strategy/cash-secured-put"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Cash-secured Put","description":"View the option profit and loss chart for a \u003cticker\u003e cash-secured put strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/bear-put-spread":{"urls":["/options/*/option-profit-loss-chart/strategy/bear-put-spread"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Bear Put Spread","description":"View the option profit and loss chart for a \u003cticker\u003e bear put spread strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/bear-call-spread":{"urls":["/options/*/option-profit-loss-chart/strategy/bear-call-spread"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Bear Call Spread","description":"View the option profit and loss chart for a \u003cticker\u003e bear call spread strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/collar":{"urls":["/options/*/option-profit-loss-chart/strategy/collar"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Collar","description":"View the option profit and loss chart for a \u003cticker\u003e collar strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/long-straddle":{"urls":["/options/*/option-profit-loss-chart/strategy/long-straddle"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Long Straddle","description":"View the option profit and loss chart for a \u003cticker\u003e long straddle strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/short-straddle":{"urls":["/options/*/option-profit-loss-chart/strategy/short-straddle"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Short Straddle","description":"View the option profit and loss chart for a \u003cticker\u003e short straddle strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/iron-condor":{"urls":["/options/*/option-profit-loss-chart/strategy/iron-condor"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Iron Condor","description":"View the option profit and loss chart for a \u003cticker\u003e iron condor strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/calendar-spread":{"urls":["/options/*/option-profit-loss-chart/strategy/calendar-spread"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Calendar Spread","description":"View the option profit and loss chart for a \u003cticker\u003e calendar spread strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/covered-combination":{"urls":["/options/*/option-profit-loss-chart/strategy/covered-combination"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Covered Combination","description":"View the option profit and loss chart for a \u003cticker\u003e covered combination strategy.","canonical":null},"/options/*/option-profit-loss-chart/strategy/long-call-butterfly":{"urls":["/options/*/option-profit-loss-chart/strategy/long-call-butterfly"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e | Option Profit \u0026 Loss Chart | Long Call Butterfly","description":"View the option profit and loss chart for a \u003cticker\u003e long call butterfly strategy.","canonical":null},"/options/*/chain/chart/gamma-exposure":{"urls":["/options/*/chain/chart/gamma-exposure","/options/*/chain/*/chart/gamma-exposure","/options/*/gamma-exposure"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Gamma Exposure (GEX) | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Option Gamma Exposure (GEX) Chart.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/gamma-exposure"},"/options/*/chain/*/chart/gamma-exposure":{"urls":["/options/*/chain/chart/gamma-exposure","/options/*/chain/*/chart/gamma-exposure","/options/*/gamma-exposure"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Gamma Exposure (GEX) | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Option Gamma Exposure (GEX) Chart.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/gamma-exposure"},"/options/*/gamma-exposure":{"urls":["/options/*/chain/chart/gamma-exposure","/options/*/chain/*/chart/gamma-exposure","/options/*/gamma-exposure"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Gamma Exposure (GEX) | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Option Gamma Exposure (GEX) Chart.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/gamma-exposure"},"/options/*/delta-exposure":{"urls":["/options/*/delta-exposure"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Delta Exposure (DEX) | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Option Delta Exposure (DEX) Chart.","canonical":"https://optioncharts.io/options/\u003cticker\u003e/delta-exposure"},"/options/*/overview/multi-expiry-gamma-exposure":{"urls":["/options/*/overview/multi-expiry-gamma-exposure"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Multi-Expiry Option Gamma Exposure | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Multi-Expiry Option Gamma Exposure Chart.","canonical":null},"/options/*/overview/multi-expiry-greeks":{"urls":["/options/*/overview/multi-expiry-greeks"],"title":"\u003cticker\u003e: \u003ccompany_name\u003e Option Delta, Gamma, Theta, Vega Charts | OptionCharts","description":"View \u003cticker\u003e: \u003ccompany_name\u003e Multi-Expiry Greeks - option delta, gamma, theta, and vega charts.","canonical":null},"/option/*/contract/*":{"urls":["/option/*/contract/*","/option/*/contract"],"title":"\u003cticker\u003e Option | OptionCharts","description":"View \u003cticker\u003e option contract overview, price history, and volume.","canonical":"https://optioncharts.io/option/\u003cticker\u003e/contract"},"/option/*/contract":{"urls":["/option/*/contract/*","/option/*/contract"],"title":"\u003cticker\u003e Option | OptionCharts","description":"View \u003cticker\u003e option contract overview, price history, and volume.","canonical":"https://optioncharts.io/option/\u003cticker\u003e/contract"},"/blog":{"urls":["/blog"],"title":"OptionCharts Blog","description":"Follow the OptionCharts blog for the latest product news, updates, tips, and guides on options trading.","canonical":null},"/guides/understanding-the-option-contract-price-history-chart":{"urls":["/guides/understanding-the-option-contract-price-history-chart"],"title":"Understanding the Option Contract Price History Chart | OptionCharts","description":"Learn how to interpret the Option Contract Price History Chart on OptionCharts","canonical":null},"/trades":{"urls":["/trades"],"title":"My Saved Trades | OptionCharts","description":"View your saved trades.","canonical":null},"/feedback":{"urls":["/feedback"],"title":"Feedback | OptionCharts","description":"Send us your feedback on OptionCharts.","canonical":null},"/watchlist":{"urls":["/watchlist"],"title":"Watchlist | OptionCharts","description":"View your watchlist.","canonical":null}};gon.ticker="CBOE";gon.company_name="Cboe Global Markets Inc.";
+//]]>
+</script>
+
+  <!-- google adsense-->
+    <script src="/assets/application-aff303daac5f041ddd2847294ee0e8dbe47d0a5dae34d08524f7e49b08d5508b.js" data-turbo-track="reload" type="module"></script>
+</head>
+
+<!-- Google Analytics BEGIN-->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P278089W54"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+          dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+
+      gtag('config', 'G-P278089W54');
+  </script>
+<!-- Google Analytics END-->
+
+<!-- ========================= MAIN CONTENT ========================= -->
+<body>
+
+<!--library for tooltips-->
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
+
+<!--content for search-->
+<div id="search-dialog-id" class="tw-relative tw-z-10 preflight" style=" display: none" role="dialog" aria-modal="true">
+
+  <div class="tw-fixed tw-inset-0 tw-bg-gray-500 tw-bg-opacity-25 tw-transition-opacity"></div>
+
+  <div class="tw-fixed tw-inset-0 tw-z-10 tw-w-screen tw-overflow-y-auto tw-p-4 sm:tw-p-6 md:tw-p-20">
+    <div class="tw-mx-auto tw-max-w-xl tw-transform tw-divide-y tw-divide-gray-100 tw-overflow-hidden tw-rounded-xl tw-bg-white tw-shadow-2xl tw-ring-1 tw-ring-black tw-ring-opacity-5 tw-transition-all">
+      <div class="tw-relative">
+        <svg class="tw-pointer-events-none tw-absolute tw-left-4 tw-top-3.5 tw-h-5 tw-w-5 tw-text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/>
+        </svg>
+        <input
+          id="search-combobox"
+          type="text"
+          class="tw-h-12 tw-w-full tw-border-0 tw-bg-transparent tw-pl-11 tw-pr-4 tw-text-gray-900 placeholder:tw-text-gray-400 focus:tw-ring-0 sm:tw-text-sm"
+          placeholder="Search ticker or company..."
+          role="combobox"
+          aria-expanded="false"
+          aria-controls="options"
+          name="search"
+          value=""
+          autocomplete="off"
+          hx-get="/async/search-results"
+          hx-trigger="input changed delay:250ms, search"
+          hx-target="#search-results"
+          hx-include="this"
+          hx-headers='{"X-CSRF-Token": "s2sUHUXT00jqx3JKzFhlmB3VfTgY0mDKD2Mlm1sT7cWVmapQYG3J0Mff3NJI7VgVRT1vRtHbP-yHmaTv0FUqBw"}'
+        >
+      </div>
+
+      <!-- Results, show/hide based on command palette state -->
+      <ul id="search-results" class="tw-max-h-96 tw-transform-gpu scroll-py-3 tw-overflow-y-auto tw-p-3" role="listbox">
+          <li class="group tw-flex tw-cursor-default tw-select-none tw-rounded-xl tw-p-3 hover:tw-bg-gray-200" id="option-0" role="option" tabindex="-1" onclick="submitOption(this);">
+    <div class="tw-ml-4 tw-flex-auto">
+      <p class="tw-text-sm tw-font-medium tw-text-gray-700">SPY</p>
+      <p class="tw-text-sm tw-text-gray-500">SPDR S&amp;P 500 ETF Trust</p>
+    </div>
+  </li>
+  <li class="group tw-flex tw-cursor-default tw-select-none tw-rounded-xl tw-p-3 hover:tw-bg-gray-200" id="option-1" role="option" tabindex="-1" onclick="submitOption(this);">
+    <div class="tw-ml-4 tw-flex-auto">
+      <p class="tw-text-sm tw-font-medium tw-text-gray-700">$SPX</p>
+      <p class="tw-text-sm tw-text-gray-500">S&amp;P 500 Index</p>
+    </div>
+  </li>
+  <li class="group tw-flex tw-cursor-default tw-select-none tw-rounded-xl tw-p-3 hover:tw-bg-gray-200" id="option-2" role="option" tabindex="-1" onclick="submitOption(this);">
+    <div class="tw-ml-4 tw-flex-auto">
+      <p class="tw-text-sm tw-font-medium tw-text-gray-700">TSLA</p>
+      <p class="tw-text-sm tw-text-gray-500">Tesla Inc</p>
+    </div>
+  </li>
+  <li class="group tw-flex tw-cursor-default tw-select-none tw-rounded-xl tw-p-3 hover:tw-bg-gray-200" id="option-3" role="option" tabindex="-1" onclick="submitOption(this);">
+    <div class="tw-ml-4 tw-flex-auto">
+      <p class="tw-text-sm tw-font-medium tw-text-gray-700">NVDA</p>
+      <p class="tw-text-sm tw-text-gray-500">NVIDIA Corp</p>
+    </div>
+  </li>
+  <li class="group tw-flex tw-cursor-default tw-select-none tw-rounded-xl tw-p-3 hover:tw-bg-gray-200" id="option-4" role="option" tabindex="-1" onclick="submitOption(this);">
+    <div class="tw-ml-4 tw-flex-auto">
+      <p class="tw-text-sm tw-font-medium tw-text-gray-700">AAPL</p>
+      <p class="tw-text-sm tw-text-gray-500">Apple Inc</p>
+    </div>
+  </li>
+  <li class="group tw-flex tw-cursor-default tw-select-none tw-rounded-xl tw-p-3 hover:tw-bg-gray-200" id="option-5" role="option" tabindex="-1" onclick="submitOption(this);">
+    <div class="tw-ml-4 tw-flex-auto">
+      <p class="tw-text-sm tw-font-medium tw-text-gray-700">GOOG</p>
+      <p class="tw-text-sm tw-text-gray-500">Alphabet Inc</p>
+    </div>
+  </li>
+  <li class="group tw-flex tw-cursor-default tw-select-none tw-rounded-xl tw-p-3 hover:tw-bg-gray-200" id="option-6" role="option" tabindex="-1" onclick="submitOption(this);">
+    <div class="tw-ml-4 tw-flex-auto">
+      <p class="tw-text-sm tw-font-medium tw-text-gray-700">MSFT</p>
+      <p class="tw-text-sm tw-text-gray-500">Microsoft Corporation</p>
+    </div>
+  </li>
+
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+    function initializeSearchModal() {
+        const SEARCH_TRIGGER_BUTTON_IDS = ['search-icon-header', 'search-icon-header2', 'add-ticker-to-watchlist-btn', "search-form-landing-page-id"];
+
+        const searchInput = document.getElementById('search-combobox');
+        const searchModal = document.getElementById('search-dialog-id');
+
+        // Show the modal when 'Cmd + K (mac)' , or 'Ctrl + k (windows)' is pressed
+        document.addEventListener('keydown', function (event) {
+            if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+                event.preventDefault();
+                showSearchModal();
+            }
+        });
+
+        // show the modal when the button is clicked
+        document.addEventListener('click', function (event) {
+            const clickedElement = event.target.closest('#' + SEARCH_TRIGGER_BUTTON_IDS.join(', #'));
+            if (clickedElement) {
+                triggeredByBtnId = clickedElement.id;
+                //console.log('searchModal triggered open by btn: ' + clickedElement.id);
+                showSearchModal();
+            }
+        });
+
+        // Close the modal when Esc is pressed
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                searchModal.classList.remove('tw-block');
+                searchModal.classList.add('tw-hidden');
+            }
+        });
+
+        // Close the modal when clicking outside of it
+        document.addEventListener('click', function (event) {
+            if (searchModal.style.display === 'block' || searchModal.classList.contains('tw-block')
+                && !searchModal.querySelector('.tw-mx-auto').contains(event.target)) {
+
+                // do not close modal if search button was clicked
+                if (SEARCH_TRIGGER_BUTTON_IDS.includes(event.target.id)) {
+                    return;
+                }
+                searchModal.classList.remove('tw-block');
+                searchModal.classList.add('tw-hidden');
+            }
+        });
+
+        // Add listeners to select search results with keyboard - ArrowDown, ArrowUp, Enter
+        let currentIndex = -1;
+
+        function handleKeyDownOnSearchResults(event) {
+            const options = document.getElementById('search-results').querySelectorAll('li');
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                if (currentIndex < options.length - 1) {
+                    currentIndex++;
+                    updateHighlight(currentIndex, options);
+                }
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateHighlight(currentIndex, options);
+                }
+            } else if (event.key === 'Enter') {
+                event.preventDefault();
+                if (currentIndex >= 0 && currentIndex < options.length) {
+                    submitOption(options[currentIndex]);
+                } else if (currentIndex === -1 && options.length > 0) {
+                    // if no option is selected, submit the first option
+                    submitOption(options[0]);
+                }
+            }
+        }
+
+        if (!searchInput.isKeyDownListenerAdded) {
+            searchInput.addEventListener('keydown', handleKeyDownOnSearchResults);
+            searchInput.isKeyDownListenerAdded = true;
+        }
+    }
+
+    function updateHighlight(currentIndex, options) {
+        options.forEach((option, index) => {
+            if (index === currentIndex) {
+                option.classList.add('tw-bg-gray-200');
+                option.setAttribute('aria-selected', 'true');
+            } else {
+                option.classList.remove('tw-bg-gray-200');
+                option.removeAttribute('aria-selected');
+            }
+        });
+    }
+
+    function submitOption(option) {
+        const tickerSymbolFromInput = option.querySelector('.tw-text-sm.tw-font-medium').textContent;
+        console.log('submitting to search for ticker symbol: ' + tickerSymbolFromInput);
+        GoogleAnalyticsHelpers.sendSearchEvent(tickerSymbolFromInput);
+        run_loading_spinner();
+
+        // Handles the case when adding an item to the watchlist. Instead of navigating to the ticker page, the item is added to the watchlist, and then the user is redirected back to the watchlist show page.
+        if (triggeredByBtnId === 'add-ticker-to-watchlist-btn') {
+            // console.log('adding to watchlist...');
+            // console.log('tickerSymbolFromInput: ' + tickerSymbolFromInput);
+            const button = document.getElementById('add-ticker-to-watchlist-btn');
+            const watchlistId = button.getAttribute('data-watchlist-id');
+            console.log('watchlistId: ' + watchlistId);
+            // make ajax request to add tickers to watchlist.
+            $.ajax({
+                url: '/async/watchlists/add_ticker',
+                method: 'POST',
+                data: {
+                    ticker: tickerSymbolFromInput,
+                    watchlist_id: watchlistId
+                },
+                success: function (response) {
+                    console.log('Ticker added to watchlist successfully:', response);
+                    window.location.href = `/watchlist/${watchlistId}`;
+                },
+                error: function (error) {
+                    console.warn('Error adding ticker to watchlist:', error);
+                    window.location.href = `/watchlist/${watchlistId}?error_adding_to_watchlist=true&error_ticker=${tickerSymbolFromInput}`;
+                }
+            });
+            return;
+        }
+
+        // default behavior
+        window.location.href = `/search?ticker_search=${tickerSymbolFromInput}`;
+    }
+
+    function showSearchModal() {
+        // close the mobile menu if it is open
+        if (!document.getElementById('header-mobile-menu').classList.contains('tw-hidden')) {
+            console.log('closing mobile menu...');
+            document.getElementById('header-mobile-menu').classList.add('tw-hidden');
+        }
+        let searchModal = document.getElementById('search-dialog-id');
+        if (!searchModal) {
+            console.warn('searchModal NOT found in DOM.');
+        }
+
+        // show the modal
+        searchModal.classList.remove('tw-hidden');
+        searchModal.classList.add('tw-block');
+
+        const searchCombobox = document.getElementById('search-combobox');
+        searchCombobox.focus();
+    }
+
+    document.addEventListener('DOMContentLoaded', initializeSearchModal);
+    let triggeredByBtnId = null;
+
+    // After each key press, update the search results
+    // makes sure to only add this listener once
+    if (typeof window.htmxAfterSwapListenerAttachedForSearchDialog === 'undefined') {
+        window.htmxAfterSwapListenerAttachedForSearchDialog = false;
+    }
+    if (!window.htmxAfterSwapListenerAttachedForSearchDialog) {
+        document.addEventListener('htmx:afterSwap', function (event) {
+            if (event.detail.target.id === 'search-dialog-id') {
+                //console.log('htmx:afterSwap event detected...');
+                initializeSearchModal();
+            }
+        });
+        window.htmxAfterSwapListenerAttachedForSearchDialog = true;
+    }
+</script>
+
+
+<div class="tw-bg-white preflight">
+  <div id="cover-spin"></div> <!-- loading spinner -->
+  <header class="tw-bg-white">
+  <nav class="container tw-flex tw-items-center tw-justify-between tw-gap-x-6 tw-p-6 lg:tw-px-8" aria-label="Global">
+    <div class="tw-flex lg:tw-flex-1">
+      <a href="/" class="tw--m-1.5 tw-p-1.5">
+        <img class="tw-h-8 tw-w-auto tw-min-w-[120px] tw-object-contain" src="/images/brand_logo/option_charts_logo_main6.png" alt="OptionCharts logo">
+      </a>
+    </div>
+    <div class="tw-hidden lg:tw-flex lg:tw-gap-x-12">
+      <a href="/" class="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900">Home</a>
+      <!-- <a href="#" class="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900">Features</a>-->
+      <a href="/pricing" class="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900">Pricing</a>
+      <a href="/trending/most-active-stock-options" class="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900">Market
+        Trends</a>
+
+      <!-- resources menu -->
+      <div class="tw-relative">
+        <button type="button" id="resources-dropdown-button" class="tw-flex tw-items-center tw-gap-x-1 tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900" aria-expanded="false">
+          Resources
+          <svg class="tw-h-5 tw-w-5 tw-flex-none tw-text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+            <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+          </svg>
+        </button>
+
+        <div id="resources-dropdown-menu" class="tw-absolute tw--left-8 tw-top-full tw-z-10 tw-mt-3 tw-w-56 tw-rounded-xl tw-bg-white tw-p-2 tw-shadow-lg tw-ring-1 ring-gray-900/5 tw-hidden tw-opacity-0 tw-translate-y-1">
+          <a href="/docs" class="tw-block tw-rounded-lg tw-px-3 tw-py-2 tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 hover:tw-bg-gray-50">Knowledge
+            base</a>
+          <a href="/blog" class="tw-block tw-rounded-lg tw-px-3 tw-py-2 tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 hover:tw-bg-gray-50">Blog</a>
+        </div>
+        <script>
+            // js for dropdown menu functionality
+            document.addEventListener('DOMContentLoaded', () => {
+                const resourcesButton = document.getElementById('resources-dropdown-button');
+                const resourcesMenu = document.getElementById('resources-dropdown-menu');
+                let isOpen = false;
+
+                function toggleMenu() {
+                    isOpen = !isOpen;
+                    resourcesButton.setAttribute('aria-expanded', isOpen);
+
+                    if (isOpen) {
+                        resourcesMenu.classList.remove('tw-hidden');
+                        setTimeout(() => {
+                            resourcesMenu.classList.add('tw-transition', 'tw-ease-out', 'tw-duration-200');
+                            resourcesMenu.classList.remove('tw-opacity-0', 'tw-translate-y-1');
+                            resourcesMenu.classList.add('tw-opacity-100', 'tw-translate-y-0');
+                        }, 10);
+                    } else {
+                        resourcesMenu.classList.add('tw-transition', 'tw-ease-in', 'tw-duration-150');
+                        resourcesMenu.classList.remove('tw-opacity-100', 'tw-translate-y-0');
+                        resourcesMenu.classList.add('tw-opacity-0', 'tw-translate-y-1');
+                        setTimeout(() => {
+                            resourcesMenu.classList.add('tw-hidden');
+                        }, 150);
+                    }
+                }
+
+                resourcesButton.addEventListener('click', toggleMenu);
+
+                // Close the menu when clicking outside
+                document.addEventListener('click', (event) => {
+                    if (isOpen && !resourcesButton.contains(event.target) && !resourcesMenu.contains(event.target)) {
+                        toggleMenu();
+                    }
+                });
+            });
+        </script>
+      </div>
+
+      <!-- search button-->
+      <button>
+        <svg id="search-icon-header2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="tw-w-6 tw-h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+        </svg>
+      </button>
+
+    </div>
+
+    <div class="tw-flex tw-flex-1 tw-items-center tw-justify-end tw-gap-x-3">
+      <!-- this area will show for both mobile and desktop, and not be in collapsible menu -->
+
+      <!-- search button-->
+      <button class="lg:tw-hidden">
+        <svg id="search-icon-header" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="tw-w-6 tw-h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+        </svg>
+      </button>
+
+      <!-- either Log in or account settings button -->
+        <a href="/users/sign_in" class="tw-hidden lg:tw-block lg:tw-text-sm lg:tw-font-semibold lg:tw-leading-6 lg:tw-text-gray-900">
+          Log in
+        </a>
+
+      <!-- either upgrade or sign up button-->
+        <a href="/pricing" class="tw-rounded-md tw-bg-blue-500 tw-px-3 tw-py-2 tw-text-sm tw-font-semibold tw-text-white tw-shadow-sm hover:tw-bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outw-bg-blue-500"
+           onclick="GoogleAnalyticsHelpers.triggerCustomEvent('oc_click_subscribe_header_upgrade_btn');"
+        >
+          Upgrade
+        </a>
+    </div>
+
+    <!-- The collapsible menu button which show for mobile or small screens-->
+    <div class="tw-flex lg:tw-hidden">
+      <button id="header-open-menu-button-id" type="button" class="tw--m-2.5 tw-inline-flex tw-items-center tw-justify-center tw-rounded-md tw-p-2.5 tw-text-gray-700">
+        <span class="tw-sr-only">Open main menu</span>
+        <svg class="tw-h-6 tw-w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+
+  <!-- Mobile menu.  show/hide based on menu open state. BEGIN -->
+  <div id="header-mobile-menu" class="lg:tw-hidden tw-hidden" role="dialog" aria-modal="true">
+    <!-- Background backdrop, show/hide based on slide-over state. -->
+    <div class="tw-fixed tw-inset-0 tw-z-10"></div>
+    <div class="tw-fixed tw-inset-y-0 tw-right-0 tw-z-10 tw-w-full tw-overflow-y-auto tw-bg-white tw-px-6 tw-py-6 sm:tw-max-w-sm sm:tw-ring-1 sm:ring-gray-900/10">
+      <div class="tw-flex tw-items-center tw-gap-x-6">
+        <!-- this area is the mobile menu and will ALWAYS show-->
+        <a href="/" class="tw--m-1.5 tw-p-1.5">
+          <img class="tw-h-8 tw-w-auto" src="/images/brand_logo/option_charts_logo_main6.png" alt="OptionCharts logo">
+        </a>
+
+          <a href="/pricing" class="tw-ml-auto tw-rounded-md tw-bg-blue-500 tw-px-3 tw-py-2 tw-text-sm tw-font-semibold tw-text-white tw-shadow-sm hover:tw-bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outw-bg-blue-500">
+            Upgrade
+          </a>
+        <button id="header-close-menu-button-id" type="button" class="tw--m-2.5 tw-rounded-md tw-p-2.5 tw-text-gray-700">
+          <span class="tw-sr-only">Close menu</span>
+          <svg class="tw-h-6 tw-w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="tw-mt-6 tw-flow-root">
+        <div class="tw--my-6 tw-divide-y tw-divide-gray-500/10">
+          <div class="tw-space-y-2 tw-py-6">
+            <a href="/" class="tw--mx-3 tw-block tw-rounded-lg tw-px-3 tw-py-2 tw-text-base tw-font-semibold tw-leading-7 tw-text-gray-900 hover:tw-bg-gray-50">Home</a>
+            <a href="/pricing" class="tw--mx-3 tw-block tw-rounded-lg tw-px-3 tw-py-2 tw-text-base tw-font-semibold tw-leading-7 tw-text-gray-900 hover:tw-bg-gray-50">Pricing</a>
+            <a href="/trending/most-active-stock-options" class="tw--mx-3 tw-block tw-rounded-lg tw-px-3 tw-py-2 tw-text-base tw-font-semibold tw-leading-7 tw-text-gray-900 hover:tw-bg-gray-50">Market
+              Trends</a>
+            <!-- Resources menu for mobile menu -->
+            <div class="tw-relative">
+              <button type="button" id="mobile-resources-dropdown-button" class="tw--mx-3 tw-flex tw-w-full tw-items-center tw-justify-between tw-rounded-lg tw-px-3 tw-py-2 tw-text-base tw-font-semibold tw-leading-7 tw-text-gray-900 hover:tw-bg-gray-50">
+                Resources
+                <svg class="tw-h-5 tw-w-5 tw-flex-none tw-text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+                </svg>
+              </button>
+              <div id="mobile-resources-dropdown-menu" class="tw-hidden tw-mt-2 tw-space-y-2">
+                <a href="/docs" class="tw--mx-3 tw-block tw-rounded-lg tw-px-3 tw-py-2 tw-text-base tw-font-semibold tw-leading-7 tw-text-gray-900 hover:tw-bg-gray-50">Knowledge
+                  base</a>
+                <a href="/blog" class="tw--mx-3 tw-block tw-rounded-lg tw-px-3 tw-py-2 tw-text-base tw-font-semibold tw-leading-7 tw-text-gray-900 hover:tw-bg-gray-50">Blog</a>
+              </div>
+            </div>
+            <script>
+                // Mobile Resources dropdown functionality
+                document.addEventListener('DOMContentLoaded', () => {
+                    const mobileResourcesButton = document.getElementById('mobile-resources-dropdown-button');
+                    const mobileResourcesMenu = document.getElementById('mobile-resources-dropdown-menu');
+                    mobileResourcesButton.addEventListener('click', () => {
+                        mobileResourcesMenu.classList.toggle('tw-hidden');
+                        const expandedState = mobileResourcesMenu.classList.contains('tw-hidden') ? 'false' : 'true';
+                        mobileResourcesButton.setAttribute('aria-expanded', expandedState);
+                    });
+                });
+            </script>
+          </div>
+
+            <div class="tw-py-6">
+              <a href="/users/sign_in" class="tw--mx-3 tw-block tw-rounded-lg tw-px-3 tw-py-2.5 tw-text-base tw-font-semibold tw-leading-7 tw-text-gray-900 hover:tw-bg-gray-50">
+                Log in
+              </a>
+              <a href="/users/sign_up" class="tw--mx-3 tw-block tw-rounded-lg tw-px-3 tw-py-2.5 tw-text-base tw-font-semibold tw-leading-7 tw-text-gray-900 hover:tw-bg-gray-50">
+                Sign up
+              </a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('header-open-menu-button-id').addEventListener('click', () => {
+            document.getElementById('header-mobile-menu').classList.toggle('tw-hidden');
+        });
+
+        document.getElementById('header-close-menu-button-id').addEventListener('click', () => {
+            // close the mobile menu
+            document.getElementById('header-mobile-menu').classList.toggle('tw-hidden');
+        });
+    });
+</script>
+
+  <div class="container">
+  <!-- flash messages-->
+
+
+
+</div>
+
+  <div class="container tw-mx-auto tw-px-4 tw-mb-6">
+
+  <div class="mt-4">
+    <div id="stock-price-widget-container"
+         style="min-height: 205px"
+         hx-get="/async/stock_price_widget?ticker=CBOE"
+         hx-trigger="load, every 31s"
+    >
+    </div>
+
+  </div>
+
+  <!-- alerts, warnings and notifications-->
+
+
+
+  <!-- Tabs BEGIN  -->
+
+
+  <div class="tw-mt-1">
+
+    <div class=" sm:tw-block tw-mb-6">
+      <div class="tw-border-b tw-border-gray-200">
+        <nav id="option-charts-main-tabs" class="tw--mb-px tw-flex tw-space-x-8 tw-overflow-x-auto tw-whitespace-nowrap" aria-label="Tabs">
+            <a id="tab_id_overview"
+               href="/options/CBOE"
+               class="tw-border-transparent tw-text-gray-500 hover:tw-border-gray-300 hover:tw-text-gray-700 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium"
+               hx-get="/async/options_ticker_info?ticker=CBOE"
+               hx-target="#option-charts-main-content-container"
+               hx-swap="innerHTML"
+               hx-push-url="/options/CBOE"
+               hx-on::before-request="
+                // add loading spinner
+                load_local_spinner('option-charts-main-content-container');
+                // update meta tags
+                shared_util_namespace.updateMetaTagsTitleAndDescriptionFromLink('/options/CBOE', 'CBOE', 'Cboe Global Markets Inc.');
+                // change the active tab.
+                shared_util_namespace.changeActiveTab('option-charts-main-tabs', 'tw-border-blue-500 tw-text-blue-500 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium', 'tw-border-transparent tw-text-gray-500 hover:tw-border-gray-300 hover:tw-text-gray-700 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium');
+                // center the active tab on mobile
+                setTimeout(() => {
+                  const tabContainer = document.getElementById('option-charts-main-tabs');
+                  shared_util_namespace.centerElementInContainer(event.target, tabContainer);
+                }, 10);
+                "
+               
+            >
+              Overview
+            </a>
+            <a id="tab_id_profit_and_loss_chart"
+               href="/options/CBOE/option-profit-loss-chart"
+               class="tw-border-transparent tw-text-gray-500 hover:tw-border-gray-300 hover:tw-text-gray-700 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium"
+               hx-get="/async/option_profit_loss?ticker=CBOE"
+               hx-target="#option-charts-main-content-container"
+               hx-swap="innerHTML"
+               hx-push-url="/options/CBOE/option-profit-loss-chart"
+               hx-on::before-request="
+                // add loading spinner
+                load_local_spinner('option-charts-main-content-container');
+                // update meta tags
+                shared_util_namespace.updateMetaTagsTitleAndDescriptionFromLink('/options/CBOE/option-profit-loss-chart', 'CBOE', 'Cboe Global Markets Inc.');
+                // change the active tab.
+                shared_util_namespace.changeActiveTab('option-charts-main-tabs', 'tw-border-blue-500 tw-text-blue-500 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium', 'tw-border-transparent tw-text-gray-500 hover:tw-border-gray-300 hover:tw-text-gray-700 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium');
+                // center the active tab on mobile
+                setTimeout(() => {
+                  const tabContainer = document.getElementById('option-charts-main-tabs');
+                  shared_util_namespace.centerElementInContainer(event.target, tabContainer);
+                }, 10);
+                "
+               
+            >
+              Profit &amp; Loss Chart
+            </a>
+            <a id="tab_id_option_charts"
+               href="/options/CBOE/open-interest"
+               class="tw-border-blue-500 tw-text-blue-500 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium"
+               hx-get="/async/options_charts/open_interest?ticker=CBOE"
+               hx-target="#option-charts-main-content-container"
+               hx-swap="innerHTML"
+               hx-push-url="/options/CBOE/open-interest"
+               hx-on::before-request="
+                // add loading spinner
+                load_local_spinner('option-charts-main-content-container');
+                // update meta tags
+                shared_util_namespace.updateMetaTagsTitleAndDescriptionFromLink('/options/CBOE/open-interest', 'CBOE', 'Cboe Global Markets Inc.');
+                // change the active tab.
+                shared_util_namespace.changeActiveTab('option-charts-main-tabs', 'tw-border-blue-500 tw-text-blue-500 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium', 'tw-border-transparent tw-text-gray-500 hover:tw-border-gray-300 hover:tw-text-gray-700 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium');
+                // center the active tab on mobile
+                setTimeout(() => {
+                  const tabContainer = document.getElementById('option-charts-main-tabs');
+                  shared_util_namespace.centerElementInContainer(event.target, tabContainer);
+                }, 10);
+                "
+               aria-selected=true
+            >
+              Option Charts
+            </a>
+            <a id="tab_id_option_chain"
+               href="/options/CBOE/option-chain"
+               class="tw-border-transparent tw-text-gray-500 hover:tw-border-gray-300 hover:tw-text-gray-700 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium"
+               hx-get="/async/option_chain?ticker=CBOE"
+               hx-target="#option-charts-main-content-container"
+               hx-swap="innerHTML"
+               hx-push-url="/options/CBOE/option-chain"
+               hx-on::before-request="
+                // add loading spinner
+                load_local_spinner('option-charts-main-content-container');
+                // update meta tags
+                shared_util_namespace.updateMetaTagsTitleAndDescriptionFromLink('/options/CBOE/option-chain', 'CBOE', 'Cboe Global Markets Inc.');
+                // change the active tab.
+                shared_util_namespace.changeActiveTab('option-charts-main-tabs', 'tw-border-blue-500 tw-text-blue-500 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium', 'tw-border-transparent tw-text-gray-500 hover:tw-border-gray-300 hover:tw-text-gray-700 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium');
+                // center the active tab on mobile
+                setTimeout(() => {
+                  const tabContainer = document.getElementById('option-charts-main-tabs');
+                  shared_util_namespace.centerElementInContainer(event.target, tabContainer);
+                }, 10);
+                "
+               
+            >
+              Option Chain
+            </a>
+            <a id="tab_id_option_contract"
+               href="/option/CBOE/contract"
+               class="tw-border-transparent tw-text-gray-500 hover:tw-border-gray-300 hover:tw-text-gray-700 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium"
+               hx-get="/async/option_contract?ticker=CBOE"
+               hx-target="#option-charts-main-content-container"
+               hx-swap="innerHTML"
+               hx-push-url="/option/CBOE/contract"
+               hx-on::before-request="
+                // add loading spinner
+                load_local_spinner('option-charts-main-content-container');
+                // update meta tags
+                shared_util_namespace.updateMetaTagsTitleAndDescriptionFromLink('/option/CBOE/contract', 'CBOE', 'Cboe Global Markets Inc.');
+                // change the active tab.
+                shared_util_namespace.changeActiveTab('option-charts-main-tabs', 'tw-border-blue-500 tw-text-blue-500 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium', 'tw-border-transparent tw-text-gray-500 hover:tw-border-gray-300 hover:tw-text-gray-700 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium');
+                // center the active tab on mobile
+                setTimeout(() => {
+                  const tabContainer = document.getElementById('option-charts-main-tabs');
+                  shared_util_namespace.centerElementInContainer(event.target, tabContainer);
+                }, 10);
+                "
+               
+            >
+              Option Contract
+            </a>
+            <a id="tab_id_option_history"
+               href="/options/CBOE/option-history"
+               class="tw-border-transparent tw-text-gray-500 hover:tw-border-gray-300 hover:tw-text-gray-700 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium"
+               hx-get="/async/option_history_table?ticker=CBOE"
+               hx-target="#option-charts-main-content-container"
+               hx-swap="innerHTML"
+               hx-push-url="/options/CBOE/option-history"
+               hx-on::before-request="
+                // add loading spinner
+                load_local_spinner('option-charts-main-content-container');
+                // update meta tags
+                shared_util_namespace.updateMetaTagsTitleAndDescriptionFromLink('/options/CBOE/option-history', 'CBOE', 'Cboe Global Markets Inc.');
+                // change the active tab.
+                shared_util_namespace.changeActiveTab('option-charts-main-tabs', 'tw-border-blue-500 tw-text-blue-500 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium', 'tw-border-transparent tw-text-gray-500 hover:tw-border-gray-300 hover:tw-text-gray-700 tw-whitespace-nowrap tw-border-b-2 tw-py-4 tw-px-1 tw-text-sm tw-font-medium');
+                // center the active tab on mobile
+                setTimeout(() => {
+                  const tabContainer = document.getElementById('option-charts-main-tabs');
+                  shared_util_namespace.centerElementInContainer(event.target, tabContainer);
+                }, 10);
+                "
+               
+            >
+              Option History
+            </a>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- Tabs END  -->
+
+
+  <!-- Chart Content will be lazily loaded here, below tabs -->
+    <div id="option-charts-main-content-container"
+         hx-get="/async/options_charts/max_pain?expiration_dates=2025-12-05%3Aw&amp;option_type=all&amp;strike_range=all&amp;ticker=CBOE"
+         hx-trigger="load"
+         class="tw-min-h-[2000px]"
+    >
+      <!-- load content -->
+      <script>
+          // loads spinner while waiting for content to load
+          $(document).ready(function () {
+              load_local_spinner('option-charts-main-content-container');
+
+              // Center the active tab on page load for mobile devices
+              setTimeout(() => {
+                  const tabContainer = document.getElementById('option-charts-main-tabs');
+                  const activeTab = tabContainer.querySelector('[aria-selected="true"]');
+                  if (activeTab && tabContainer) {
+                      shared_util_namespace.centerElementInContainer(activeTab, tabContainer);
+                  }
+              }, 100);
+          });
+      </script>
+    </div>
+
+</div>
+
+  <hr>
+
+<footer class="tw-bg-white" aria-labelledby="footer-heading">
+  <h2 id="footer-heading" class="tw-sr-only">Footer</h2>
+  <div class="tw-mx-auto tw-max-w-7xl tw-px-6 tw-pb-8 tw-pt-16 sm:tw-pt-24 lg:tw-px-8 lg:tw-pt-32">
+    <div class="xl:tw-grid xl:tw-grid-cols-3 xl:tw-gap-8">
+      <div class="tw-space-y-8">
+        <img class="tw-h-7" src="/images/brand_logo/option_charts_logo_abbreviated_1.png" alt="OptionCharts">
+        <p class="tw-text-sm tw-leading-6 tw-text-gray-600">Elevate your option trading.</p>
+
+        <div class="tw-flex tw-space-x-6">
+          <a href="https://x.com/optioncharts_io" class="tw-text-gray-400 hover:tw-text-gray-500">
+            <span class="tw-sr-only">X</span>
+            <svg class="tw-h-4 tw-w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z"/>
+            </svg>
+          </a>
+          <a href="/discord" class="tw-text-gray-400 hover:tw-text-gray-500">
+            <span class="tw-sr-only">Discord</span>
+            <svg class="tw-h-4 tw-w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+      <div class="tw-mt-16 tw-grid tw-grid-cols-2 tw-gap-8 xl:tw-col-span-2 xl:tw-mt-0">
+        <div class="md:tw-grid md:tw-grid-cols-2 md:tw-gap-8">
+          <div>
+            <h3 class="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900">Company</h3>
+            <ul role="list" class="tw-mt-6 tw-space-y-4">
+              <li>
+                <a href="/" class="tw-text-sm tw-leading-6 tw-text-gray-600 hover:tw-text-gray-900">Home</a>
+              </li>
+              <li>
+                <a href="/pricing" class="tw-text-sm tw-leading-6 tw-text-gray-600 hover:tw-text-gray-900">Pricing</a>
+              </li>
+              <li>
+                <a href="/blog" class="tw-text-sm tw-leading-6 tw-text-gray-600 hover:tw-text-gray-900">Blog</a>
+              </li>
+            </ul>
+          </div>
+          <div class="tw-mt-10 md:tw-mt-0">
+            <h3 class="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900">Support</h3>
+            <ul role="list" class="tw-mt-6 tw-space-y-4">
+              <li>
+                <a href="/docs" class="tw-text-sm tw-leading-6 tw-text-gray-600 hover:tw-text-gray-900">Knowledge
+                  base</a>
+              </li>
+              <li>
+                <a href="/docs/faq" class="tw-text-sm tw-leading-6 tw-text-gray-600 hover:tw-text-gray-900">FAQ</a>
+              </li>
+              <li>
+                <a href="/contact" class="tw-text-sm tw-leading-6 tw-text-gray-600 hover:tw-text-gray-900">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="md:tw-grid md:tw-grid-cols-2 md:tw-gap-8">
+          <div>
+            <h3 class="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900">Legal</h3>
+            <ul role="list" class="tw-mt-6 tw-space-y-4">
+              <li>
+                <a href="/privacy" class="tw-text-sm tw-leading-6 tw-text-gray-600 hover:tw-text-gray-900">Privacy</a>
+              </li>
+              <li>
+                <a href="/terms-of-service" class="tw-text-sm tw-leading-6 tw-text-gray-600 hover:tw-text-gray-900">Terms</a>
+              </li>
+              <li>
+                <a href="/disclaimer" class="tw-text-sm tw-leading-6 tw-text-gray-600 hover:tw-text-gray-900">Disclaimer</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--    <div class="tw-mt-16 tw-border-t border-gray-900/10 tw-pt-8 sm:tw-mt-20 lg:tw-mt-24">-->
+    <div class="tw-mt-16 tw-pt-8 sm:tw-mt-20 lg:tw-mt-24">
+      <p class="tw-text-xs tw-leading-5 tw-text-gray-500">&copy; 2025 OptionCharts, LLC. All rights
+        reserved.</p>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+
+
+  <!-- defaults to info button-->
+
+
+<!--the modal, hidden by default-->
+<div class="modal fade" id="show_subscription_ad_modal_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-body tw-font-normal tw-text-md">
+          <!-- add the close button here instead of header -->
+          <div style="text-align: right">
+            <i type="button" class="bi bi-x" style="font-size: 3em" data-bs-dismiss="modal" aria-label="Close"></i>
+          </div>
+        <div style="text-align: left">
+            <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3">
+    <div class="col-lg-12 p-3 p-lg-5 pt-lg-3">
+
+      <h1 class="display-4 fw-bold lh-1">Get more with OptionCharts Premium</h1>
+      <p class="lead">
+        Upgrade to OptionCharts Premium to gain access to all charts, enjoy ad-free browsing, view charts in
+        full-screen mode, download data, and enjoy other exclusive features.
+      </p>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+        <a href="/users/sign_up?enrollment_plan=premium-monthly" id="subscribe_button_from_premium_subscription_ad"
+           onclick="GoogleAnalyticsHelpers.triggerCustomEvent('oc_click_subscribe_on_subscribe_ad', window.location.pathname)"
+        >
+          <button type="button" class="btn btn-lg btn-primary">Subscribe to Premium</button>
+        </a>
+        <a href="/pricing"
+           onclick="GoogleAnalyticsHelpers.triggerCustomEvent('oc_click_learn_more_on_subscribe_ad', window.location.pathname)">
+          <button type="button" class="btn btn-lg btn-outline-primary" id='view_pricing_button_from_premium_subscription_ad'>View
+            Plans and Pricing
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+  <!-- defaults to info button-->
+
+
+<!--the modal, hidden by default-->
+<div class="modal fade" id="requires_subscription_generic_modal_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-body tw-font-normal tw-text-md">
+          <!-- add the close button here instead of header -->
+          <div style="text-align: right">
+            <i type="button" class="bi bi-x" style="font-size: 3em" data-bs-dismiss="modal" aria-label="Close"></i>
+          </div>
+        <div style="text-align: left">
+          <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3">
+  <div class="col-lg-12 p-3 p-lg-5 pt-lg-3">
+    <div class="d-flex justify-content-center" style="padding-bottom: 20px">
+      <i class="bi bi-lock" style="font-size: 4em"></i>
+    </div>
+
+
+    <h1 class="display-4 fw-bold lh-1 tw-my-3">Unlock this feature with OptionCharts Premium</h1>
+    <p class="lead tw-mb-3">
+      Upgrade to OptionCharts Premium to gain access to all charts, enjoy ad-free browsing, view charts in
+      full-screen mode, download data, and enjoy other exclusive features.
+    </p>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+      <a href="/users/sign_up?enrollment_plan=premium-monthly" class="subscribe_button_from_requires_subscription"
+         onclick="GoogleAnalyticsHelpers.triggerCustomEvent('oc_click_subscribe_locked_feature_1', window.location.pathname, '')">
+        <button type="button" class="btn btn-lg btn-primary">Subscribe to Premium</button>
+      </a>
+      <a href="/pricing"
+      onclick="GoogleAnalyticsHelpers.triggerCustomEvent('oc_click_learn_more_locked_feature_1', window.location.pathname, '')"
+      >
+        <button type="button" class="btn btn-lg btn-outline-primary">View Plans and Pricing</button>
+      </a>
+    </div>
+  </div>
+</div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- ========================= JS here ========================= -->
+<!--bootstrap-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+<script src="/assets/application-aff303daac5f041ddd2847294ee0e8dbe47d0a5dae34d08524f7e49b08d5508b.js"></script>
+<script src="/assets/all-b18458e328689d6fae2b74648b3097afb10895608eb82575c34fe668a0fccac7.js" data-turbo-track="reload" defer="defer"></script>
+<script src="/assets/loading_spinner-d767767a26154b1703b5e6d6cedbe4aada49824abe9d66668288dfe1580f1a17.js" data-turbo-track="reload" defer="defer"></script>
+<script src="/assets/shared_utils-ead14fd0d638563e52c4e643e69886ce3560dc3171f8262a51b88fec5fdb790f.js" data-turbo-track="reload" defer="defer"></script>
+<script src="/assets/google_analytics-1b46c93625e8f23b44abf4e7c113cf7e5c6616cea9899826fbcfb8dbc43a135b.js" data-turbo-track="reload" defer="defer"></script>
+<script src="/assets/oc_ads-1190a8fd2f1b74239030f7b0cb43691748ac0634411fe7aca8f31eb6472cdbc6.js" data-turbo-track="reload" defer="defer"></script>
+
+
+<script>
+    <!--trigger analytics events-->
+    document.addEventListener('DOMContentLoaded', function () {
+
+
+    });
+</script>
+
+
+</body>
+</html>
