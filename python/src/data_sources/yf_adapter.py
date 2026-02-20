@@ -118,7 +118,7 @@ class YahooFinanceAdapter(OptionDataAdapter):
         Returns:
             Selected expiration date string
         """
-        if requested_date.lower() == 'next_monthly':
+        if requested_date.lower() == 'next_3fr_monthly':
             # Find next monthly expiration (3rd Friday logic)
             from ..utils import get_next_monthly_expiration
             target_date = get_next_monthly_expiration()

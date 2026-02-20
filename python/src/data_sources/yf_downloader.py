@@ -244,8 +244,8 @@ class YahooFinanceDownloader:
         # Filename format: TICKER_YYYYMMDD_optionchain.csv
         
         # Normalize expiration date
-        if expiration_date == 'next_monthly':
-            # Can't match, return None
+        if expiration_date == 'next_3fr_monthly':
+            # Can't match on dynamic date, return None
             return None
         
         exp_str = expiration_date.replace('-', '')

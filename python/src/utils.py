@@ -95,6 +95,32 @@ def get_next_monthly_expiration(reference_date=None):
     return third_friday
 
 
+def get_current_monthly_expiration(reference_date=None):
+    """
+    Find the 3rd Friday of the current month (today's month).
+
+    Unlike get_next_monthly_expiration(), this never advances to the next
+    month — it always returns the 3rd Friday of whichever month 'today' is in.
+
+    Args:
+        reference_date: Reference date (defaults to today)
+
+    Returns:
+        datetime object for the 3rd Friday of the current month
+    """
+    if reference_date is None:
+        reference_date = datetime.now()
+
+    first_day = datetime(reference_date.year, reference_date.month, 1)
+
+    # First Friday of the month
+    days_until_friday = (4 - first_day.weekday()) % 7
+    first_friday = first_day + timedelta(days=days_until_friday)
+
+    # Third Friday is 14 days later
+    return first_friday + timedelta(days=14)
+
+
 def validate_date(date_string):
     """
     Validate date format (YYYY-MM-DD)
@@ -247,21 +273,29 @@ def get_expiration_date_from_config(config):
     
     Returns:
         tuple: (expiration_date_string, is_auto_selected)
-        - expiration_date_string: "YYYY-MM-DD" format or "next_monthly"
+        - expiration_date_string: "YYYY-MM-DD", "current_3Fr_monthly", or "next_3Fr_monthly"
         - is_auto_selected: bool indicating if auto-selection needed
     
     Raises:
         ValueError: If date format is invalid
     """
-    exp_date = config.get('CALCULATION', 'expiration_date', fallback='next_monthly')
-    
-    if exp_date.lower() == 'next_monthly':
+    exp_date = config.get('CALCULATION', 'expiration_date', fallback='current_3Fr_monthly')
+
+    if exp_date.lower() == 'next_3fr_monthly':
         return exp_date, True
+    elif exp_date.lower() == 'current_3fr_monthly':
+        # Resolve to 3rd Friday of the current month right now
+        third_friday = get_current_monthly_expiration()
+        resolved = third_friday.strftime('%Y-%m-%d')
+        return resolved, True
     else:
         # Validate date format
         validated = validate_date(exp_date)
         if not validated:
-            raise ValueError(f"Invalid expiration date format: {exp_date}. Expected YYYY-MM-DD or 'next_monthly'")
+            raise ValueError(
+                f"Invalid expiration date format: {exp_date}. "
+                f"Expected YYYY-MM-DD, 'current_3Fr_monthly', or 'next_3Fr_monthly'"
+            )
         return exp_date, False
 
 
@@ -305,7 +339,9 @@ def get_data_source_config(config):
             'data_dir': config.get('CBOE', 'data_dir', fallback='data/raw/cboe'),
             'base_url': config.get('CBOE', 'base_url', fallback='https://www.cboe.com/delayed_quotes/'),
             'rate_limit_delay': config.getint('CBOE', 'rate_limit_delay', fallback=2),
-            'request_timeout': config.getint('CBOE', 'request_timeout', fallback=30)
+            'request_timeout': config.getint('CBOE', 'request_timeout', fallback=30),
+            'download_phase_enabled': config.getboolean('CBOE', 'download_phase_enabled', fallback=False),
+            'overwrite_existing': config.getboolean('CBOE', 'overwrite_existing', fallback=False),
         }
     
     return {

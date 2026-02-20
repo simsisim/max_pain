@@ -38,15 +38,14 @@ def parse_arguments():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python main.py                          # Use config.ini settings
-  python main.py --ticker NVDA            # Override single ticker
-  python main.py --ticker-choice 2        # Override ticker universe
-  python main.py --data-file path/to/file.csv  # Use specific data file
+  python main.py                                        # Use config.ini settings
+  python main.py --ticker NVDA                          # Single ticker
+  python main.py --ticker-file user_input/nasdaq100_tickers.csv  # Ticker file
         """
     )
 
     parser.add_argument('--ticker', help='Single ticker to analyze')
-    parser.add_argument('--ticker-choice', type=int, help='Ticker universe choice (0-7)')
+    parser.add_argument('--ticker-file', help='Path to CSV file with ticker column')
     parser.add_argument('--data-file', help='Path to CBOE CSV data file')
     parser.add_argument('--config', default='config.ini', help='Path to config file')
     parser.add_argument('--verbose', action='store_true', help='Enable verbose logging')
@@ -92,17 +91,26 @@ def main():
 
         # Determine tickers to process
         if args.ticker:
-            tickers = [args.ticker]
+            tickers = [args.ticker.upper()]
         else:
-            # Get ticker choice from config
-            ticker_choice = args.ticker_choice if args.ticker_choice is not None else config.getint('TICKER_SELECTION', 'ticker_choice', fallback=7)
+            # Resolve ticker file: CLI arg > config
+            ticker_file = args.ticker_file or config.get('TICKER_SELECTION', 'ticker_file', fallback=None)
 
-            if ticker_choice == 7:  # TEST mode - NVDA only
-                tickers = ['NVDA']
-            else:
-                logger.error(f"Ticker choice {ticker_choice} not yet implemented")
-                logger.error("Currently only supports ticker_choice=7 (TEST - NVDA)")
+            if not ticker_file:
+                logger.error("No ticker specified. Use --ticker, --ticker-file, or set ticker_file in config.")
                 sys.exit(1)
+
+            if not os.path.exists(ticker_file):
+                raise FileNotFoundError(f"Ticker file not found: {ticker_file}")
+
+            import pandas as pd
+            tickers = pd.read_csv(ticker_file)['ticker'].dropna().str.upper().tolist()
+
+            if not tickers:
+                logger.error(f"No tickers found in {ticker_file}")
+                sys.exit(1)
+
+            logger.info(f"Loaded {len(tickers)} tickers from {ticker_file}")
 
         # Display configuration
         print(f"Data Source: {data_source}")
@@ -110,10 +118,15 @@ def main():
         print(f"Expiration Date: {expiration_date}")
         print()
 
-        # Check if download-first mode is enabled for YF
-        download_phase_enabled = config.getboolean('YAHOO_FINANCE', 'download_phase_enabled', fallback=False) if data_source == 'YF' else False
-        
-        # PHASE 1: Download all tickers (YF only, if enabled)
+        # Check if download-first mode is enabled
+        if data_source == 'YF':
+            download_phase_enabled = config.getboolean('YAHOO_FINANCE', 'download_phase_enabled', fallback=False)
+        elif data_source == 'CBOE':
+            download_phase_enabled = ds_config['source_specific_config'].get('download_phase_enabled', False)
+        else:
+            download_phase_enabled = False
+
+        # PHASE 1: Download all tickers (if enabled)
         filepaths = {}
         if data_source == 'YF' and download_phase_enabled:
             from src.data_sources.yf_downloader import YahooFinanceDownloader
@@ -145,9 +158,39 @@ def main():
             print(f"Proceeding to process {len(tickers)} ticker(s)...")
             print()
 
+        elif data_source == 'CBOE' and download_phase_enabled:
+            from src.data_sources.cboe_downloader import CBOEDownloader
+
+            print("=" * 60)
+            print("[PHASE 1] DOWNLOADING CBOE OPTION CHAIN DATA")
+            print("=" * 60)
+
+            downloader = CBOEDownloader(ds_config['source_specific_config'])
+            download_results = downloader.download_batch(tickers)
+
+            print()
+            print("Download Summary:")
+            print(f"  ✓ Succeeded: {len(download_results['succeeded'])}/{len(tickers)}")
+            if download_results['failed']:
+                print(f"  ✗ Failed: {len(download_results['failed'])}/{len(tickers)}")
+                for ticker, error in download_results['failed'].items():
+                    print(f"    - {ticker}: {error}")
+
+            # Continue only with successfully downloaded tickers
+            tickers = download_results['succeeded']
+            filepaths = download_results['filepaths']
+
+            if not tickers:
+                logger.error("No tickers successfully downloaded from CBOE")
+                sys.exit(1)
+
+            print()
+            print(f"Proceeding to process {len(tickers)} ticker(s)...")
+            print()
+
         # PHASE 2: Process tickers
         print("=" * 60)
-        phase_label = "[PHASE 2] CALCULATING MAX PAIN" if download_phase_enabled and data_source == 'YF' else "[INFO] PROCESSING"
+        phase_label = "[PHASE 2] CALCULATING MAX PAIN" if download_phase_enabled else "[INFO] PROCESSING"
         print(phase_label)
         print("=" * 60)
         print()
@@ -164,8 +207,12 @@ def main():
                     from src.data_sources.yf_downloader import YahooFinanceDownloader
                     downloader = YahooFinanceDownloader(ds_config['source_specific_config'])
                     option_data_dict = downloader.load_option_data(filepaths[ticker])
+                elif data_source == 'CBOE' and download_phase_enabled:
+                    # CBOEAdapter._find_csv_file() scans data_dir for ticker name,
+                    # so the downloaded file is picked up automatically.
+                    option_data_dict = adapter.fetch_option_data(ticker, expiration_date)
                 else:
-                    # Stream mode: fetch directly (CBOE or YF without download phase)
+                    # Stream mode: fetch directly (CBOE without download phase, or YF)
                     option_data_dict = adapter.fetch_option_data(ticker, expiration_date)
                 
                 # Calculate max pain

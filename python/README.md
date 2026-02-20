@@ -1,350 +1,331 @@
 # Max Pain Calculator
 
-Professional options max pain calculator with CBOE data integration. Calculate the "max pain" strike price where market makers would pay out the least amount of premium at options expiration.
+Calculate the **max pain strike price** for a list of stock tickers at options expiration — the price where market makers would pay out the least total premium.
 
 ## Overview
 
-**Max Pain Theory**: The strike price at which market makers would pay out the LEAST amount of in-the-money (ITM) call or put premium at options expiration. This represents the point where the most options holders experience losses.
+**Max Pain Theory**: At expiration, the stock price tends to gravitate toward the strike where the combined payout to all option holders is minimized. This is where the largest number of options expire worthless.
 
 This calculator:
-- Parses CBOE option chain data
-- Calculates max pain prices using optimization algorithms
+- Downloads option chain data from Yahoo Finance (batch, with local caching)
+- Calculates max pain prices using the standard payout minimization algorithm
 - Generates professional reports in HTML, CSV, and JSON formats
-- Provides net premium analysis (call vs put bias)
+- Supports single tickers or a full list from a CSV file
 
-## Features
+---
 
-✓ **CBOE Data Parsing** - Load and parse CBOE delayed quotes CSV format
-✓ **Max Pain Calculation** - Find the strike with minimum total payout
-✓ **Net Premium Analysis** - Calculate call vs put premium bias
-✓ **Multiple Output Formats** - HTML, CSV, and JSON reports
-✓ **Professional Reporting** - Beautiful HTML reports with statistics
-✓ **Configurable** - Full configuration via config.ini
-✓ **Logging** - Comprehensive logging for debugging
+## Data Sources
+
+| Source | Bulk list download | Single ticker | Notes |
+|--------|-------------------|---------------|-------|
+| **Yahoo Finance (YF)** | **Yes — recommended** | Yes | Free, reliable, cached locally |
+| **CBOE** | No | Manual file only | Delayed 15–20 min, scraping fragile |
+
+**Use YF for everything.** CBOE's download URL is a retail webpage button, not an API — it blocks bulk automated requests and its ToS prohibits scraping. Use `source = YF` in `config.ini`.
+
+---
 
 ## Installation
 
-### Requirements
-
-- Python 3.9 or higher
-- pandas, numpy, jinja2 (see requirements.txt)
-
-### Setup
-
 ```bash
-# Clone or navigate to the project directory
-cd /home/imagda/_invest2024/python/max_pain
+# Navigate to project directory
+cd /home/imagda/_invest2024/python/max_pain/python
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Verify installation
+# Verify
 python main.py --help
 ```
 
+**Requirements**: Python 3.9+, pandas, numpy, yfinance, jinja2, requests (see `requirements.txt`)
+
+---
+
 ## Quick Start
 
-### Basic Usage
-
+### Single ticker
 ```bash
-# Run with default config (NVDA test data)
-python main.py
-
-# Use custom data file
-python main.py --data-file python/nvda_quotedata.csv
-
-# Enable verbose logging
-python main.py --verbose
+python main.py --ticker NVDA
 ```
 
-### Example Output
+### List of tickers from a CSV file
+```bash
+python main.py --ticker-file user_input/test.csv
+```
+
+### Use config.ini defaults (ticker_file + source defined there)
+```bash
+python main.py
+```
+
+---
+
+## Ticker Input
+
+Three ways to specify tickers, in order of priority:
+
+| Method | How |
+|--------|-----|
+| CLI single ticker | `--ticker AAPL` |
+| CLI ticker file | `--ticker-file user_input/test.csv` |
+| Config file | `ticker_file = user_input/sp500_tickers.csv` in `config.ini` |
+
+### CSV file format
+
+Files live in `user_input/`. One column, header must be `ticker`:
+
+```
+ticker
+BKNG
+MELI
+NFLX
+META
+COST
+```
+
+Pre-made lists available:
+- `user_input/sp500_tickers.csv`
+- `user_input/nasdaq100_tickers.csv`
+- `user_input/russell3000_tickers.csv`
+- `user_input/iwm1000_tickers.csv`
+- `user_input/test.csv` (10 tickers for testing)
+
+---
+
+## How Downloads Work (YF 2-Phase Architecture)
+
+With `download_phase_enabled = true` (default for YF), the program runs in two phases:
+
+**Phase 1 — Download**
+- Fetches option chain for each ticker from Yahoo Finance
+- Saves one CSV file per ticker to `data/raw/yf/`
+- Skips tickers where the file already exists (`overwrite_existing = false`)
+- Rate-limited to avoid API bans (1 s between requests by default)
+
+**Phase 2 — Calculate**
+- Reads the locally saved CSV files
+- Calculates max pain for each ticker
+- Generates reports
+
+### Downloaded file location
+
+```
+data/raw/yf/
+├── BKNG_20260220_optionchain.csv
+├── MELI_20260220_optionchain.csv
+├── NFLX_20260220_optionchain.csv
+└── ...
+```
+
+Filename format: `{TICKER}_{YYYYMMDD}_optionchain.csv`
+
+On a second run with `overwrite_existing = false`, Phase 1 is instant — all files are reused.
+
+---
+
+## Expiration Date
+
+Set in `config.ini`:
+
+```ini
+[CALCULATION]
+# Options:
+#   current_3Fr_monthly  = 3rd Friday of THIS month (auto-resolved)
+#   next_3Fr_monthly     = 3rd Friday of NEXT month (advances past mid-month)
+#   YYYY-MM-DD           = specific date e.g. 2026-03-20
+expiration_date = current_3Fr_monthly
+```
+
+> **Note**: If today is expiration day itself, options have already settled. Use `next_3Fr_monthly` for a forward-looking run.
+
+---
+
+## Configuration
+
+Full configuration is in `config.ini`. Key sections:
+
+```ini
+[DATA_SOURCE]
+source = YF          # YF = Yahoo Finance (recommended). CBOE = manual file only.
+
+[TICKER_SELECTION]
+ticker_file = user_input/test.csv   # default ticker list
+
+[YAHOO_FINANCE]
+download_phase_enabled = true       # 2-phase download/process
+download_dir = data/raw/yf          # where files are saved
+overwrite_existing = false          # skip re-download if file exists
+rate_limit_delay = 1                # seconds between requests
+
+[OUTPUT]
+output_formats = html,csv,json
+sort_by = net_premium               # or: ticker, pct_change
+highlight_top_n = 20
+
+[LOGGING]
+log_level = INFO
+log_file = logs/max_pain.log
+```
+
+---
+
+## Command-Line Options
+
+```
+python main.py [OPTIONS]
+
+Options:
+  --ticker TICKER        Single ticker to analyze
+  --ticker-file FILE     CSV file with 'ticker' column
+  --config FILE          Config file path (default: config.ini)
+  --verbose              Enable DEBUG logging
+  --help                 Show help
+```
+
+---
+
+## Example Output
 
 ```
 ============================================================
 MAX PAIN CALCULATOR v1.0
 ============================================================
 Configuration: config.ini
-Data Source: CBOE
-Ticker Universe: TEST (NVDA)
-Expiration Date: next_monthly
+Data Source: YF
+Ticker(s): BKNG, MELI, REGN, CHTR, KLAC, META, ASML, NFLX, COST, ADBE
+Expiration Date: 2026-02-20
 
-[INFO] Processing 1 ticker(s)...
+============================================================
+[PHASE 1] DOWNLOADING OPTION CHAIN DATA
+============================================================
+  [1/10] Downloading BKNG...
+    ✓ Saved to BKNG_20260220_optionchain.csv
+  [2/10] Downloading MELI...
+    ↻ Using existing file
+  ...
 
-[1/1] Processing nvda_quotedata.csv...
-  ├─ Ticker: NVIDIA
-  ├─ Current Price: $179.92
-  ├─ Max Pain: $144.00
-  ├─ Change: -19.96%
-  ├─ Net Premium: $111,600.00 (CALL bias)
+Download Summary:
+  ✓ Succeeded: 10/10
+
+============================================================
+[PHASE 2] CALCULATING MAX PAIN
+============================================================
+[1/10] Processing BKNG...
+  ├─ Ticker: BKNG
+  ├─ Current Price: $4823.10
+  ├─ Max Pain: $4700.00
+  ├─ Change: -2.55%
+  ├─ Net Premium: $8,420,000.00 (CALL bias)
   └─ Status: ✓ Complete
-
-Report Generation:
-  ├─ CSV: results/csv/2025-12-08_max_pain_report.csv
-  ├─ JSON: results/json/2025-12-08_max_pain_results.json
-  ├─ HTML: results/html/2025-12-08_max_pain_report.html
-  └─ Complete
-
-Completed in 5.2 seconds
 ```
 
-## Configuration
-
-Edit `config.ini` to customize behavior:
-
-### Data Source
-```ini
-[DATA_SOURCE]
-source = CBOE  # or YF (Yahoo Finance - future)
-```
-
-### Ticker Selection
-```ini
-[TICKER_SELECTION]
-ticker_choice = 7  # 0-7 (see options below)
-# 0 = Custom list
-# 1 = S&P 500
-# 2 = NASDAQ 100
-# 3 = DOW 30
-# 4 = Russell 1000
-# 5 = Portfolio
-# 6 = Single ticker
-# 7 = TEST (NVDA only)
-```
-
-### Output Options
-```ini
-[OUTPUT]
-output_formats = html,csv,json
-sort_by = net_premium  # or ticker, pct_change
-highlight_top_n = 20
-```
-
-### Logging
-```ini
-[LOGGING]
-log_level = INFO  # DEBUG, INFO, WARNING, ERROR
-log_file = logs/max_pain.log
-```
+---
 
 ## Methodology
 
 ### Max Pain Calculation
 
-The calculator uses the following algorithm:
+For each candidate strike price X:
 
-**Step 1**: Load option chain data
-- Strike prices (K)
-- Call Open Interest (C[k])
-- Put Open Interest (P[k])
-- Current stock price (S)
-
-**Step 2**: Calculate payout at each strike
-For each potential price point X:
 ```
-Call Payout(X) = Σ max(0, X - k) × C[k] × 100  for all k
-Put Payout(X) = Σ max(0, k - X) × P[k] × 100  for all k
+Call Payout(X) = Σ max(0, X - k) × Call_OI[k] × 100   for all strikes k
+Put  Payout(X) = Σ max(0, k - X) × Put_OI[k]  × 100   for all strikes k
 Total Payout(X) = Call Payout(X) + Put Payout(X)
+
+Max Pain = strike X where Total Payout(X) is minimum
 ```
 
-**Step 3**: Find minimum
-```
-Max Pain = argmin { Total Payout(X) } for all strikes X
-```
+### Net Premium
 
-**Step 4**: Calculate net premium
 ```
-Net Premium = Call Premium - Put Premium
-where:
-  Call Premium = Σ C[k] × 100  for k < Max Pain (ITM calls)
-  Put Premium = Σ P[k] × 100  for k > Max Pain (ITM puts)
+Net Premium = ITM Call Premium - ITM Put Premium
+  where ITM calls: k < Max Pain
+        ITM puts:  k > Max Pain
 ```
 
-### Interpretation
+- **Positive (CALL bias)**: more call premium at risk — downward pressure expected
+- **Negative (PUT bias)**: more put premium at risk — upward pressure expected
 
-- **Negative % Change**: Downward pressure (max pain < current price)
-- **Positive % Change**: Upward pressure (max pain > current price)
-- **Positive Net Premium**: More call premium (bullish bias)
-- **Negative Net Premium**: More put premium (bearish bias)
-
-## Output Formats
-
-### CSV Report
-```csv
-Ticker,Friday Close,Max Pain,% Change,Net Call/(Put) Premium
-NVIDIA,179.92,144.00,-19.96%,"111,600.00"
-```
-
-### JSON Report
-```json
-{
-  "metadata": {
-    "report_date": "2025-12-08",
-    "data_source": "CBOE",
-    "ticker_count": 1
-  },
-  "results": [
-    {
-      "ticker": "NVIDIA",
-      "current_price": 179.92,
-      "max_pain_price": 144.00,
-      "pct_change": -19.96,
-      "net_call_put_premium": 111600.00,
-      "premium_bias": "call"
-    }
-  ]
-}
-```
-
-### HTML Report
-
-Beautiful, professional HTML report with:
-- Summary statistics
-- Color-coded percentage changes
-- Sortable data
-- Top 20 highlighting
-- Print-friendly styling
-
-View the HTML report in any web browser.
+---
 
 ## Project Structure
 
 ```
-max_pain/
-├── main.py                     # Main entry point
-├── config.ini                  # Configuration
-├── requirements.txt            # Dependencies
-├── README.md                   # This file
+python/
+├── main.py                          # Entry point
+├── config.ini                       # Configuration
+├── requirements.txt
+├── README.md
 │
-├── src/                        # Source code
-│   ├── utils.py                # Utility functions
-│   ├── max_pain_calculator.py  # Core calculation engine
-│   └── report_generator.py     # Report generation
+├── src/
+│   ├── utils.py                     # Config loading, date helpers
+│   ├── max_pain_calculator.py       # Core calculation engine
+│   ├── report_generator.py          # HTML/CSV/JSON output
+│   ├── chart_generator.py           # Chart generation
+│   └── data_sources/
+│       ├── yf_adapter.py            # Yahoo Finance adapter
+│       ├── yf_downloader.py         # YF batch downloader (Phase 1)
+│       ├── cboe_adapter.py          # CBOE CSV file adapter
+│       ├── cboe_downloader.py       # CBOE downloader (single ticker)
+│       └── factory.py               # Adapter factory
 │
-├── templates/                  # HTML templates
-│   └── max_pain_report.html
+├── user_input/                      # Ticker list CSV files
+│   ├── test.csv                     # 10 tickers (testing)
+│   ├── nasdaq100_tickers.csv
+│   ├── sp500_tickers.csv
+│   ├── russell3000_tickers.csv
+│   └── iwm1000_tickers.csv
 │
-├── data/                       # Data storage
-│   ├── raw/                    # Raw option data
-│   └── tickers/                # Ticker lists
+├── data/
+│   └── raw/
+│       ├── yf/                      # YF downloaded option chains
+│       └── cboe/                    # CBOE CSV files (manual)
 │
-├── results/                    # Generated reports
+├── results/                         # Generated reports
 │   ├── html/
 │   ├── csv/
-│   └── json/
+│   ├── json/
+│   └── charts/
 │
-└── logs/                       # Log files
+└── logs/
+    └── max_pain.log
 ```
 
-## Command-Line Options
-
-```bash
-python main.py [OPTIONS]
-
-Options:
-  --ticker TICKER          Single ticker to analyze
-  --ticker-choice N        Ticker universe choice (0-7)
-  --data-file FILE         Path to CBOE CSV data file
-  --config FILE            Path to config file (default: config.ini)
-  --verbose                Enable verbose logging
-  --help                   Show help message
-```
-
-## Data Format
-
-### CBOE CSV Format
-
-The calculator expects CBOE delayed quotes CSV format:
-
-```
-Line 1: (empty)
-Line 2: Company Name, Last: PRICE, Change: CHANGE
-Line 3: Date info, Bid, Ask, Volume
-Line 4: Headers (Expiration Date, Calls, Strike, OI, Puts, OI, etc.)
-Line 5+: Option data rows
-```
-
-### Required Columns
-
-- Strike
-- Open Interest (for calls)
-- Open Interest.1 (for puts)
-
-## Examples
-
-### Example 1: Single Ticker
-```bash
-python main.py --data-file python/nvda_quotedata.csv
-```
-
-### Example 2: Custom Config
-```bash
-python main.py --config my_config.ini
-```
-
-### Example 3: Verbose Mode
-```bash
-python main.py --verbose
-```
+---
 
 ## Troubleshooting
 
-### CSV Parsing Errors
-- Ensure CSV is in CBOE format
-- Check for empty or corrupt files
-- Verify column structure
+**No data for a ticker**
+YF may not have options data for all tickers (very small caps, some foreign listings). The ticker is skipped and logged — other tickers continue.
 
-### Missing Dependencies
+**Expiration date not found**
+YF returns available expirations near the requested date. `yf_expiration_selection = nearest` picks the closest one automatically.
+
+**Rate limit / download failures**
+Increase `rate_limit_delay` in `[YAHOO_FINANCE]`. Default is 1 second.
+
+**Re-download existing files**
+Set `overwrite_existing = true` in `[YAHOO_FINANCE]` and re-run.
+
+**Missing dependencies**
 ```bash
 pip install --upgrade -r requirements.txt
 ```
 
-### Permission Errors
-```bash
-chmod +x main.py
-```
+---
 
 ## Disclaimer
 
-**IMPORTANT**: Max pain is not a guarantee and should be used solely for directional clues. This tool is provided for educational and informational purposes only.
+Max pain is not a prediction and should not be used as the sole basis for trading decisions.
 
-- Market makers can protect themselves by buying/selling underlying stock
-- Manipulation does not occur every month
-- Should be used as ONE indicator among many
-- Not financial advice - consult a financial advisor before trading
-- All data comes from CBOE - accuracy is not guaranteed
-- Past performance does not guarantee future results
-
-## Future Enhancements
-
-### Phase 2 (Planned)
-- [ ] CBOE data downloader (automated fetching)
-- [ ] Multi-ticker batch processing
-- [ ] Yahoo Finance integration
-- [ ] Historical tracking
-
-### Phase 3 (Future)
-- [ ] Web interface
-- [ ] Real-time updates
-- [ ] Advanced analytics (Greeks, PCR)
-- [ ] Database integration
-- [ ] PDF export
-
-## References
-
-- **CBOE**: https://www.cboe.com/delayed_quotes/
-- **Max Pain Theory**: Market maker behavior at options expiration
-- **Project Documentation**: See PROJECT_PLAN.md for detailed specifications
-
-## License
-
-For internal use only.
-
-## Support
-
-For issues or questions, see the project documentation or review the logs in `logs/max_pain.log`.
+- Market makers hedge dynamically — pinning is not guaranteed
+- Manipulation does not occur every cycle
+- Use as one directional indicator among many
+- Not financial advice — consult a licensed financial advisor before trading
+- Past max pain levels do not guarantee future price behavior
 
 ---
 
-**Version**: 1.0.0
-**Last Updated**: 2025-12-08
-**Author**: Max Pain Calculator Project
+**Version**: 1.1.0
+**Last Updated**: 2026-02-20
