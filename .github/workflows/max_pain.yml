@@ -29,6 +29,36 @@ on:
         default: 'next_3Fr_monthly'
         type: string
 
+      strike_band_pct:
+        description: |
+          Strike band filter — keep only strikes within ±N% of spot price.
+          Prevents deep-OTM strikes from skewing the max pain result.
+          Set to 0 to disable.
+        required: false
+        default: '15'
+        type: string
+
+      min_open_interest:
+        description: |
+          Minimum open interest threshold — drop strikes where Call_OI + Put_OI
+          is below this value. Removes single-contract noise spikes.
+          Set to 0 to disable.
+        required: false
+        default: '10'
+        type: string
+
+      volume_weighted_oi:
+        description: |
+          Use today's traded volume instead of open interest in the pain formula.
+          Useful for mid-session runs where active flow matters more than
+          accumulated positioning. Falls back to OI if volume is absent or zero.
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+
   # 2. Scheduled run — every 3rd Friday of the month at 21:30 UTC (5:30 pm ET)
   #    Cron does not support "nth weekday" natively, but the 3rd Friday always
   #    falls between the 15th and 21st of the month, so this pattern is exact.
@@ -82,6 +112,28 @@ jobs:
       - name: Ensure data source is YF
         run: |
           sed -i "s/^source = .*/source = YF/" config.ini
+
+      # -----------------------------------------------------------------------
+      # Patch calculation enhancement params when overridden via dispatch input.
+      # On scheduled runs inputs are empty — config.ini defaults are kept.
+      - name: Apply calculation parameters
+        env:
+          STRIKE_BAND:   ${{ inputs.strike_band_pct || '' }}
+          MIN_OI:        ${{ inputs.min_open_interest || '' }}
+          VOL_WEIGHTED:  ${{ inputs.volume_weighted_oi || '' }}
+        run: |
+          if [ -n "${STRIKE_BAND}" ]; then
+            sed -i "s/^strike_band_pct = .*/strike_band_pct = ${STRIKE_BAND}/" config.ini
+            echo "strike_band_pct set to: ${STRIKE_BAND}"
+          fi
+          if [ -n "${MIN_OI}" ]; then
+            sed -i "s/^min_open_interest = .*/min_open_interest = ${MIN_OI}/" config.ini
+            echo "min_open_interest set to: ${MIN_OI}"
+          fi
+          if [ -n "${VOL_WEIGHTED}" ]; then
+            sed -i "s/^volume_weighted_oi = .*/volume_weighted_oi = ${VOL_WEIGHTED}/" config.ini
+            echo "volume_weighted_oi set to: ${VOL_WEIGHTED}"
+          fi
 
       # -----------------------------------------------------------------------
       - name: Run Max Pain Calculator

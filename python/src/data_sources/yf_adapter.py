@@ -159,25 +159,39 @@ class YahooFinanceAdapter(OptionDataAdapter):
     def _merge_option_chain(self, calls_df, puts_df):
         """
         Merge calls and puts DataFrames into common format
-        
+
         This is the CRITICAL transformation for Yahoo Finance data:
         - YF provides separate DataFrames for calls and puts
         - We need to merge them on strike price
         - Then rename to standard column names
-        
+
         Args:
             calls_df: Calls DataFrame from yfinance
             puts_df: Puts DataFrame from yfinance
-        
+
         Returns:
             DataFrame with columns: Strike, Call_OI, Put_OI
+            (plus Call_Gamma, Put_Gamma if gamma is available — Mod 5)
         """
         self.logger.debug(f"Merging option chain: {len(calls_df)} calls, {len(puts_df)} puts")
-        
-        # Extract only needed columns
-        calls = calls_df[['strike', 'openInterest']].copy()
-        puts = puts_df[['strike', 'openInterest']].copy()
-        
+
+        # Extract needed columns; capture gamma (Mod 5) and volume (Mod 6) when available
+        calls_cols = ['strike', 'openInterest']
+        puts_cols = ['strike', 'openInterest']
+
+        has_gamma = 'gamma' in calls_df.columns and 'gamma' in puts_df.columns
+        if has_gamma:
+            calls_cols.append('gamma')
+            puts_cols.append('gamma')
+
+        has_volume = 'volume' in calls_df.columns and 'volume' in puts_df.columns
+        if has_volume:
+            calls_cols.append('volume')
+            puts_cols.append('volume')
+
+        calls = calls_df[calls_cols].copy()
+        puts = puts_df[puts_cols].copy()
+
         # CRITICAL: Merge on strike price with outer join
         # This ensures we keep all strikes even if calls or puts are missing
         option_data = pd.merge(
@@ -187,27 +201,51 @@ class YahooFinanceAdapter(OptionDataAdapter):
             suffixes=('_call', '_put'),
             how='outer'  # Keep all strikes
         )
-        
+
         # Rename to standard column names
-        option_data.rename(columns={
+        rename_map = {
             'strike': 'Strike',
             'openInterest_call': 'Call_OI',
-            'openInterest_put': 'Put_OI'
-        }, inplace=True)
-        
+            'openInterest_put': 'Put_OI',
+        }
+        if has_gamma:
+            rename_map['gamma_call'] = 'Call_Gamma'
+            rename_map['gamma_put'] = 'Put_Gamma'
+        if has_volume:
+            rename_map['volume_call'] = 'Call_Volume'
+            rename_map['volume_put'] = 'Put_Volume'
+        option_data.rename(columns=rename_map, inplace=True)
+
         # Fill missing values with 0 (pandas 3.0 compatible)
-        option_data = option_data.fillna({'Call_OI': 0, 'Put_OI': 0})
-        
+        fill_map = {'Call_OI': 0, 'Put_OI': 0}
+        if has_gamma:
+            fill_map['Call_Gamma'] = 0.0
+            fill_map['Put_Gamma'] = 0.0
+        if has_volume:
+            fill_map['Call_Volume'] = 0
+            fill_map['Put_Volume'] = 0
+        option_data = option_data.fillna(fill_map)
+
         # Ensure numeric types
         option_data['Strike'] = pd.to_numeric(option_data['Strike'])
         option_data['Call_OI'] = pd.to_numeric(option_data['Call_OI']).astype(int)
         option_data['Put_OI'] = pd.to_numeric(option_data['Put_OI']).astype(int)
-        
+        if has_gamma:
+            option_data['Call_Gamma'] = pd.to_numeric(option_data['Call_Gamma'])
+            option_data['Put_Gamma'] = pd.to_numeric(option_data['Put_Gamma'])
+        if has_volume:
+            option_data['Call_Volume'] = pd.to_numeric(option_data['Call_Volume']).astype(int)
+            option_data['Put_Volume'] = pd.to_numeric(option_data['Put_Volume']).astype(int)
+
         # Sort by strike and reset index
         option_data.sort_values('Strike', inplace=True)
         option_data.reset_index(drop=True, inplace=True)
-        
+
         self.logger.info(f"Merged option chain: {len(option_data)} strikes")
         self.logger.debug(f"Strike range: ${option_data['Strike'].min():.2f} - ${option_data['Strike'].max():.2f}")
-        
+        if has_gamma:
+            self.logger.debug("Gamma columns captured: Call_Gamma, Put_Gamma")
+        if has_volume:
+            self.logger.debug("Volume columns captured: Call_Volume, Put_Volume")
+
         return option_data

@@ -21,9 +21,23 @@ class MaxPainCalculator:
        - Calculate put payout: Σ(max(0, strike - price) × put_OI × 100)
     2. Max pain = price point with MINIMUM total payout
     3. Net premium = difference between call and put open interest value
+
+    Optional enhancements (controlled via config or kwargs):
+    - Mod 1: Strike band filter (±N% around spot)
+    - Mod 2: Minimum OI threshold
+    - Mod 3: Dollar-weighted OI
+    - Mod 4: Smooth pain curve (rolling average)
+    - Mod 5: Net gamma computation (requires Call_Gamma/Put_Gamma columns)
     """
 
-    def __init__(self):
+    def __init__(self, config=None):
+        """
+        Args:
+            config: Optional dict with calculation parameters.
+                    Keys: strike_band_pct, min_open_interest, dollar_weighted_oi,
+                          smooth_pain_curve, smoothing_window
+        """
+        self.config = config or {}
         self.logger = logging.getLogger('max_pain.calculator')
 
     def load_cboe_csv(self, filepath):
@@ -150,6 +164,24 @@ class MaxPainCalculator:
             self.logger.error(f"Error parsing option chain: {e}")
             raise
 
+    def _apply_dollar_weight(self, option_data):
+        """
+        Add dollar-notional-weighted OI columns (Mod 3).
+
+        Call_OI_W = Call_OI × Strike
+        Put_OI_W  = Put_OI  × Strike
+
+        Args:
+            option_data: DataFrame with Strike, Call_OI, Put_OI
+
+        Returns:
+            New DataFrame with additional Call_OI_W and Put_OI_W columns
+        """
+        weighted = option_data.copy()
+        weighted['Call_OI_W'] = weighted['Call_OI'] * weighted['Strike']
+        weighted['Put_OI_W'] = weighted['Put_OI'] * weighted['Strike']
+        return weighted
+
     def calculate_pain_at_price(self, price, option_data):
         """
         Calculate total payout at a given price point
@@ -181,29 +213,133 @@ class MaxPainCalculator:
 
         return total_payout, call_payout, put_payout
 
-    def calculate_max_pain(self, option_data, current_price):
+    def calculate_max_pain(self, option_data, current_price,
+                           strike_band_pct=15, min_open_interest=10,
+                           dollar_weighted_oi=False,
+                           volume_weighted_oi=False,
+                           smooth_pain_curve=False, smoothing_window=3):
         """
         Calculate max pain price
 
         Args:
             option_data: DataFrame with Strike, Call_OI, Put_OI
+                         (optionally Call_Gamma, Put_Gamma for Mod 5;
+                          optionally Call_Volume, Put_Volume for Mod 6)
             current_price: Current stock price
+            strike_band_pct: Filter strikes to ±N% of spot (0 = disabled) [Mod 1]
+            min_open_interest: Drop strikes with total OI below this (0 = disabled) [Mod 2]
+            dollar_weighted_oi: Weight by dollar notional (OI × Strike) [Mod 3]
+            volume_weighted_oi: Substitute today's volume for OI in the formula [Mod 6]
+                                Falls back to OI with a warning if volume is absent or all-zero.
+                                Composes with dollar_weighted_oi → Volume × Strike.
+            smooth_pain_curve: Apply rolling-average smoothing before finding min [Mod 4]
+            smoothing_window: Window size for rolling average [Mod 4]
 
         Returns:
-            dict with calculation results
+            dict with calculation results (includes net_gamma_data if gamma columns present)
         """
         self.logger.info("Calculating max pain price")
 
-        # Get range of strikes to evaluate
-        min_strike = option_data['Strike'].min()
-        max_strike = option_data['Strike'].max()
+        # Work on a copy so the caller's DataFrame is not modified
+        option_data = option_data.copy()
 
-        self.logger.debug(f"Evaluating strikes from ${min_strike:.2f} to ${max_strike:.2f}")
+        # --- Mod 1: Strike band filter ---
+        if strike_band_pct > 0:
+            band = strike_band_pct / 100.0
+            lo = current_price * (1.0 - band)
+            hi = current_price * (1.0 + band)
+            before = len(option_data)
+            option_data = option_data[
+                (option_data['Strike'] >= lo) & (option_data['Strike'] <= hi)
+            ].copy()
+            dropped = before - len(option_data)
+            if dropped:
+                self.logger.info(
+                    f"Strike band filter (±{strike_band_pct}%): "
+                    f"dropped {dropped} strikes outside "
+                    f"[${lo:.2f}, ${hi:.2f}]"
+                )
+
+        # --- Mod 2: Minimum OI threshold ---
+        if min_open_interest > 0:
+            before = len(option_data)
+            option_data = option_data[
+                (option_data['Call_OI'] + option_data['Put_OI']) >= min_open_interest
+            ].copy()
+            dropped = before - len(option_data)
+            if dropped:
+                self.logger.info(
+                    f"Min OI filter (>={min_open_interest}): "
+                    f"dropped {dropped} low-OI strikes"
+                )
+
+        if option_data.empty:
+            raise ValueError(
+                "No option data remaining after strike band / OI filters. "
+                "Try increasing strike_band_pct or reducing min_open_interest."
+            )
+
+        self.logger.debug(
+            f"Evaluating {len(option_data)} strikes from "
+            f"${option_data['Strike'].min():.2f} to ${option_data['Strike'].max():.2f}"
+        )
+
+        # --- Mod 5: Net gamma (before dollar-weighting copy) ---
+        has_gamma = (
+            'Call_Gamma' in option_data.columns
+            and 'Put_Gamma' in option_data.columns
+        )
+        if has_gamma:
+            option_data['Net_Gamma'] = (
+                option_data['Call_OI'] * option_data['Call_Gamma']
+                - option_data['Put_OI'] * option_data['Put_Gamma']
+            )
+            self.logger.debug("Computed Net_Gamma per strike")
+
+        # --- Mod 6: Volume-weighted OI ---
+        # Build calc_data (separate copy so original OI/totals are preserved).
+        # When enabled, today's volume replaces OI as the weighting signal.
+        # Falls back to OI when volume is absent or all-zero (pre-market).
+        # Runs before Mod 3 so dollar-weighting composes on top: Volume × Strike.
+        calc_data = option_data.copy()
+        if volume_weighted_oi:
+            has_vol_cols = (
+                'Call_Volume' in option_data.columns
+                and 'Put_Volume' in option_data.columns
+            )
+            total_volume = (
+                int(option_data['Call_Volume'].sum() + option_data['Put_Volume'].sum())
+                if has_vol_cols else 0
+            )
+            if has_vol_cols and total_volume > 0:
+                calc_data['Call_OI'] = option_data['Call_Volume']
+                calc_data['Put_OI'] = option_data['Put_Volume']
+                self.logger.debug(
+                    f"Volume-weighted OI: substituted Call_Volume/Put_Volume "
+                    f"(total volume {total_volume:,})"
+                )
+            else:
+                self.logger.warning(
+                    "volume_weighted_oi=True but volume data is absent or all-zero "
+                    "(pre-market / no trades yet?); falling back to open interest"
+                )
+
+        # --- Mod 3: Dollar-weighted OI ---
+        # Applied on top of calc_data so it composes with Mod 6:
+        # both enabled → Volume × Strike ("dollar-volume weighting").
+        if dollar_weighted_oi:
+            calc_data = self._apply_dollar_weight(calc_data)
+            calc_data['Call_OI'] = calc_data['Call_OI_W']
+            calc_data['Put_OI'] = calc_data['Put_OI_W']
+            self.logger.debug(
+                "Dollar-weighted OI applied%s" %
+                (" (on top of volume)" if volume_weighted_oi else "")
+            )
 
         # Evaluate pain at each strike price
         pain_results = []
-        for strike in option_data['Strike'].values:
-            total_payout, call_payout, put_payout = self.calculate_pain_at_price(strike, option_data)
+        for strike in calc_data['Strike'].values:
+            total_payout, call_payout, put_payout = self.calculate_pain_at_price(strike, calc_data)
             pain_results.append({
                 'strike': strike,
                 'total_payout': total_payout,
@@ -211,9 +347,20 @@ class MaxPainCalculator:
                 'put_payout': put_payout
             })
 
-        # Find strike with minimum payout
         pain_df = pd.DataFrame(pain_results)
-        min_pain_idx = pain_df['total_payout'].idxmin()
+
+        # --- Mod 4: Smooth pain curve ---
+        if smooth_pain_curve and len(pain_df) >= 3:
+            pain_df['total_payout_smooth'] = pain_df['total_payout'].rolling(
+                window=smoothing_window, center=True, min_periods=1
+            ).mean()
+            min_pain_idx = pain_df['total_payout_smooth'].idxmin()
+            self.logger.debug(
+                f"Pain curve smoothed (window={smoothing_window})"
+            )
+        else:
+            min_pain_idx = pain_df['total_payout'].idxmin()
+
         max_pain_strike = pain_df.loc[min_pain_idx, 'strike']
         min_payout = pain_df.loc[min_pain_idx, 'total_payout']
 
@@ -223,13 +370,13 @@ class MaxPainCalculator:
         # Calculate percentage change
         pct_change = ((max_pain_strike - current_price) / current_price) * 100
 
-        # Calculate net premium
+        # Calculate net premium (uses original unweighted OI)
         net_premium = self.calculate_net_premium(option_data, max_pain_strike)
 
         # Determine premium bias
         premium_bias = "call" if net_premium > 0 else "put" if net_premium < 0 else "neutral"
 
-        # Calculate total OI
+        # Calculate total OI (original unweighted)
         total_call_oi = option_data['Call_OI'].sum()
         total_put_oi = option_data['Put_OI'].sum()
 
@@ -244,6 +391,12 @@ class MaxPainCalculator:
             'min_payout': min_payout,
             'calculation_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         }
+
+        # Include net gamma data for chart overlay (Mod 5)
+        if has_gamma:
+            result['net_gamma_data'] = (
+                option_data.set_index('Strike')['Net_Gamma']
+            )
 
         return result
 
@@ -296,7 +449,7 @@ class MaxPainCalculator:
         # Parse option chain
         option_data = self.parse_option_chain(df)
 
-        # Calculate max pain
+        # Calculate max pain (kwargs pick up self.config defaults if caller passes them)
         result = self.calculate_max_pain(option_data, current_price)
 
         # Add ticker and expiration info

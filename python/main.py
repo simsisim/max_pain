@@ -73,8 +73,18 @@ def main():
         logger = setup_logging(config)
         logger.info("Starting Max Pain Calculator")
 
+        # Build calculation config from [CALCULATION] section (Mods 1–4)
+        calc_config = {
+            'strike_band_pct':    config.getfloat('CALCULATION', 'strike_band_pct', fallback=15),
+            'min_open_interest':  config.getint('CALCULATION', 'min_open_interest', fallback=10),
+            'dollar_weighted_oi': config.getboolean('CALCULATION', 'dollar_weighted_oi', fallback=False),
+            'volume_weighted_oi': config.getboolean('CALCULATION', 'volume_weighted_oi', fallback=False),
+            'smooth_pain_curve':  config.getboolean('CALCULATION', 'smooth_pain_curve', fallback=False),
+            'smoothing_window':   config.getint('CALCULATION', 'smoothing_window', fallback=3),
+        }
+
         # Initialize components
-        calculator = MaxPainCalculator()
+        calculator = MaxPainCalculator(config=calc_config)
         report_generator = ReportGenerator(config)
 
         # Get data source configuration
@@ -215,10 +225,16 @@ def main():
                     # Stream mode: fetch directly (CBOE without download phase, or YF)
                     option_data_dict = adapter.fetch_option_data(ticker, expiration_date)
                 
-                # Calculate max pain
+                # Calculate max pain (pass new enhancement params explicitly)
                 result = calculator.calculate_max_pain(
                     option_data_dict['option_data'],
-                    option_data_dict['current_price']
+                    option_data_dict['current_price'],
+                    strike_band_pct=calc_config['strike_band_pct'],
+                    min_open_interest=calc_config['min_open_interest'],
+                    dollar_weighted_oi=calc_config['dollar_weighted_oi'],
+                    volume_weighted_oi=calc_config['volume_weighted_oi'],
+                    smooth_pain_curve=calc_config['smooth_pain_curve'],
+                    smoothing_window=calc_config['smoothing_window'],
                 )
                 
                 # Add ticker and expiration info
@@ -281,9 +297,10 @@ def main():
         print("=" * 60)
         start_time = datetime.now()
 
-        # Remove option_data from results (not needed for reports, causes JSON serialization issues)
+        # Remove non-serialisable fields not needed for reports
         for result in results_list:
             result.pop('option_data', None)
+            result.pop('net_gamma_data', None)
 
         generated_files = report_generator.generate_reports(results_list)
 

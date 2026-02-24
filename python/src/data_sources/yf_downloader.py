@@ -203,6 +203,16 @@ class YahooFinanceDownloader:
         option_data['Strike'] = pd.to_numeric(option_data['Strike'])
         option_data['Call_OI'] = pd.to_numeric(option_data['Call_OI']).astype(int)
         option_data['Put_OI'] = pd.to_numeric(option_data['Put_OI']).astype(int)
+
+        # Handle gamma columns if present (Mod 5 — round-trip from CSV)
+        for col in ['Call_Gamma', 'Put_Gamma']:
+            if col in option_data.columns:
+                option_data[col] = pd.to_numeric(option_data[col], errors='coerce').fillna(0.0)
+
+        # Handle volume columns if present (Mod 6 — round-trip from CSV)
+        for col in ['Call_Volume', 'Put_Volume']:
+            if col in option_data.columns:
+                option_data[col] = pd.to_numeric(option_data[col], errors='coerce').fillna(0).astype(int)
         
         result = {
             'ticker': metadata['Ticker'],
