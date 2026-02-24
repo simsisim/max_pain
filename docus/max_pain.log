@@ -1,0 +1,84 @@
+2026-02-20 21:50:48 [INFO] max_pain: Starting Max Pain Calculator
+2026-02-20 21:50:48 [INFO] max_pain: Using YF data source
+2026-02-20 21:50:48 [INFO] max_pain: Loaded 10 tickers from user_input/test.csv
+2026-02-20 21:50:48 [INFO] max_pain.YahooFinanceDownloader: Starting batch download of 10 tickers
+2026-02-20 21:50:48 [INFO] max_pain.YahooFinanceDownloader: Downloading BKNG for expiration next_3Fr_monthly
+2026-02-20 21:50:48 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for BKNG
+2026-02-20 21:50:50 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-03-20
+2026-02-20 21:50:50 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 152 strikes
+2026-02-20 21:50:50 [INFO] max_pain.YahooFinanceDownloader: Saved to BKNG_20260320_optionchain.csv
+2026-02-20 21:50:51 [INFO] max_pain.YahooFinanceDownloader: Downloading MELI for expiration next_3Fr_monthly
+2026-02-20 21:50:51 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for MELI
+2026-02-20 21:50:51 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-03-20
+2026-02-20 21:50:51 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 127 strikes
+2026-02-20 21:50:51 [INFO] max_pain.YahooFinanceDownloader: Saved to MELI_20260320_optionchain.csv
+2026-02-20 21:50:52 [INFO] max_pain.YahooFinanceDownloader: Downloading REGN for expiration next_3Fr_monthly
+2026-02-20 21:50:52 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for REGN
+2026-02-20 21:50:52 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-03-20
+2026-02-20 21:50:52 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 107 strikes
+2026-02-20 21:50:52 [INFO] max_pain.YahooFinanceDownloader: Saved to REGN_20260320_optionchain.csv
+2026-02-20 21:50:53 [INFO] max_pain.YahooFinanceDownloader: Downloading CHTR for expiration next_3Fr_monthly
+2026-02-20 21:50:53 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for CHTR
+2026-02-20 21:50:54 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-03-20
+2026-02-20 21:50:54 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 55 strikes
+2026-02-20 21:50:54 [INFO] max_pain.YahooFinanceDownloader: Saved to CHTR_20260320_optionchain.csv
+2026-02-20 21:50:55 [INFO] max_pain.YahooFinanceDownloader: Downloading KLAC for expiration next_3Fr_monthly
+2026-02-20 21:50:55 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for KLAC
+2026-02-20 21:50:55 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-03-20
+2026-02-20 21:50:55 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 135 strikes
+2026-02-20 21:50:55 [INFO] max_pain.YahooFinanceDownloader: Saved to KLAC_20260320_optionchain.csv
+2026-02-20 21:50:56 [INFO] max_pain.YahooFinanceDownloader: Downloading META for expiration next_3Fr_monthly
+2026-02-20 21:50:56 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for META
+2026-02-20 21:50:57 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-03-20
+2026-02-20 21:50:57 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 178 strikes
+2026-02-20 21:50:57 [INFO] max_pain.YahooFinanceDownloader: Saved to META_20260320_optionchain.csv
+2026-02-20 21:50:58 [INFO] max_pain.YahooFinanceDownloader: Downloading ASML for expiration next_3Fr_monthly
+2026-02-20 21:50:58 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for ASML
+2026-02-20 21:50:58 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-03-20
+2026-02-20 21:50:58 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 131 strikes
+2026-02-20 21:50:58 [INFO] max_pain.YahooFinanceDownloader: Saved to ASML_20260320_optionchain.csv
+2026-02-20 21:50:59 [INFO] max_pain.YahooFinanceDownloader: Downloading NFLX for expiration next_3Fr_monthly
+2026-02-20 21:50:59 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for NFLX
+2026-02-20 21:51:00 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-03-20
+2026-02-20 21:51:00 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 371 strikes
+2026-02-20 21:51:00 [INFO] max_pain.YahooFinanceDownloader: Saved to NFLX_20260320_optionchain.csv
+2026-02-20 21:51:01 [INFO] max_pain.YahooFinanceDownloader: Downloading COST for expiration next_3Fr_monthly
+2026-02-20 21:51:01 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for COST
+2026-02-20 21:51:01 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-03-20
+2026-02-20 21:51:01 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 113 strikes
+2026-02-20 21:51:01 [INFO] max_pain.YahooFinanceDownloader: Saved to COST_20260320_optionchain.csv
+2026-02-20 21:51:02 [INFO] max_pain.YahooFinanceDownloader: Downloading ADBE for expiration next_3Fr_monthly
+2026-02-20 21:51:02 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for ADBE
+2026-02-20 21:51:03 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-03-20
+2026-02-20 21:51:03 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 83 strikes
+2026-02-20 21:51:03 [INFO] max_pain.YahooFinanceDownloader: Saved to ADBE_20260320_optionchain.csv
+2026-02-20 21:51:03 [INFO] max_pain.YahooFinanceDownloader: Loaded 152 strikes for BKNG
+2026-02-20 21:51:03 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 21:51:04 [INFO] max_pain.calculator: Max pain calculated: $4500.00
+2026-02-20 21:51:04 [INFO] max_pain.YahooFinanceDownloader: Loaded 127 strikes for MELI
+2026-02-20 21:51:04 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 21:51:04 [INFO] max_pain.calculator: Max pain calculated: $2100.00
+2026-02-20 21:51:04 [INFO] max_pain.YahooFinanceDownloader: Loaded 107 strikes for REGN
+2026-02-20 21:51:04 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 21:51:05 [INFO] max_pain.calculator: Max pain calculated: $675.00
+2026-02-20 21:51:05 [INFO] max_pain.YahooFinanceDownloader: Loaded 55 strikes for CHTR
+2026-02-20 21:51:05 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 21:51:05 [INFO] max_pain.calculator: Max pain calculated: $230.00
+2026-02-20 21:51:05 [INFO] max_pain.YahooFinanceDownloader: Loaded 135 strikes for KLAC
+2026-02-20 21:51:05 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 21:51:06 [INFO] max_pain.calculator: Max pain calculated: $1320.00
+2026-02-20 21:51:06 [INFO] max_pain.YahooFinanceDownloader: Loaded 178 strikes for META
+2026-02-20 21:51:06 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 21:51:07 [INFO] max_pain.calculator: Max pain calculated: $650.00
+2026-02-20 21:51:07 [INFO] max_pain.YahooFinanceDownloader: Loaded 131 strikes for ASML
+2026-02-20 21:51:07 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 21:51:08 [INFO] max_pain.calculator: Max pain calculated: $1220.00
+2026-02-20 21:51:08 [INFO] max_pain.YahooFinanceDownloader: Loaded 371 strikes for NFLX
+2026-02-20 21:51:08 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 21:51:13 [INFO] max_pain.calculator: Max pain calculated: $85.00
+2026-02-20 21:51:13 [INFO] max_pain.YahooFinanceDownloader: Loaded 113 strikes for COST
+2026-02-20 21:51:13 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 21:51:13 [INFO] max_pain.calculator: Max pain calculated: $940.00
+2026-02-20 21:51:13 [INFO] max_pain.YahooFinanceDownloader: Loaded 83 strikes for ADBE
+2026-02-20 21:51:13 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 21:51:14 [INFO] max_pain.calculator: Max pain calculated: $305.00

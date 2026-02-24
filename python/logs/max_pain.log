@@ -1,0 +1,301 @@
+2025-12-08 22:59:49 [INFO] max_pain: Starting Max Pain Calculator
+2025-12-08 22:59:49 [INFO] max_pain.calculator: Loading CBOE data from python/nvda_quotedata.csv
+2025-12-08 22:59:49 [INFO] max_pain.calculator: Parsed 304 valid option strikes
+2025-12-08 22:59:49 [INFO] max_pain.calculator: Calculating max pain price
+2025-12-08 22:59:54 [INFO] max_pain.calculator: Max pain calculated: $144.00
+2025-12-08 22:59:54 [INFO] max_pain.report_generator: Generating reports in formats: html, csv, json
+2025-12-08 22:59:54 [INFO] max_pain.report_generator: Generating CSV report
+2025-12-08 22:59:54 [INFO] max_pain.report_generator: CSV report saved to: results/csv/2025-12-08_max_pain_report.csv
+2025-12-08 22:59:54 [INFO] max_pain.report_generator: Generating JSON report
+2025-12-08 22:59:54 [INFO] max_pain.report_generator: JSON report saved to: results/json/2025-12-08_max_pain_results.json
+2025-12-08 22:59:54 [INFO] max_pain.report_generator: Generating HTML report
+2025-12-08 22:59:54 [INFO] max_pain.report_generator: HTML report saved to: results/html/2025-12-08_max_pain_report.html
+2025-12-08 22:59:54 [INFO] max_pain: Max Pain Calculator completed successfully
+2025-12-09 00:38:59 [INFO] max_pain: Starting Max Pain Calculator
+2025-12-09 00:38:59 [INFO] max_pain: Using CBOE data source
+2025-12-09 00:38:59 [INFO] max_pain.CBOEAdapter: Fetching CBOE data for NVDA
+2025-12-09 00:38:59 [ERROR] max_pain: Error processing NVDA: No CBOE CSV files found for NVDA in data/raw/cboe
+2025-12-09 00:38:59 [ERROR] max_pain: No results to generate reports
+2025-12-09 00:39:10 [INFO] max_pain: Starting Max Pain Calculator
+2025-12-09 00:39:10 [INFO] max_pain: Using CBOE data source
+2025-12-09 00:39:10 [INFO] max_pain.CBOEAdapter: Fetching CBOE data for NVDA
+2025-12-09 00:39:10 [INFO] max_pain.CBOEAdapter: Parsed 304 valid option strikes
+2025-12-09 00:39:10 [INFO] max_pain.calculator: Calculating max pain price
+2025-12-09 00:39:16 [INFO] max_pain.calculator: Max pain calculated: $144.00
+2025-12-09 00:39:16 [INFO] max_pain.report_generator: Generating reports in formats: html, csv, json
+2025-12-09 00:39:16 [INFO] max_pain.report_generator: Generating CSV report
+2025-12-09 00:39:16 [INFO] max_pain.report_generator: CSV report saved to: results/csv/2025-12-09_max_pain_report.csv
+2025-12-09 00:39:16 [INFO] max_pain.report_generator: Generating JSON report
+2025-12-09 00:39:16 [INFO] max_pain.report_generator: JSON report saved to: results/json/2025-12-09_max_pain_results.json
+2025-12-09 00:39:16 [INFO] max_pain.report_generator: Generating HTML report
+2025-12-09 00:39:16 [INFO] max_pain.report_generator: HTML report saved to: results/html/2025-12-09_max_pain_report.html
+2025-12-09 00:39:16 [INFO] max_pain: Max Pain Calculator completed successfully
+2025-12-09 00:51:32 [INFO] max_pain: Starting Max Pain Calculator
+2025-12-09 00:51:32 [INFO] max_pain: Using YF data source
+2025-12-09 00:51:32 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for NVDA
+2025-12-09 00:51:33 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2025-12-19
+2025-12-09 00:51:33 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 500 strikes
+2025-12-09 00:51:33 [INFO] max_pain.calculator: Calculating max pain price
+2025-12-09 00:51:42 [INFO] max_pain.calculator: Max pain calculated: $155.00
+2025-12-09 00:51:42 [INFO] max_pain.report_generator: Generating reports in formats: html, csv, json
+2025-12-09 00:51:42 [INFO] max_pain.report_generator: Generating CSV report
+2025-12-09 00:51:42 [INFO] max_pain.report_generator: CSV report saved to: results/csv/2025-12-09_max_pain_report.csv
+2025-12-09 00:51:42 [INFO] max_pain.report_generator: Generating JSON report
+2025-12-09 00:51:42 [INFO] max_pain.report_generator: JSON report saved to: results/json/2025-12-09_max_pain_results.json
+2025-12-09 00:51:42 [INFO] max_pain.report_generator: Generating HTML report
+2025-12-09 00:51:42 [INFO] max_pain.report_generator: HTML report saved to: results/html/2025-12-09_max_pain_report.html
+2025-12-09 00:51:42 [INFO] max_pain: Max Pain Calculator completed successfully
+2025-12-09 00:54:14 [INFO] max_pain: Starting Max Pain Calculator
+2025-12-09 00:54:14 [INFO] max_pain: Using YF data source
+2025-12-09 00:54:14 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for NVDA
+2025-12-09 00:54:15 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2025-12-19
+2025-12-09 00:54:15 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 500 strikes
+2025-12-09 00:54:15 [INFO] max_pain.calculator: Calculating max pain price
+2025-12-09 00:54:25 [INFO] max_pain.calculator: Max pain calculated: $155.00
+2025-12-09 00:54:25 [INFO] max_pain.report_generator: Generating reports in formats: html, csv, json
+2025-12-09 00:54:25 [INFO] max_pain.report_generator: Generating CSV report
+2025-12-09 00:54:25 [INFO] max_pain.report_generator: CSV report saved to: results/csv/2025-12-09_max_pain_report.csv
+2025-12-09 00:54:25 [INFO] max_pain.report_generator: Generating JSON report
+2025-12-09 00:54:25 [INFO] max_pain.report_generator: JSON report saved to: results/json/2025-12-09_max_pain_results.json
+2025-12-09 00:54:25 [INFO] max_pain.report_generator: Generating HTML report
+2025-12-09 00:54:25 [INFO] max_pain.report_generator: HTML report saved to: results/html/2025-12-09_max_pain_report.html
+2025-12-09 00:54:25 [INFO] max_pain: Max Pain Calculator completed successfully
+2025-12-09 01:07:01 [INFO] max_pain: Starting Max Pain Calculator
+2025-12-09 01:09:27 [INFO] max_pain: Starting Max Pain Calculator
+2025-12-09 01:09:27 [INFO] max_pain: Using YF data source
+2025-12-09 01:09:27 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for NVDA
+2025-12-09 01:09:28 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2025-12-19
+2025-12-09 01:09:28 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 500 strikes
+2025-12-09 01:09:28 [INFO] max_pain.calculator: Calculating max pain price
+2025-12-09 01:09:38 [INFO] max_pain.calculator: Max pain calculated: $155.00
+2025-12-09 01:09:38 [INFO] max_pain.report_generator: Generating reports in formats: html, csv, json
+2025-12-09 01:09:38 [INFO] max_pain.report_generator: Generating CSV report
+2025-12-09 01:09:38 [INFO] max_pain.report_generator: CSV report saved to: results/csv/2025-12-09_max_pain_report.csv
+2025-12-09 01:09:38 [INFO] max_pain.report_generator: Generating JSON report
+2025-12-09 01:09:38 [INFO] max_pain.report_generator: JSON report saved to: results/json/2025-12-09_max_pain_results.json
+2025-12-09 01:09:38 [INFO] max_pain.report_generator: Generating HTML report
+2025-12-09 01:09:38 [INFO] max_pain.report_generator: HTML report saved to: results/html/2025-12-09_max_pain_report.html
+2025-12-09 01:09:38 [INFO] max_pain: Max Pain Calculator completed successfully
+2025-12-09 01:10:51 [INFO] max_pain: Starting Max Pain Calculator
+2025-12-09 01:10:51 [INFO] max_pain: Using YF data source
+2025-12-09 01:10:51 [INFO] max_pain.YahooFinanceDownloader: Starting batch download of 1 tickers
+2025-12-09 01:10:51 [INFO] max_pain.YahooFinanceDownloader: Downloading NVDA for expiration 2025-12-19
+2025-12-09 01:10:51 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for NVDA
+2025-12-09 01:10:52 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2025-12-19
+2025-12-09 01:10:52 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 500 strikes
+2025-12-09 01:10:52 [INFO] max_pain.YahooFinanceDownloader: Saved to NVDA_20251219_optionchain.csv
+2025-12-09 01:10:52 [INFO] max_pain.YahooFinanceDownloader: Loaded 500 strikes for NVDA
+2025-12-09 01:10:52 [INFO] max_pain.calculator: Calculating max pain price
+2025-12-09 01:11:01 [INFO] max_pain.calculator: Max pain calculated: $155.00
+2025-12-09 01:11:01 [INFO] max_pain.report_generator: Generating reports in formats: html, csv, json
+2025-12-09 01:11:01 [INFO] max_pain.report_generator: Generating CSV report
+2025-12-09 01:11:01 [INFO] max_pain.report_generator: CSV report saved to: results/csv/2025-12-09_max_pain_report.csv
+2025-12-09 01:11:01 [INFO] max_pain.report_generator: Generating JSON report
+2025-12-09 01:11:01 [INFO] max_pain.report_generator: JSON report saved to: results/json/2025-12-09_max_pain_results.json
+2025-12-09 01:11:01 [INFO] max_pain.report_generator: Generating HTML report
+2025-12-09 01:11:01 [INFO] max_pain.report_generator: HTML report saved to: results/html/2025-12-09_max_pain_report.html
+2025-12-09 01:11:01 [INFO] max_pain: Max Pain Calculator completed successfully
+2025-12-09 01:21:21 [INFO] max_pain: Starting Max Pain Calculator
+2025-12-09 01:21:21 [INFO] max_pain: Using YF data source
+2025-12-09 01:21:21 [INFO] max_pain.YahooFinanceDownloader: Starting batch download of 1 tickers
+2025-12-09 01:21:21 [INFO] max_pain.YahooFinanceDownloader: Loaded 500 strikes for NVDA
+2025-12-09 01:21:21 [INFO] max_pain.calculator: Calculating max pain price
+2025-12-09 01:21:30 [INFO] max_pain.calculator: Max pain calculated: $155.00
+2025-12-09 01:21:30 [INFO] max_pain.report_generator: Generating reports in formats: html, csv, json
+2025-12-09 01:21:30 [INFO] max_pain.report_generator: Generating CSV report
+2025-12-09 01:21:30 [INFO] max_pain.report_generator: CSV report saved to: results/csv/2025-12-09_max_pain_report.csv
+2025-12-09 01:21:30 [INFO] max_pain.report_generator: Generating JSON report
+2025-12-09 01:22:25 [INFO] max_pain: Starting Max Pain Calculator
+2025-12-09 01:22:25 [INFO] max_pain: Using YF data source
+2025-12-09 01:22:25 [INFO] max_pain.YahooFinanceDownloader: Starting batch download of 1 tickers
+2025-12-09 01:22:25 [INFO] max_pain.YahooFinanceDownloader: Loaded 500 strikes for NVDA
+2025-12-09 01:22:25 [INFO] max_pain.calculator: Calculating max pain price
+2025-12-09 01:22:34 [INFO] max_pain.calculator: Max pain calculated: $155.00
+2025-12-09 01:22:34 [INFO] max_pain.report_generator: Generating reports in formats: html, csv, json
+2025-12-09 01:22:34 [INFO] max_pain.report_generator: Generating CSV report
+2025-12-09 01:22:34 [INFO] max_pain.report_generator: CSV report saved to: results/csv/2025-12-09_max_pain_report.csv
+2025-12-09 01:22:34 [INFO] max_pain.report_generator: Generating JSON report
+2025-12-09 01:22:34 [INFO] max_pain.report_generator: JSON report saved to: results/json/2025-12-09_max_pain_results.json
+2025-12-09 01:22:34 [INFO] max_pain.report_generator: Generating HTML report
+2025-12-09 01:22:34 [INFO] max_pain.report_generator: HTML report saved to: results/html/2025-12-09_max_pain_report.html
+2025-12-09 01:22:34 [INFO] max_pain: Max Pain Calculator completed successfully
+2025-12-09 01:23:19 [INFO] max_pain: Starting Max Pain Calculator
+2025-12-09 01:23:19 [INFO] max_pain: Using YF data source
+2025-12-09 01:23:19 [INFO] max_pain.YahooFinanceDownloader: Starting batch download of 1 tickers
+2025-12-09 01:23:19 [INFO] max_pain.YahooFinanceDownloader: Loaded 500 strikes for NVDA
+2025-12-09 01:23:19 [INFO] max_pain.calculator: Calculating max pain price
+2025-12-09 01:23:28 [INFO] max_pain.calculator: Max pain calculated: $155.00
+2026-02-20 00:26:22 [INFO] max_pain: Starting Max Pain Calculator
+2026-02-20 00:26:22 [INFO] max_pain: Using CBOE data source
+2026-02-20 00:26:22 [INFO] max_pain.CBOEDownloader: Starting CBOE batch download of 1 tickers
+2026-02-20 00:26:22 [INFO] max_pain.CBOEAdapter: Fetching CBOE data for NVDA
+2026-02-20 00:26:22 [INFO] max_pain.CBOEAdapter: Parsed 304 valid option strikes
+2026-02-20 00:26:22 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 00:26:25 [INFO] max_pain.calculator: Max pain calculated: $144.00
+2026-02-20 00:26:27 [INFO] max_pain.ChartGenerator: Generated total_payout chart: NVIDIA_Fri Dec 19 2025_total_payout.png
+2026-02-20 00:26:28 [INFO] max_pain.ChartGenerator: Generated open_interest chart: NVIDIA_Fri Dec 19 2025_open_interest.png
+2026-02-20 00:26:28 [INFO] max_pain.report_generator: Generating reports in formats: html, csv, json
+2026-02-20 00:26:28 [INFO] max_pain.report_generator: Generating CSV report
+2026-02-20 00:26:28 [INFO] max_pain.report_generator: CSV report saved to: results/csv/2026-02-20_max_pain_report.csv
+2026-02-20 00:26:28 [INFO] max_pain.report_generator: Generating JSON report
+2026-02-20 00:26:28 [INFO] max_pain.report_generator: JSON report saved to: results/json/2026-02-20_max_pain_results.json
+2026-02-20 00:26:28 [INFO] max_pain.report_generator: Generating HTML report
+2026-02-20 00:26:28 [INFO] max_pain.report_generator: HTML report saved to: results/html/2026-02-20_max_pain_report.html
+2026-02-20 00:26:28 [INFO] max_pain: Max Pain Calculator completed successfully
+2026-02-20 00:43:29 [INFO] max_pain: Starting Max Pain Calculator
+2026-02-20 00:43:29 [INFO] max_pain: Using CBOE data source
+2026-02-20 00:43:29 [INFO] max_pain: Loaded 10 tickers from user_input/test.csv
+2026-02-20 00:43:29 [INFO] max_pain.CBOEDownloader: Starting CBOE batch download of 10 tickers
+2026-02-20 00:43:29 [INFO] max_pain.CBOEDownloader: Downloading CBOE data for BKNG from https://www.cboe.com/delayed_quotes/bkng/download_csv?market=option
+2026-02-20 00:43:30 [INFO] max_pain.CBOEDownloader: Saved BKNG to bkng_quotedata.csv
+2026-02-20 00:43:32 [INFO] max_pain.CBOEDownloader: Downloading CBOE data for MELI from https://www.cboe.com/delayed_quotes/meli/download_csv?market=option
+2026-02-20 00:43:34 [INFO] max_pain.CBOEDownloader: Saved MELI to meli_quotedata.csv
+2026-02-20 00:43:36 [INFO] max_pain.CBOEDownloader: Downloading CBOE data for REGN from https://www.cboe.com/delayed_quotes/regn/download_csv?market=option
+2026-02-20 00:43:38 [INFO] max_pain.CBOEDownloader: Saved REGN to regn_quotedata.csv
+2026-02-20 00:43:40 [INFO] max_pain.CBOEDownloader: Downloading CBOE data for CHTR from https://www.cboe.com/delayed_quotes/chtr/download_csv?market=option
+2026-02-20 00:43:42 [INFO] max_pain.CBOEDownloader: Saved CHTR to chtr_quotedata.csv
+2026-02-20 00:43:44 [INFO] max_pain.CBOEDownloader: Downloading CBOE data for KLAC from https://www.cboe.com/delayed_quotes/klac/download_csv?market=option
+2026-02-20 00:43:45 [INFO] max_pain.CBOEDownloader: Saved KLAC to klac_quotedata.csv
+2026-02-20 00:43:47 [INFO] max_pain.CBOEDownloader: Downloading CBOE data for META from https://www.cboe.com/delayed_quotes/meta/download_csv?market=option
+2026-02-20 00:43:49 [INFO] max_pain.CBOEDownloader: Saved META to meta_quotedata.csv
+2026-02-20 00:43:51 [INFO] max_pain.CBOEDownloader: Downloading CBOE data for ASML from https://www.cboe.com/delayed_quotes/asml/download_csv?market=option
+2026-02-20 00:43:53 [INFO] max_pain.CBOEDownloader: Saved ASML to asml_quotedata.csv
+2026-02-20 00:43:55 [INFO] max_pain.CBOEDownloader: Downloading CBOE data for NFLX from https://www.cboe.com/delayed_quotes/nflx/download_csv?market=option
+2026-02-20 00:43:56 [INFO] max_pain.CBOEDownloader: Saved NFLX to nflx_quotedata.csv
+2026-02-20 00:43:58 [INFO] max_pain.CBOEDownloader: Downloading CBOE data for COST from https://www.cboe.com/delayed_quotes/cost/download_csv?market=option
+2026-02-20 00:44:00 [INFO] max_pain.CBOEDownloader: Saved COST to cost_quotedata.csv
+2026-02-20 00:44:02 [INFO] max_pain.CBOEDownloader: Downloading CBOE data for ADBE from https://www.cboe.com/delayed_quotes/adbe/download_csv?market=option
+2026-02-20 00:44:04 [INFO] max_pain.CBOEDownloader: Saved ADBE to adbe_quotedata.csv
+2026-02-20 00:44:04 [INFO] max_pain.CBOEAdapter: Fetching CBOE data for BKNG
+2026-02-20 00:44:04 [ERROR] max_pain: Error processing BKNG: Could not find price information in CSV
+2026-02-20 00:44:04 [INFO] max_pain.CBOEAdapter: Fetching CBOE data for MELI
+2026-02-20 00:44:04 [ERROR] max_pain: Error processing MELI: Could not find price information in CSV
+2026-02-20 00:44:04 [INFO] max_pain.CBOEAdapter: Fetching CBOE data for REGN
+2026-02-20 00:44:04 [ERROR] max_pain: Error processing REGN: Could not find price information in CSV
+2026-02-20 00:44:04 [INFO] max_pain.CBOEAdapter: Fetching CBOE data for CHTR
+2026-02-20 00:44:04 [ERROR] max_pain: Error processing CHTR: Could not find price information in CSV
+2026-02-20 00:44:04 [INFO] max_pain.CBOEAdapter: Fetching CBOE data for KLAC
+2026-02-20 00:44:04 [ERROR] max_pain: Error processing KLAC: Could not find price information in CSV
+2026-02-20 00:44:04 [INFO] max_pain.CBOEAdapter: Fetching CBOE data for META
+2026-02-20 00:44:04 [ERROR] max_pain: Error processing META: Could not find price information in CSV
+2026-02-20 00:44:04 [INFO] max_pain.CBOEAdapter: Fetching CBOE data for ASML
+2026-02-20 00:44:04 [ERROR] max_pain: Error processing ASML: Could not find price information in CSV
+2026-02-20 00:44:04 [INFO] max_pain.CBOEAdapter: Fetching CBOE data for NFLX
+2026-02-20 00:44:04 [ERROR] max_pain: Error processing NFLX: Could not find price information in CSV
+2026-02-20 00:44:04 [INFO] max_pain.CBOEAdapter: Fetching CBOE data for COST
+2026-02-20 00:44:04 [ERROR] max_pain: Error processing COST: Could not find price information in CSV
+2026-02-20 00:44:04 [INFO] max_pain.CBOEAdapter: Fetching CBOE data for ADBE
+2026-02-20 00:44:04 [ERROR] max_pain: Error processing ADBE: Could not find price information in CSV
+2026-02-20 00:44:04 [ERROR] max_pain: No results to generate reports
+2026-02-20 00:44:58 [INFO] max_pain: Starting Max Pain Calculator
+2026-02-20 00:44:58 [INFO] max_pain: Using YF data source
+2026-02-20 00:44:58 [INFO] max_pain: Loaded 10 tickers from user_input/test.csv
+2026-02-20 00:44:58 [INFO] max_pain.YahooFinanceDownloader: Starting batch download of 10 tickers
+2026-02-20 00:44:58 [INFO] max_pain.YahooFinanceDownloader: Downloading BKNG for expiration 2026-02-20
+2026-02-20 00:44:58 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for BKNG
+2026-02-20 00:44:59 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-02-20
+2026-02-20 00:44:59 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 232 strikes
+2026-02-20 00:44:59 [INFO] max_pain.YahooFinanceDownloader: Saved to BKNG_20260220_optionchain.csv
+2026-02-20 00:45:00 [INFO] max_pain.YahooFinanceDownloader: Downloading MELI for expiration 2026-02-20
+2026-02-20 00:45:00 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for MELI
+2026-02-20 00:45:00 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-02-20
+2026-02-20 00:45:01 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 143 strikes
+2026-02-20 00:45:01 [INFO] max_pain.YahooFinanceDownloader: Saved to MELI_20260220_optionchain.csv
+2026-02-20 00:45:02 [INFO] max_pain.YahooFinanceDownloader: Downloading REGN for expiration 2026-02-20
+2026-02-20 00:45:02 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for REGN
+2026-02-20 00:45:02 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-02-20
+2026-02-20 00:45:02 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 121 strikes
+2026-02-20 00:45:02 [INFO] max_pain.YahooFinanceDownloader: Saved to REGN_20260220_optionchain.csv
+2026-02-20 00:45:03 [INFO] max_pain.YahooFinanceDownloader: Downloading CHTR for expiration 2026-02-20
+2026-02-20 00:45:03 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for CHTR
+2026-02-20 00:45:04 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-02-20
+2026-02-20 00:45:04 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 62 strikes
+2026-02-20 00:45:04 [INFO] max_pain.YahooFinanceDownloader: Saved to CHTR_20260220_optionchain.csv
+2026-02-20 00:45:05 [INFO] max_pain.YahooFinanceDownloader: Downloading KLAC for expiration 2026-02-20
+2026-02-20 00:45:05 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for KLAC
+2026-02-20 00:45:05 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-02-20
+2026-02-20 00:45:05 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 137 strikes
+2026-02-20 00:45:05 [INFO] max_pain.YahooFinanceDownloader: Saved to KLAC_20260220_optionchain.csv
+2026-02-20 00:45:06 [INFO] max_pain.YahooFinanceDownloader: Downloading META for expiration 2026-02-20
+2026-02-20 00:45:06 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for META
+2026-02-20 00:45:07 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-02-20
+2026-02-20 00:45:07 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 216 strikes
+2026-02-20 00:45:07 [INFO] max_pain.YahooFinanceDownloader: Saved to META_20260220_optionchain.csv
+2026-02-20 00:45:08 [INFO] max_pain.YahooFinanceDownloader: Downloading ASML for expiration 2026-02-20
+2026-02-20 00:45:08 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for ASML
+2026-02-20 00:45:08 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-02-20
+2026-02-20 00:45:08 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 164 strikes
+2026-02-20 00:45:08 [INFO] max_pain.YahooFinanceDownloader: Saved to ASML_20260220_optionchain.csv
+2026-02-20 00:45:09 [INFO] max_pain.YahooFinanceDownloader: Downloading NFLX for expiration 2026-02-20
+2026-02-20 00:45:09 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for NFLX
+2026-02-20 00:45:10 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-02-20
+2026-02-20 00:45:10 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 168 strikes
+2026-02-20 00:45:10 [INFO] max_pain.YahooFinanceDownloader: Saved to NFLX_20260220_optionchain.csv
+2026-02-20 00:45:11 [INFO] max_pain.YahooFinanceDownloader: Downloading COST for expiration 2026-02-20
+2026-02-20 00:45:11 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for COST
+2026-02-20 00:45:12 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-02-20
+2026-02-20 00:45:12 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 132 strikes
+2026-02-20 00:45:12 [INFO] max_pain.YahooFinanceDownloader: Saved to COST_20260220_optionchain.csv
+2026-02-20 00:45:13 [INFO] max_pain.YahooFinanceDownloader: Downloading ADBE for expiration 2026-02-20
+2026-02-20 00:45:13 [INFO] max_pain.YahooFinanceAdapter: Downloading Yahoo Finance data for ADBE
+2026-02-20 00:45:13 [INFO] max_pain.YahooFinanceAdapter: Selected expiration: 2026-02-20
+2026-02-20 00:45:13 [INFO] max_pain.YahooFinanceAdapter: Merged option chain: 97 strikes
+2026-02-20 00:45:13 [INFO] max_pain.YahooFinanceDownloader: Saved to ADBE_20260220_optionchain.csv
+2026-02-20 00:45:13 [INFO] max_pain.YahooFinanceDownloader: Loaded 232 strikes for BKNG
+2026-02-20 00:45:13 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 00:45:15 [INFO] max_pain.calculator: Max pain calculated: $4350.00
+2026-02-20 00:45:15 [INFO] max_pain.YahooFinanceDownloader: Loaded 143 strikes for MELI
+2026-02-20 00:45:15 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 00:45:16 [INFO] max_pain.calculator: Max pain calculated: $2015.00
+2026-02-20 00:45:16 [INFO] max_pain.YahooFinanceDownloader: Loaded 121 strikes for REGN
+2026-02-20 00:45:16 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 00:45:16 [INFO] max_pain.calculator: Max pain calculated: $735.00
+2026-02-20 00:45:16 [INFO] max_pain.YahooFinanceDownloader: Loaded 62 strikes for CHTR
+2026-02-20 00:45:16 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 00:45:17 [INFO] max_pain.calculator: Max pain calculated: $200.00
+2026-02-20 00:45:17 [INFO] max_pain.YahooFinanceDownloader: Loaded 137 strikes for KLAC
+2026-02-20 00:45:17 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 00:45:17 [INFO] max_pain.calculator: Max pain calculated: $1440.00
+2026-02-20 00:45:17 [INFO] max_pain.YahooFinanceDownloader: Loaded 216 strikes for META
+2026-02-20 00:45:17 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 00:45:19 [INFO] max_pain.calculator: Max pain calculated: $617.50
+2026-02-20 00:45:19 [INFO] max_pain.YahooFinanceDownloader: Loaded 164 strikes for ASML
+2026-02-20 00:45:19 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 00:45:20 [INFO] max_pain.calculator: Max pain calculated: $1395.00
+2026-02-20 00:45:20 [INFO] max_pain.YahooFinanceDownloader: Loaded 168 strikes for NFLX
+2026-02-20 00:45:20 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 00:45:21 [INFO] max_pain.calculator: Max pain calculated: $80.00
+2026-02-20 00:45:21 [INFO] max_pain.YahooFinanceDownloader: Loaded 132 strikes for COST
+2026-02-20 00:45:21 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 00:45:21 [INFO] max_pain.calculator: Max pain calculated: $960.00
+2026-02-20 00:45:21 [INFO] max_pain.YahooFinanceDownloader: Loaded 97 strikes for ADBE
+2026-02-20 00:45:21 [INFO] max_pain.calculator: Calculating max pain price
+2026-02-20 00:45:22 [INFO] max_pain.calculator: Max pain calculated: $277.50
+2026-02-20 00:45:23 [INFO] max_pain.ChartGenerator: Generated total_payout chart: BKNG_20260220_total_payout.png
+2026-02-20 00:45:24 [INFO] max_pain.ChartGenerator: Generated open_interest chart: BKNG_20260220_open_interest.png
+2026-02-20 00:45:24 [INFO] max_pain.ChartGenerator: Generated total_payout chart: MELI_20260220_total_payout.png
+2026-02-20 00:45:25 [INFO] max_pain.ChartGenerator: Generated open_interest chart: MELI_20260220_open_interest.png
+2026-02-20 00:45:25 [INFO] max_pain.ChartGenerator: Generated total_payout chart: REGN_20260220_total_payout.png
+2026-02-20 00:45:25 [INFO] max_pain.ChartGenerator: Generated open_interest chart: REGN_20260220_open_interest.png
+2026-02-20 00:45:26 [INFO] max_pain.ChartGenerator: Generated total_payout chart: CHTR_20260220_total_payout.png
+2026-02-20 00:45:26 [INFO] max_pain.ChartGenerator: Generated open_interest chart: CHTR_20260220_open_interest.png
+2026-02-20 00:45:27 [INFO] max_pain.ChartGenerator: Generated total_payout chart: KLAC_20260220_total_payout.png
+2026-02-20 00:45:27 [INFO] max_pain.ChartGenerator: Generated open_interest chart: KLAC_20260220_open_interest.png
+2026-02-20 00:45:28 [INFO] max_pain.ChartGenerator: Generated total_payout chart: META_20260220_total_payout.png
+2026-02-20 00:45:29 [INFO] max_pain.ChartGenerator: Generated open_interest chart: META_20260220_open_interest.png
+2026-02-20 00:45:30 [INFO] max_pain.ChartGenerator: Generated total_payout chart: ASML_20260220_total_payout.png
+2026-02-20 00:45:30 [INFO] max_pain.ChartGenerator: Generated open_interest chart: ASML_20260220_open_interest.png
+2026-02-20 00:45:31 [INFO] max_pain.ChartGenerator: Generated total_payout chart: NFLX_20260220_total_payout.png
+2026-02-20 00:45:31 [INFO] max_pain.ChartGenerator: Generated open_interest chart: NFLX_20260220_open_interest.png
+2026-02-20 00:45:32 [INFO] max_pain.ChartGenerator: Generated total_payout chart: COST_20260220_total_payout.png
+2026-02-20 00:45:32 [INFO] max_pain.ChartGenerator: Generated open_interest chart: COST_20260220_open_interest.png
+2026-02-20 00:45:33 [INFO] max_pain.ChartGenerator: Generated total_payout chart: ADBE_20260220_total_payout.png
+2026-02-20 00:45:33 [INFO] max_pain.ChartGenerator: Generated open_interest chart: ADBE_20260220_open_interest.png
+2026-02-20 00:45:33 [INFO] max_pain.report_generator: Generating reports in formats: html, csv, json
+2026-02-20 00:45:33 [INFO] max_pain.report_generator: Generating CSV report
+2026-02-20 00:45:33 [INFO] max_pain.report_generator: CSV report saved to: results/csv/2026-02-20_max_pain_report.csv
+2026-02-20 00:45:33 [INFO] max_pain.report_generator: Generating JSON report
+2026-02-20 00:45:33 [INFO] max_pain.report_generator: JSON report saved to: results/json/2026-02-20_max_pain_results.json
+2026-02-20 00:45:33 [INFO] max_pain.report_generator: Generating HTML report
+2026-02-20 00:45:33 [INFO] max_pain.report_generator: HTML report saved to: results/html/2026-02-20_max_pain_report.html
+2026-02-20 00:45:33 [INFO] max_pain: Max Pain Calculator completed successfully

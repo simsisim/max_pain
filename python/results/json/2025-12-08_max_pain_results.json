@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "report_date": "2025-12-08",
+    "generation_timestamp": "2025-12-08T22:59:54.748268",
+    "data_source": "CBOE",
+    "ticker_count": 1,
+    "top_n_highlighted": 20
+  },
+  "results": [
+    {
+      "max_pain_price": 144.0,
+      "current_price": 179.9199,
+      "pct_change": -19.964384150947176,
+      "net_call_put_premium": 111600.0,
+      "premium_bias": "call",
+      "total_call_oi": 1945602,
+      "total_put_oi": 1959540,
+      "min_payout": 5722778050.0,
+      "calculation_date": "2025-12-08 22:59:54",
+      "ticker": "NVIDIA",
+      "expiration_date": "Fri Dec 19 2025",
+      "is_top_n": true
+    }
+  ],
+  "summary": {
+    "total_net_premium": 111600.0,
+    "avg_pct_change": -19.964384150947176,
+    "bearish_count": 1,
+    "bullish_count": 0,
+    "neutral_count": 0
+  }
+}
