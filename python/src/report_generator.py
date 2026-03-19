@@ -8,6 +8,21 @@ import csv
 from datetime import datetime
 from jinja2 import Template
 import os
+import numpy as np
+
+
+class _NumpyEncoder(json.JSONEncoder):
+    """Serialise numpy scalar types that standard json cannot handle."""
+    def default(self, obj):
+        if isinstance(obj, (np.integer,)):
+            return int(obj)
+        if isinstance(obj, (np.floating,)):
+            return float(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return super().default(obj)
+
+from src.pdf_report_generator import PdfReportGenerator
 
 
 class ReportGenerator:
@@ -59,6 +74,11 @@ class ReportGenerator:
         if 'html' in output_formats:
             html_path = self.generate_html_report(results_list)
             generated_files['html'] = html_path
+
+        if 'pdf' in output_formats:
+            pdf_gen = PdfReportGenerator(self.config)
+            pdf_path = pdf_gen.generate_pdf_report(results_list)
+            generated_files['pdf'] = pdf_path
 
         return generated_files
 
@@ -183,7 +203,7 @@ class ReportGenerator:
 
         # Write JSON
         with open(filepath, 'w') as f:
-            json.dump(report, f, indent=2)
+            json.dump(report, f, indent=2, cls=_NumpyEncoder)
 
         self.logger.info(f"JSON report saved to: {filepath}")
         return filepath

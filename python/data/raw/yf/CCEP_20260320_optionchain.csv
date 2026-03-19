@@ -1,0 +1,15 @@
+Ticker,CCEP
+CurrentPrice,98.04
+ExpirationDate,2026-03-20
+DownloadTimestamp,2026-03-18 17:51:25
+
+Strike,Call_OI,Call_Volume,Put_OI,Put_Volume
+80.0,0,0,3,2
+85.0,0,0,3,2
+90.0,1,1,12,1
+95.0,1096,7,4,5
+100.0,25,15,584,10
+105.0,10,1,50,1
+110.0,341,1,0,1
+115.0,184,5,0,0
+120.0,2,2,0,0

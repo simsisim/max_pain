@@ -114,11 +114,21 @@ def main():
                 raise FileNotFoundError(f"Ticker file not found: {ticker_file}")
 
             import pandas as pd
-            tickers = pd.read_csv(ticker_file)['ticker'].dropna().str.upper().tolist()
+            df = pd.read_csv(ticker_file, header=None if ticker_file.endswith('.txt') else 0)
+            if ticker_file.endswith('.txt'):
+                # Plain text file: one ticker per line, no header
+                tickers = df.iloc[:, 0].dropna().str.strip().str.upper().tolist()
+            else:
+                # CSV file: must have a 'ticker' column
+                tickers = df['ticker'].dropna().str.strip().str.upper().tolist()
 
             if not tickers:
                 logger.error(f"No tickers found in {ticker_file}")
                 sys.exit(1)
+
+            # Always include index ETFs (shown in a separate block in the PDF report)
+            index_tickers = ['SPY', 'QQQ', 'IWM']
+            tickers = index_tickers + [t for t in tickers if t not in index_tickers]
 
             logger.info(f"Loaded {len(tickers)} tickers from {ticker_file}")
 

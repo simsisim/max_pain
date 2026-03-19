@@ -402,34 +402,34 @@ class MaxPainCalculator:
 
     def calculate_net_premium(self, option_data, max_pain_price):
         """
-        Calculate net call/put premium
+        Calculate net call/put premium in dollars (dollar notional).
 
-        Net Premium = Total Call Premium - Total Put Premium
-        where premium is calculated based on open interest at max pain
+        Net Premium ($) = Σ(Call_OI × 100 × Strike) for ITM calls at max pain
+                        − Σ(Put_OI  × 100 × Strike) for ITM puts  at max pain
+
+        ITM calls: Strike < max_pain_price
+        ITM puts:  Strike > max_pain_price
+
+        Multiplying by Strike converts contract count → dollar notional,
+        matching the EarningsBeats report scale.
 
         Args:
             option_data: DataFrame with Strike, Call_OI, Put_OI
             max_pain_price: Calculated max pain price
 
         Returns:
-            float: Net premium (positive = more calls, negative = more puts)
+            float: Net premium in dollars (positive = call-heavy, negative = put-heavy)
         """
-        # Calculate call premium: sum of call OI for strikes below max pain
-        call_premium = 0
-        for _, row in option_data.iterrows():
-            if row['Strike'] < max_pain_price:
-                call_premium += row['Call_OI'] * 100
+        itm_calls = option_data[option_data['Strike'] < max_pain_price]
+        itm_puts  = option_data[option_data['Strike'] > max_pain_price]
 
-        # Calculate put premium: sum of put OI for strikes above max pain
-        put_premium = 0
-        for _, row in option_data.iterrows():
-            if row['Strike'] > max_pain_price:
-                put_premium += row['Put_OI'] * 100
+        call_premium = (itm_calls['Call_OI'] * 100 * itm_calls['Strike']).sum()
+        put_premium  = (itm_puts['Put_OI']   * 100 * itm_puts['Strike']).sum()
 
         net_premium = call_premium - put_premium
 
-        self.logger.debug(f"Call premium: {call_premium:,.0f}, Put premium: {put_premium:,.0f}")
-        self.logger.debug(f"Net premium: {net_premium:,.0f}")
+        self.logger.debug(f"Call premium: ${call_premium:,.0f}, Put premium: ${put_premium:,.0f}")
+        self.logger.debug(f"Net premium:  ${net_premium:,.0f}")
 
         return net_premium
 

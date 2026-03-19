@@ -16,6 +16,31 @@ This tool:
 - Generates PNG charts (payout curve, OI distribution, net gamma overlay)
 
 ---
+Best match for your report format
+
+  1. maximum-pain.com — shows max pain strike + dollar value bars per strike. Closest to what you're computing.
+  2. barchart.com — very reputable data source, free max pain chart. URL pattern: barchart.com/stocks/quotes/TICKER/max-pain-chart
+  3. optioncharts.io — clean visual, URL pattern: optioncharts.io/options/TICKER/max-pain
+
+  Suggested verification approach
+
+  Pick 2-3 tickers from your run (e.g. MU, SPY, NVDA) and compare:
+
+  ┌────────────────────┬──────────────────┬────────────────────┐
+  │       Field        │   Your output    │    Site output     │
+  ├────────────────────┼──────────────────┼────────────────────┤
+  │ Max Pain strike    │ $430.00          │ ?                  │
+  ├────────────────────┼──────────────────┼────────────────────┤
+  │ % change direction │ -7.16% (bearish) │ bearish / bullish? │
+  ├────────────────────┼──────────────────┼────────────────────┤
+  │ Call vs Put bias   │ call-heavy       │ call-heavy?        │
+  └────────────────────┴──────────────────┴────────────────────┘
+
+  The absolute dollar value of net premium will likely differ slightly between sites because they may use different OI snapshots
+  (CBOE vs YF, different download time). What matters is that the max pain strike and the direction (call-heavy vs put-heavy) agree.
+
+
+
 
 ## Quick Start
 
@@ -367,3 +392,5 @@ Max pain is a directional indicator, not a guarantee.
 
 **Version**: 1.2.0
 **Last Updated**: 2026-02-24
+
+
