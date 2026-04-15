@@ -52,7 +52,7 @@ pip install -r requirements.txt
 # Single ticker
 python main.py --ticker NVDA
 
-# Ticker list from CSV
+# Ticker list from CSV or plain/TradingView .txt
 python main.py --ticker-file user_input/test.csv
 
 # Use config.ini defaults
@@ -76,10 +76,29 @@ Three ways to specify tickers, in priority order:
 | Method | How |
 |--------|-----|
 | CLI — single | `--ticker AAPL` |
-| CLI — file | `--ticker-file user_input/test.csv` |
+| CLI — file | `--ticker-file user_input/test.csv` (or `.txt`) |
 | Config default | `ticker_file = user_input/nasdaq100_tickers.csv` in `config.ini` |
 
-**CSV format** — one column, header must be `ticker`:
+Two file formats are supported, auto-detected by content:
+
+**Plain `.txt`** — one ticker per line, no header:
+
+```
+BKNG
+NFLX
+META
+NVDA
+```
+
+**TradingView watchlist `.txt`** — paste a watchlist export directly (comma-separated `EXCHANGE:TICKER` tokens). Section labels (`###...`) and unsupported instruments are filtered out automatically:
+
+```
+###MAG7,NASDAQ:GOOGL,NASDAQ:NVDA,NASDAQ:TSLA,###SEMIS,NASDAQ:AMAT,NASDAQ:LRCX
+```
+
+Filtered out automatically: indices (`TVC`, `DJ`), futures (`COMEX`, `!`-suffix), crypto (`CRYPTO`), and non-US exchanges (`TSE`, `KRX`, `LSE`, `NSE`, `TWSE`, `EURONEXT`, `GETTEX`, `OTC`). Skipped tokens are logged at startup.
+
+**CSV** — one column, header must be `ticker`:
 
 ```
 ticker
@@ -118,6 +137,34 @@ With `download_phase_enabled = true` (default):
 - Generates reports and charts
 
 On a second run, Phase 1 is near-instant — all files are reused.
+
+---
+
+## GitHub Actions — Automated Schedule
+
+The workflow (`.github/workflows/max_pain.yml`) runs in two modes:
+
+### Scheduled (automatic)
+
+Triggers **every 2nd Friday of the month at 21:30 UTC (5:30 PM ET)** — one week before the monthly options expiration (3rd Friday). This gives you a full week of signal before expiration.
+
+Runs **nasdaq100 and sp500 in parallel**, targeting `next_3Fr_monthly` (the upcoming 3rd Friday expiration). Results and logs are uploaded as GitHub Actions artifacts (retained 90 / 30 days respectively).
+
+### Manual dispatch
+
+Go to **Actions → Max Pain Calculator → Run workflow** to trigger on demand. Options:
+
+| Input | Default | Notes |
+|-------|---------|-------|
+| Ticker file | `test.csv` | Any file from the dropdown (CSV or `.txt`) |
+| Expiration date | `next_3Fr_monthly` | Keyword or `YYYY-MM-DD` |
+| Strike band % | `15` | Set to `0` to disable |
+| Min open interest | `10` | Set to `0` to disable |
+| Volume-weighted OI | `false` | Use today's volume instead of OI |
+
+### Artifacts
+
+Each run uploads two artifacts named `max-pain-results-<run_id>-<index>` and `max-pain-logs-<run_id>-<index>`. On scheduled runs there are two sets (one per ticker file). Both are retained for **30 days**.
 
 ---
 

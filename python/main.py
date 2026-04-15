@@ -53,6 +53,84 @@ Examples:
     return parser.parse_args()
 
 
+# Exchanges whose tickers are not supported by yfinance options chains
+_TV_SKIP_EXCHANGES = {
+    'TVC', 'DJ', 'COMEX', 'NYMEX', 'CBOT', 'CME',  # indices / futures
+    'TSE', 'KRX', 'LSE', 'NSE', 'TWSE', 'EURONEXT', 'GETTEX', 'OTC',  # non-US
+    'CRYPTO',  # crypto
+}
+
+
+def _load_txt_tickers(path, logger):
+    """Load tickers from a plain text file.
+
+    Supports two formats auto-detected by content:
+    - Plain: one ticker per line (e.g. 'AAPL')
+    - TradingView watchlist: comma-separated 'EXCHANGE:TICKER' tokens on one or
+      more lines, with optional '###Section' headers.
+
+    TradingView filtering:
+    - Strips the exchange prefix (keeps only the part after ':')
+    - Skips '###...' section labels
+    - Skips exchanges in _TV_SKIP_EXCHANGES (indices, futures, non-US)
+    - Skips futures tickers that contain '!'
+    """
+    with open(path) as f:
+        raw = f.read()
+
+    # Detect TradingView format: presence of 'EXCHANGE:TICKER' tokens
+    import re
+    is_tradingview = bool(re.search(r'[A-Z0-9]+:[A-Z0-9]', raw))
+
+    if not is_tradingview:
+        # Plain format: one ticker per line
+        tickers = [
+            line.strip().upper()
+            for line in raw.splitlines()
+            if line.strip() and not line.strip().startswith('#')
+        ]
+        logger.info(f"Plain ticker file: {len(tickers)} tickers loaded")
+        return tickers
+
+    # TradingView format: split on commas (may span multiple lines)
+    tokens = [t.strip() for t in raw.replace('\n', ',').split(',') if t.strip()]
+    tickers = []
+    skipped = []
+    in_section_header = False
+    for token in tokens:
+        if token.startswith('###'):
+            in_section_header = True  # skip words until the next EXCHANGE:TICKER token
+            continue
+        if in_section_header:
+            if ':' in token:
+                in_section_header = False  # back to normal ticker tokens
+            else:
+                skipped.append(token)  # section header fragment (e.g. 'GRID', 'NUCLEAR')
+                continue
+        if ':' in token:
+            exchange, symbol = token.split(':', 1)
+            exchange = exchange.upper()
+            symbol = symbol.upper()
+        else:
+            exchange, symbol = '', token.upper()
+
+        if '!' in symbol:
+            skipped.append(token)
+            continue  # futures contract
+        if exchange in _TV_SKIP_EXCHANGES:
+            skipped.append(token)
+            continue
+
+        tickers.append(symbol)
+
+    if skipped:
+        logger.info(f"TradingView file: skipped {len(skipped)} unsupported tokens "
+                    f"(futures/indices/non-US): {', '.join(skipped[:10])}"
+                    + (' ...' if len(skipped) > 10 else ''))
+    logger.info(f"TradingView file: {len(tickers)} tickers loaded")
+    return tickers
+
+
 def main():
     """Main execution function"""
     print_banner()
@@ -114,12 +192,11 @@ def main():
                 raise FileNotFoundError(f"Ticker file not found: {ticker_file}")
 
             import pandas as pd
-            df = pd.read_csv(ticker_file, header=None if ticker_file.endswith('.txt') else 0)
             if ticker_file.endswith('.txt'):
-                # Plain text file: one ticker per line, no header
-                tickers = df.iloc[:, 0].dropna().str.strip().str.upper().tolist()
+                tickers = _load_txt_tickers(ticker_file, logger)
             else:
                 # CSV file: must have a 'ticker' column
+                df = pd.read_csv(ticker_file)
                 tickers = df['ticker'].dropna().str.strip().str.upper().tolist()
 
             if not tickers:

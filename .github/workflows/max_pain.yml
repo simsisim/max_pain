@@ -9,12 +9,14 @@ on:
     inputs:
 
       ticker_file:
-        description: 'Ticker list CSV (path relative to python/)'
+        description: 'Ticker list (path relative to python/). CSV or .txt (plain or TradingView watchlist format).'
         required: true
         default: 'user_input/test.csv'
         type: choice
         options:
           - user_input/test.csv
+          - user_input/p_pullbackMarMai2026.txt
+          - user_input/earningsbeats_tickers.txt
           - user_input/nasdaq100_tickers.csv
           - user_input/sp500_tickers.csv
           - user_input/russell3000_tickers.csv
@@ -59,19 +61,49 @@ on:
           - 'false'
           - 'true'
 
-  # 2. Scheduled run — every 3rd Friday of the month at 21:30 UTC (5:30 pm ET)
-  #    Cron does not support "nth weekday" natively, but the 3rd Friday always
-  #    falls between the 15th and 21st of the month, so this pattern is exact.
+  # 2. Scheduled run — the Friday ONE WEEK BEFORE monthly expiration (3rd Friday),
+  #    at 21:30 UTC (5:30 pm ET) after market close.
+  #    The 2nd Friday always falls between the 8th and 14th, so this is exact.
   schedule:
-    - cron: '30 21 15-21 * 5'
+    - cron: '30 21 8-14 * 5'
 
 # ---------------------------------------------------------------------------
-# Job
+# Jobs
 # ---------------------------------------------------------------------------
 jobs:
-  max-pain:
-    name: Calculate Max Pain
+
+  # -------------------------------------------------------------------------
+  # Resolve which ticker file(s) to run.
+  # - schedule  → runs nasdaq100 + sp500 in parallel (matrix)
+  # - dispatch  → runs the file chosen in the UI
+  # -------------------------------------------------------------------------
+  setup:
+    name: Resolve ticker files
     runs-on: ubuntu-latest
+    outputs:
+      files: ${{ steps.resolve.outputs.files }}
+    steps:
+      - name: Resolve ticker file list
+        id: resolve
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            echo 'files=["user_input/nasdaq100_tickers.csv","user_input/sp500_tickers.csv"]' >> $GITHUB_OUTPUT
+          else
+            echo 'files=["${{ inputs.ticker_file }}"]' >> $GITHUB_OUTPUT
+          fi
+
+  # -------------------------------------------------------------------------
+  # Main calculation job — runs once per file in the matrix.
+  # -------------------------------------------------------------------------
+  max-pain:
+    name: Calculate Max Pain (${{ matrix.ticker_file }})
+    needs: setup
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        ticker_file: ${{ fromJson(needs.setup.outputs.files) }}
+      fail-fast: false   # let the other file finish even if one fails
 
     # All run steps execute inside the python/ subdirectory
     defaults:
@@ -137,25 +169,25 @@ jobs:
 
       # -----------------------------------------------------------------------
       - name: Run Max Pain Calculator
-        env:
-          TICKER_FILE: ${{ inputs.ticker_file || 'user_input/test.csv' }}
         run: |
-          echo "Ticker file : ${TICKER_FILE}"
-          python main.py --ticker-file "${TICKER_FILE}"
+          echo "Ticker file : ${{ matrix.ticker_file }}"
+          python main.py --ticker-file "${{ matrix.ticker_file }}"
 
       # -----------------------------------------------------------------------
+      # Artifact names include a slug of the ticker file so both matrix jobs
+      # upload to distinct artifacts in the same run.
       - name: Upload results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: max-pain-results-${{ github.run_id }}
+          name: max-pain-results-${{ github.run_id }}-${{ strategy.job-index }}
           path: python/results/
-          retention-days: 90
+          retention-days: 30
 
       - name: Upload logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: max-pain-logs-${{ github.run_id }}
+          name: max-pain-logs-${{ github.run_id }}-${{ strategy.job-index }}
           path: python/logs/
           retention-days: 30
