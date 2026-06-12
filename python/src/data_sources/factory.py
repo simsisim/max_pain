@@ -35,5 +35,10 @@ class DataSourceFactory:
             return CBOEAdapter(config)
         elif source == 'YF':
             return YahooFinanceAdapter(config)
+        elif source == 'CBOE_JSON':
+            raise ValueError(
+                "CBOE_JSON source requires download_phase_enabled = true in [CBOE_JSON] config. "
+                "Stream mode (no download phase) is not supported for this source."
+            )
         else:
-            raise ValueError(f"Unknown data source: {source}. Must be 'CBOE' or 'YF'")
+            raise ValueError(f"Unknown data source: {source}. Must be 'CBOE', 'YF', or 'CBOE_JSON'")

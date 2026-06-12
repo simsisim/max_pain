@@ -7,12 +7,14 @@ that transform source-specific data formats into a common format for max pain ca
 
 from .base import OptionDataAdapter
 from .cboe_adapter import CBOEAdapter
+from .cboe_json_downloader import CBOEJsonDownloader
 from .yf_adapter import YahooFinanceAdapter
 from .factory import DataSourceFactory
 
 __all__ = [
     'OptionDataAdapter',
     'CBOEAdapter',
+    'CBOEJsonDownloader',
     'YahooFinanceAdapter',
     'DataSourceFactory'
 ]

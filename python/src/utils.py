@@ -318,8 +318,8 @@ def get_data_source_config(config):
     """
     source = config.get('DATA_SOURCE', 'source', fallback='CBOE').upper()
     
-    if source not in ['CBOE', 'YF']:
-        raise ValueError(f"Invalid data source: {source}. Must be 'CBOE' or 'YF'")
+    if source not in ['CBOE', 'YF', 'CBOE_JSON']:
+        raise ValueError(f"Invalid data source: {source}. Must be 'CBOE', 'YF', or 'CBOE_JSON'")
     
     exp_date, is_auto = get_expiration_date_from_config(config)
     
@@ -333,6 +333,14 @@ def get_data_source_config(config):
             'max_retries': config.getint('YAHOO_FINANCE', 'max_retries', fallback=3),
             'retry_delay_seconds': config.getint('YAHOO_FINANCE', 'retry_delay_seconds', fallback=2),
             'rate_limit_delay': config.getint('YAHOO_FINANCE', 'rate_limit_delay', fallback=1)
+        }
+    elif source == 'CBOE_JSON':
+        source_config = {
+            'download_dir':         config.get('CBOE_JSON', 'download_dir', fallback='data/raw/cboe_json'),
+            'rate_limit_delay':     config.getint('CBOE_JSON', 'rate_limit_delay', fallback=1),
+            'request_timeout':      config.getint('CBOE_JSON', 'request_timeout', fallback=30),
+            'overwrite_existing':   config.getboolean('CBOE_JSON', 'overwrite_existing', fallback=False),
+            'expiration_selection': config.get('CALCULATION', 'yf_expiration_selection', fallback='nearest'),
         }
     else:  # CBOE
         source_config = {

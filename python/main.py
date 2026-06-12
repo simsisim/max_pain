@@ -220,6 +220,8 @@ def main():
             download_phase_enabled = config.getboolean('YAHOO_FINANCE', 'download_phase_enabled', fallback=False)
         elif data_source == 'CBOE':
             download_phase_enabled = ds_config['source_specific_config'].get('download_phase_enabled', False)
+        elif data_source == 'CBOE_JSON':
+            download_phase_enabled = config.getboolean('CBOE_JSON', 'download_phase_enabled', fallback=True)
         else:
             download_phase_enabled = False
 
@@ -285,6 +287,36 @@ def main():
             print(f"Proceeding to process {len(tickers)} ticker(s)...")
             print()
 
+        elif data_source == 'CBOE_JSON' and download_phase_enabled:
+            from src.data_sources.cboe_json_downloader import CBOEJsonDownloader
+
+            print("=" * 60)
+            print("[PHASE 1] DOWNLOADING CBOE JSON OPTION CHAIN DATA")
+            print("=" * 60)
+
+            downloader = CBOEJsonDownloader(ds_config['source_specific_config'])
+            download_results = downloader.download_batch(tickers, expiration_date)
+
+            print()
+            print("Download Summary:")
+            print(f"  ✓ Succeeded: {len(download_results['succeeded'])}/{len(tickers)}")
+            if download_results['failed']:
+                print(f"  ✗ Failed: {len(download_results['failed'])}/{len(tickers)}")
+                for ticker, error in download_results['failed'].items():
+                    print(f"    - {ticker}: {error}")
+
+            # Continue only with successfully downloaded tickers
+            tickers = download_results['succeeded']
+            filepaths = download_results['filepaths']
+
+            if not tickers:
+                logger.error("No tickers successfully downloaded from CBOE JSON")
+                sys.exit(1)
+
+            print()
+            print(f"Proceeding to process {len(tickers)} ticker(s)...")
+            print()
+
         # PHASE 2: Process tickers
         print("=" * 60)
         phase_label = "[PHASE 2] CALCULATING MAX PAIN" if download_phase_enabled else "[INFO] PROCESSING"
@@ -299,8 +331,8 @@ def main():
                 print(f"[{i}/{len(tickers)}] Processing {ticker}...")
 
                 # Get option data based on mode
-                if data_source == 'YF' and download_phase_enabled:
-                    # Load from previously downloaded CSV file
+                if data_source in ('YF', 'CBOE_JSON') and download_phase_enabled:
+                    # Load from previously downloaded CSV file (same format for both sources)
                     from src.data_sources.yf_downloader import YahooFinanceDownloader
                     downloader = YahooFinanceDownloader(ds_config['source_specific_config'])
                     option_data_dict = downloader.load_option_data(filepaths[ticker])

@@ -62,6 +62,19 @@ on:
           - 'false'
           - 'true'
 
+      data_source:
+        description: |
+          Data source for option chain data.
+          YF = Yahoo Finance (use during/right after market hours).
+          CBOE_JSON = CBOE delayed-quotes JSON API (use for after-hours runs —
+          serves last EOD snapshot regardless of time, avoids YF zero-OI problem).
+        required: false
+        default: 'YF'
+        type: choice
+        options:
+          - 'YF'
+          - 'CBOE_JSON'
+
   # 2. Scheduled run — the Friday ONE WEEK BEFORE monthly expiration (3rd Friday),
   #    at 21:30 UTC (5:30 pm ET) after market close.
   #    The 2nd Friday always falls between the 8th and 14th, so this is exact.
@@ -141,10 +154,14 @@ jobs:
           echo "expiration_date set to: ${EXP_DATE}"
 
       # -----------------------------------------------------------------------
-      # Patch source = YF (CBOE bulk download is not supported — see README)
-      - name: Ensure data source is YF
+      # Set data source. Scheduled runs always use YF (inputs.data_source is
+      # empty on schedule → falls back to 'YF'). Manual runs use the dropdown.
+      - name: Set data source
+        env:
+          DATA_SOURCE: ${{ inputs.data_source || 'YF' }}
         run: |
-          sed -i "s/^source = .*/source = YF/" config.ini
+          sed -i "s/^source = .*/source = ${DATA_SOURCE}/" config.ini
+          echo "Data source set to: ${DATA_SOURCE}"
 
       # -----------------------------------------------------------------------
       # Patch calculation enhancement params when overridden via dispatch input.
