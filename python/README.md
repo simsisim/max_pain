@@ -16,31 +16,6 @@ This tool:
 - Generates PNG charts (payout curve, OI distribution, net gamma overlay)
 
 ---
-Best match for your report format
-
-  1. maximum-pain.com — shows max pain strike + dollar value bars per strike. Closest to what you're computing.
-  2. barchart.com — very reputable data source, free max pain chart. URL pattern: barchart.com/stocks/quotes/TICKER/max-pain-chart
-  3. optioncharts.io — clean visual, URL pattern: optioncharts.io/options/TICKER/max-pain
-
-  Suggested verification approach
-
-  Pick 2-3 tickers from your run (e.g. MU, SPY, NVDA) and compare:
-
-  ┌────────────────────┬──────────────────┬────────────────────┐
-  │       Field        │   Your output    │    Site output     │
-  ├────────────────────┼──────────────────┼────────────────────┤
-  │ Max Pain strike    │ $430.00          │ ?                  │
-  ├────────────────────┼──────────────────┼────────────────────┤
-  │ % change direction │ -7.16% (bearish) │ bearish / bullish? │
-  ├────────────────────┼──────────────────┼────────────────────┤
-  │ Call vs Put bias   │ call-heavy       │ call-heavy?        │
-  └────────────────────┴──────────────────┴────────────────────┘
-
-  The absolute dollar value of net premium will likely differ slightly between sites because they may use different OI snapshots
-  (CBOE vs YF, different download time). What matters is that the max pain strike and the direction (call-heavy vs put-heavy) agree.
-
-
-
 
 ## Quick Start
 
@@ -63,9 +38,15 @@ python main.py
 
 ## Data Source
 
-Use **Yahoo Finance** (`source = YF` in `config.ini`). It is free, reliable, and returns full option chains including gamma data needed for the overlay chart.
+Three sources are available, set via `source` in `[DATA_SOURCE]` of `config.ini`:
 
-CBOE is supported for single-file manual workflows only — its download endpoint blocks bulk automated requests.
+| Source | When to use | Notes |
+|--------|-------------|-------|
+| `YF` | Scheduled runs, market hours, right after close | Free, full option chain incl. gamma. Default. |
+| `CBOE_JSON` | After-hours / pre-market manual runs | CBOE public JSON API — always returns the last EOD snapshot (published ~15:45 ET) regardless of time of day. Solves the YF zero-OI problem overnight. |
+| `CBOE` | Single-file manual workflows only | CSV download endpoint blocks bulk automated requests. Not used in GitHub Actions. |
+
+**Why CBOE_JSON for after-hours?** Yahoo Finance treats options data as live quotes. Outside market hours it returns OI = 0 for far-out expirations — filters then eliminate all strikes and every ticker fails. The CBOE delayed-quotes JSON API (`cdn.cboe.com/api/global/delayed_quotes/options/{TICKER}.json`) is a cached EOD snapshot that is available 24/7.
 
 ---
 
@@ -117,6 +98,7 @@ Pre-made lists in `user_input/`:
 | `sp500_tickers.csv` | S&P 500 |
 | `russell3000_tickers.csv` | Russell 3000 |
 | `iwm1000_tickers.csv` | IWM constituents |
+| `Ioa_port.txt` | Personal watchlist (TradingView export) |
 
 ---
 
@@ -148,7 +130,15 @@ The workflow (`.github/workflows/max_pain.yml`) runs in two modes:
 
 Triggers **every 2nd Friday of the month at 21:30 UTC (5:30 PM ET)** — one week before the monthly options expiration (3rd Friday). This gives you a full week of signal before expiration.
 
-Runs **nasdaq100 and sp500 in parallel**, targeting `next_3Fr_monthly` (the upcoming 3rd Friday expiration). Results and logs are uploaded as GitHub Actions artifacts (retained 90 / 30 days respectively).
+Runs **four ticker lists in parallel** (matrix), all targeting `next_3Fr_monthly`:
+- `nasdaq100_tickers.csv`
+- `sp500_tickers.csv`
+- `iwm1000_tickers.csv`
+- `Ioa_port.txt`
+
+Uses **YF** data source (runs right after close — OI data is still valid at 5:30 PM ET).
+
+Results and logs are uploaded as GitHub Actions artifacts, retained for 30 days.
 
 ### Manual dispatch
 
@@ -161,6 +151,7 @@ Go to **Actions → Max Pain Calculator → Run workflow** to trigger on demand.
 | Strike band % | `15` | Set to `0` to disable |
 | Min open interest | `10` | Set to `0` to disable |
 | Volume-weighted OI | `false` | Use today's volume instead of OI |
+| Data source | `YF` | Use `CBOE_JSON` for after-hours runs (avoids YF zero-OI problem) |
 
 ### Artifacts
 
@@ -374,6 +365,7 @@ python/
 │       ├── yf_downloader.py         # YF batch downloader (Phase 1)
 │       ├── cboe_adapter.py          # CBOE CSV file adapter
 │       ├── cboe_downloader.py       # CBOE single-file downloader
+│       ├── cboe_json_downloader.py  # CBOE JSON API downloader (after-hours)
 │       └── factory.py               # Adapter factory
 │
 ├── user_input/                      # Ticker CSV files (tracked by git)
@@ -416,6 +408,9 @@ Increase `rate_limit_delay` under `[YAHOO_FINANCE]` (default: 1 s).
 **Re-download existing files**
 Set `overwrite_existing = true` under `[YAHOO_FINANCE]` and re-run.
 
+**All tickers fail with "No option data remaining after filters" (after-hours run)**
+Yahoo Finance returns OI = 0 outside market hours for far-out expirations — the min OI filter then eliminates everything. Use `CBOE_JSON` as the data source in the manual dispatch dropdown. CBOE serves a valid EOD snapshot 24/7.
+
 **Gamma overlay chart not generated**
 The ticker's option chain must have a `gamma` column in Yahoo Finance's response. This is normally available for standard equity options. Check that `source = YF` and `generate_charts = true`.
 
@@ -437,7 +432,7 @@ Max pain is a directional indicator, not a guarantee.
 
 ---
 
-**Version**: 1.2.0
-**Last Updated**: 2026-02-24
+**Version**: 1.3.0
+**Last Updated**: 2026-06-12
 
 
