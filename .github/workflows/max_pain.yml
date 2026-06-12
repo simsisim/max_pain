@@ -21,6 +21,7 @@ on:
           - user_input/sp500_tickers.csv
           - user_input/russell3000_tickers.csv
           - user_input/iwm1000_tickers.csv
+          - user_input/Ioa_port.txt
 
       expiration_date:
         description: |
@@ -87,7 +88,7 @@ jobs:
         id: resolve
         run: |
           if [ "${{ github.event_name }}" = "schedule" ]; then
-            echo 'files=["user_input/nasdaq100_tickers.csv","user_input/sp500_tickers.csv"]' >> $GITHUB_OUTPUT
+            echo 'files=["user_input/nasdaq100_tickers.csv","user_input/sp500_tickers.csv","user_input/iwm1000_tickers.csv","user_input/Ioa_port.txt"]' >> $GITHUB_OUTPUT
           else
             echo 'files=["${{ inputs.ticker_file }}"]' >> $GITHUB_OUTPUT
           fi

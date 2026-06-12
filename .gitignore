@@ -1,3 +1,30 @@
-!python/user_input/*.csv
-!python/user_input/*.csv
-!python/user_input/*.csv
+# Manually downloaded GitHub Actions artifacts
+downloads_results/
+
+# Generated output (recreated on each run)
+python/results/
+python/logs/
+python/data/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keep all user_input ticker files tracked
+!python/user_input/
