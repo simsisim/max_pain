@@ -11,9 +11,10 @@ on:
       ticker_file:
         description: 'Ticker list (path relative to python/). CSV or .txt (plain or TradingView watchlist format).'
         required: true
-        default: 'user_input/test.csv'
+        default: 'user_input/Ioa_port.txt'
         type: choice
         options:
+          - user_input/Ioa_port.txt
           - user_input/test.csv
           - user_input/p_pullbackMarMai2026.txt
           - user_input/earningsbeats_tickers.txt
@@ -21,7 +22,6 @@ on:
           - user_input/sp500_tickers.csv
           - user_input/russell3000_tickers.csv
           - user_input/iwm1000_tickers.csv
-          - user_input/Ioa_port.txt
 
       expiration_date:
         description: |
@@ -29,7 +29,7 @@ on:
           Keywords: current_3Fr_monthly | next_3Fr_monthly
           Or a specific date: YYYY-MM-DD (e.g. 2026-03-21)
         required: true
-        default: 'next_3Fr_monthly'
+        default: 'current_3Fr_monthly'
         type: string
 
       strike_band_pct:
