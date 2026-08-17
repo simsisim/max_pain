@@ -216,7 +216,7 @@
         <div class="disclaimer">
             <strong>Disclaimer</strong>
             Max pain is not a guarantee and is intended to be used solely for directional clues.
-            All values below are computed using the data provided by {{ data_source }}.com.
+            All values below are computed using the data provided by {{ data_source }}{% if data_retrieved_at %}, retrieved {{ data_retrieved_at }}{% endif %}.
             We cannot attest to the accuracy of the data. Trade at your own risk.
         </div>
 
@@ -248,7 +248,7 @@
 
         <div class="footer">
             <p><strong>Generated with Max Pain Calculator v1.0</strong></p>
-            <p>Data Source: {{ data_source }}</p>
+            <p>Data Source: {{ data_source }}{% if data_retrieved_at %} (retrieved {{ data_retrieved_at }}){% endif %}</p>
             <p>Generated: {{ generation_time }}</p>
             <p class="asterisk-note">
                 *An asterisk indicates a stock ranking in the top 20 in terms of net premium (absolute value).

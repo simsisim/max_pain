@@ -10,6 +10,49 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 
+# Human-readable labels for the 'data_source' code each result dict carries
+# (set per-ticker in main.py to the actual runtime source, which may differ
+# from config.ini's default due to the YF -> CBOE_JSON after-hours fallback).
+DATA_SOURCE_LABELS = {
+    'YF': 'Yahoo Finance',
+    'CBOE_JSON': 'CBOE (delayed-quote JSON snapshot, cboe.com)',
+    'CBOE': 'CBOE (delayed-quote CSV, cboe.com)',
+}
+
+
+def summarize_data_provenance(results_list):
+    """
+    Build the "what source, retrieved when" info for a report header/disclaimer.
+
+    Reads 'data_source' and 'download_timestamp' off each result dict (set
+    per-ticker in main.py). Falls back to 'unknown'/None when those fields
+    are absent (e.g. older cached results generated before this was tracked).
+
+    Returns:
+        tuple: (source_label: str, retrieved_at: str or None)
+        retrieved_at is the earliest per-ticker DownloadTimestamp across the
+        batch, formatted 'YYYY-MM-DD HH:MM:SS'.
+    """
+    sources = {r.get('data_source') for r in results_list if r.get('data_source')}
+    if not sources:
+        return 'unknown', None
+
+    source_label = ' / '.join(DATA_SOURCE_LABELS.get(s, s) for s in sorted(sources))
+
+    timestamps = []
+    for r in results_list:
+        ts = r.get('download_timestamp')
+        if not ts:
+            continue
+        try:
+            timestamps.append(datetime.strptime(ts, '%Y-%m-%d %H:%M:%S'))
+        except ValueError:
+            continue
+
+    retrieved_at = min(timestamps).strftime('%Y-%m-%d %H:%M:%S') if timestamps else None
+    return source_label, retrieved_at
+
+
 def setup_logging(config):
     """
     Setup logging configuration

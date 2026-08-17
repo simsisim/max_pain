@@ -359,6 +359,8 @@ def main():
                 # Add ticker and expiration info
                 result['ticker'] = option_data_dict['ticker']
                 result['expiration_date'] = option_data_dict['expiration_date']
+                result['data_source'] = data_source
+                result['download_timestamp'] = option_data_dict.get('download_timestamp')
                 
                 # Preserve option_data for chart generation
                 result['option_data'] = option_data_dict['option_data']

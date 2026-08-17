@@ -25,6 +25,8 @@ from reportlab.platypus import (
 )
 from reportlab.lib.enums import TA_CENTER, TA_LEFT
 
+from src.utils import summarize_data_provenance
+
 # Tickers treated as indices (shown in a separate block at the top of each section)
 INDEX_TICKERS = {'SPY', 'QQQ', 'IWM'}
 
@@ -128,6 +130,25 @@ class PdfReportGenerator:
         return filepath
 
     # ------------------------------------------------------------------
+    # Data source / retrieval-time disclosure
+    # ------------------------------------------------------------------
+
+    def _data_source_disclaimer_text(self, results):
+        """
+        Build the "provided by <source>, retrieved at <time>" clause.
+        """
+        source_label, retrieved_at = summarize_data_provenance(results)
+
+        if source_label == 'unknown':
+            return 'All values below are computed using data of unrecorded provenance. '
+
+        text = f'All values below are computed using data provided by <b>{source_label}</b>.'
+        if retrieved_at:
+            text += f' Data retrieved: <b>{retrieved_at}</b>.'
+
+        return text + ' '
+
+    # ------------------------------------------------------------------
     # Section builder
     # ------------------------------------------------------------------
 
@@ -176,10 +197,11 @@ class PdfReportGenerator:
         elements.append(Spacer(1, 4))
 
         # Disclaimer
+        source_text = self._data_source_disclaimer_text(results)
         disclaimer = (
             '<b>Max pain is not a guarantee</b> and is intended to be used solely for '
-            '<i>directional clues</i>. All values below are computed using the data '
-            'provided by <b>Yahoo Finance</b>. We cannot attest to the accuracy of the data. '
+            '<i>directional clues</i>. ' + source_text +
+            ' We cannot attest to the accuracy of the data. '
             'Trade at your own risk.'
         )
         elements.append(Paragraph(disclaimer, styles['disclaimer']))

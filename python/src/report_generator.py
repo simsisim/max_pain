@@ -23,6 +23,7 @@ class _NumpyEncoder(json.JSONEncoder):
         return super().default(obj)
 
 from src.pdf_report_generator import PdfReportGenerator
+from src.utils import summarize_data_provenance
 
 
 class ReportGenerator:
@@ -188,12 +189,17 @@ class ReportGenerator:
         # Calculate summary stats
         summary = self._calculate_summary(results_list)
 
+        # Resolve actual runtime data source (may differ from config.ini's
+        # default due to the YF -> CBOE_JSON after-hours fallback)
+        source_label, retrieved_at = summarize_data_provenance(results_list)
+
         # Create report structure
         report = {
             'metadata': {
                 'report_date': date_str,
                 'generation_timestamp': datetime.now().isoformat(),
-                'data_source': self.config.get('DATA_SOURCE', 'source', fallback='CBOE'),
+                'data_source': source_label,
+                'data_retrieved_at': retrieved_at,
                 'ticker_count': len(results_list),
                 'top_n_highlighted': self.highlight_top_n
             },
@@ -239,6 +245,10 @@ class ReportGenerator:
         date_str = datetime.now().strftime('%Y-%m-%d')
         summary = self._calculate_summary(results_list)
 
+        # Resolve actual runtime data source (may differ from config.ini's
+        # default due to the YF -> CBOE_JSON after-hours fallback)
+        source_label, retrieved_at = summarize_data_provenance(results_list)
+
         # Render template
         html_content = template.render(
             report_date=date_str,
@@ -246,7 +256,8 @@ class ReportGenerator:
             results=results_list,
             summary=summary,
             ticker_count=len(results_list),
-            data_source=self.config.get('DATA_SOURCE', 'source', fallback='CBOE')
+            data_source=source_label,
+            data_retrieved_at=retrieved_at
         )
 
         # Save HTML
@@ -370,7 +381,7 @@ class ReportGenerator:
 
         <div class="disclaimer">
             <strong>Disclaimer:</strong> Max pain is not a guarantee and is intended to be used solely for directional clues.
-            All values below are computed using the data provided by {{ data_source }}.
+            All values below are computed using the data provided by {{ data_source }}{% if data_retrieved_at %}, retrieved {{ data_retrieved_at }}{% endif %}.
             We cannot attest to the accuracy of the data. Trade at your own risk.
         </div>
 

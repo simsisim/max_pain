@@ -218,6 +218,7 @@ class YahooFinanceDownloader:
             'ticker': metadata['Ticker'],
             'current_price': float(metadata['CurrentPrice']),
             'expiration_date': metadata['ExpirationDate'],
+            'download_timestamp': metadata.get('DownloadTimestamp'),
             'option_data': option_data
         }
         
