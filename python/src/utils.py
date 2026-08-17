@@ -5,8 +5,9 @@ Utility functions for Max Pain Calculator
 import logging
 import configparser
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time as dt_time
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 
 def setup_logging(config):
@@ -299,6 +300,29 @@ def get_expiration_date_from_config(config):
         return exp_date, False
 
 
+def is_us_market_hours(now=None):
+    """
+    Check whether US equity options markets are open (9:30am-4:00pm ET,
+    Monday-Friday). Does not account for market holidays.
+
+    Args:
+        now: optional timezone-aware or naive datetime to check (defaults to
+             current time). Naive datetimes are assumed to already be ET.
+
+    Returns:
+        bool
+    """
+    eastern = ZoneInfo('America/New_York')
+    now = now.astimezone(eastern) if now and now.tzinfo else (
+        now.replace(tzinfo=eastern) if now else datetime.now(eastern)
+    )
+
+    if now.weekday() >= 5:  # Saturday, Sunday
+        return False
+
+    return dt_time(9, 30) <= now.time() <= dt_time(16, 0)
+
+
 def get_data_source_config(config):
     """
     Get data source and related settings from config
@@ -317,10 +341,17 @@ def get_data_source_config(config):
         ValueError: If data source is invalid
     """
     source = config.get('DATA_SOURCE', 'source', fallback='CBOE').upper()
-    
+
     if source not in ['CBOE', 'YF', 'CBOE_JSON']:
         raise ValueError(f"Invalid data source: {source}. Must be 'CBOE', 'YF', or 'CBOE_JSON'")
-    
+
+    if source == 'YF' and not is_us_market_hours():
+        logging.getLogger('max_pain').warning(
+            "Requested YF data source but outside US market hours (9:30am-4pm ET) "
+            "— YF open interest is stale/zero after-hours. Auto-switching to CBOE_JSON."
+        )
+        source = 'CBOE_JSON'
+
     exp_date, is_auto = get_expiration_date_from_config(config)
     
     # Get source-specific config
