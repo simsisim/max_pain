@@ -36,9 +36,9 @@ on:
         description: |
           Strike band filter — keep only strikes within ±N% of spot price.
           Prevents deep-OTM strikes from skewing the max pain result.
-          Set to 0 to disable.
+          Set to 0 to disable (0 = matches EarningsBeats' full-chain methodology).
         required: false
-        default: '15'
+        default: '0'
         type: string
 
       min_open_interest:
